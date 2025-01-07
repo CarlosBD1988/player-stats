@@ -1,0 +1,131 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+/* Navbar container */
+.navbar {
+  background-color: #333; /* Fondo oscuro profesional */
+  color: #fff; /* Texto blanco para contraste */
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between; /* Espacio entre elementos */
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Logo or title */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Navbar menu */
+.navbar-menu {
+  position: relative; /* Posición relativa para desplegable */
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar items */
+.navbar-menu > li {
+  position: relative; /* Necesario para submenús */
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-menu > li:hover {
+  background-color: #444; /* Fondo más claro al pasar el mouse */
+}
+
+/* Dropdown menu - hidden by default */
+.navbar-menu > li > ul {
+  display: none; /* Ocultar submenú */
+  position: absolute; /* Posición absoluta para desplegable */
+  top: 100%; /* Alinear debajo del elemento padre */
+  left: 0;
+  background-color: #444;
+  padding: 10px 0;
+  list-style-type: none;
+  margin: 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+  z-index: 1000;
+}
+
+/* Mostrar submenú al pasar el mouse */
+.navbar-menu > li:hover > ul {
+  display: block;
+}
+
+/* Dropdown items */
+.navbar-menu > li > ul > li {
+  padding: 8px 20px;
+  white-space: nowrap; /* Evitar que se rompa el texto */
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-menu > li > ul > li:hover {
+  background-color: #555; /* Fondo más claro en el hover */
+}
+
+/* Links */
+.navbar a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  color: #00bcd4; /* Azul profesional */
+}
+
+
+
+
+
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
