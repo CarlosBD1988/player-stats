@@ -117,6 +117,15 @@ const AddRecord = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const inputValue = e.target.value;
+
+    // Validar que el valor sea un número positivo y dentro de un rango aceptable
+    if (/^\d*$/.test(inputValue) && inputValue <= 100) {
+      setValue(inputValue); // Aceptar solo números hasta 1,000,000
+    }
+  };
+
 
   return (
     <div>
@@ -141,7 +150,8 @@ const AddRecord = () => {
         type="number"
         placeholder="Valor"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
+        max="100"
       />
       <button onClick={handleAddRecord}>Agregar</button>
     </div>
