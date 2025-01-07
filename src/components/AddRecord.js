@@ -68,6 +68,15 @@ const AddRecord = () => {
               icon: "success",
               confirmButtonText: "OK",
             });
+            //Almacenar registro de auditoria
+            await addDoc(collection(db, "audit"), {
+              user: tokenResponsable,
+              actionn:"new record",
+              playerId: selectedPlayer,
+              itemId: selectedItem,
+              value: parseInt(value),
+              date: new Date().toISOString(),
+            });
   
             setValue("");
           } else {
