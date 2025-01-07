@@ -103,16 +103,7 @@ select {
     background-color: #e0e0e0;
     cursor: not-allowed;
   }
-  
-  /* Estilo responsive para pantallas más pequeñas */
-  @media screen and (max-width: 600px) {
-    select {
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-  }
-  
-
+ 
 
   /* Estilo responsive para pantallas más pequeñas */
   @media screen and (max-width: 600px) {
@@ -133,5 +124,9 @@ select {
       padding: 10px 12px;
       font-size: 14px;
     }
+    select {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
   }
   
