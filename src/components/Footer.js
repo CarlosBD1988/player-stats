@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer style={styles.footer}>
       <p style={styles.text}>
-        &copy; {new Date().getFullYear()} Mi Aplicación. Todos los derechos reservados.
+        &copy; {new Date().getFullYear()} Player Stats. Todos los derechos reservados.
       </p>
     </footer>
   );
@@ -19,7 +19,7 @@ const styles = {
     padding: "10px 0",
     position: "fixed",
     bottom: 0,
-    width: "100%",
+    width: "95%",
     boxShadow: "0 -2px 5px rgba(0,0,0,0.2)",
   },
   text: {
