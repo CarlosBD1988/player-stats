@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc,query ,orderBy} from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Asegúrate de importar tu instancia de Firestore correctamente.
 
 const Audit = () => {
@@ -9,7 +9,9 @@ const Audit = () => {
   useEffect(() => {
     const fetchAuditRecords = async () => {
       try {
-        const auditCollection = await getDocs(collection(db, "audit"));
+        const auditQuery = query(collection(db, "audit"), orderBy("date", "desc"));
+
+        const auditCollection = await getDocs(auditQuery); // Ejecutar la consulta
         const playerCollection = collection(db, "players");
         const itemCollection = collection(db, "items");
 
