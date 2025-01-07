@@ -5,6 +5,8 @@ import CrearJugador from "./components/AddPlayer";
 import CrearItem from "./components/AddItem";
 import CrearRegistro from "./components/AddRecord";
 import VerConsolidado from "./components/VerConsolidado";
+import Audit from "./components/Audit";
+
 import "./App.css";
 
 function App() {
@@ -32,6 +34,12 @@ function App() {
                 <li><Link to="/ver-consolidado">Ver Consolidado</Link></li>
               </ul>
             </li>
+            <li className="dropdown">
+              Auditoria  del sistema
+              <ul className="dropdown-menu">
+                <li><Link to="/auditoria">Ver movimientos</Link></li>
+              </ul>
+            </li>
           </ul>
         </nav>
 
@@ -42,6 +50,7 @@ function App() {
           <Route path="/crear-item" element={<CrearItem />} />
           <Route path="/crear-registro" element={<CrearRegistro />} />
           <Route path="/ver-consolidado" element={<VerConsolidado />} />
+          <Route path="/auditoria" element={<Audit />} />
         </Routes>
       </div>
     </Router>
@@ -49,3 +58,4 @@ function App() {
 }
 
 export default App;
+
