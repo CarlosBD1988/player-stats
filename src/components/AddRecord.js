@@ -71,7 +71,7 @@ const AddRecord = () => {
             //Almacenar registro de auditoria
             await addDoc(collection(db, "audit"), {
               user: tokenResponsable,
-              actionn:"new record",
+              action:"new record",
               playerId: selectedPlayer,
               itemId: selectedItem,
               value: parseInt(value),
