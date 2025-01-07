@@ -3,7 +3,7 @@ import { useState } from "react";
 import { db } from "../firebaseConfig";
 import { collection, addDoc , serverTimestamp } from "firebase/firestore";
 import Swal from 'sweetalert2';
-
+import './Form.css'; // Asegúrate de que la ruta sea correcta
 const AddItem = () => {
   const [name, setName ]= useState("");
 

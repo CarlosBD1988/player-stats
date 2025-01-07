@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
+import './Report.css'; // Asegúrate de que la ruta sea correcta
+
 
 const VerConsolidado = () => {
   const [records, setRecords] = useState([]);
