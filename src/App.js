@@ -6,6 +6,7 @@ import CrearItem from "./components/AddItem";
 import CrearRegistro from "./components/AddRecord";
 import VerConsolidado from "./components/VerConsolidado";
 import Audit from "./components/Audit";
+import Footer from "./components/Footer";
 
 import "./App.css";
 
@@ -42,7 +43,7 @@ function App() {
             </li>
           </ul>
         </nav>
-
+        <Footer />
         {/* Rutas */}
         <Routes>
           <Route path="/" element={<Home />} />
