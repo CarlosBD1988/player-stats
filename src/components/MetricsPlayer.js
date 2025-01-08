@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, query,where} from "firebase/firestore";
 import { db } from "../firebaseConfig"; 
+import SimpleRadarChart from "./SimpleRadarChart";
 
 
 const MetricsPlayer = ()=>
@@ -45,7 +46,7 @@ const MetricsPlayer = ()=>
     return (
 
         <div>
-                <h2>Estadística por jugador</h2>
+                <h2>Metricas jugador</h2>
 
                 <select onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
@@ -57,18 +58,45 @@ const MetricsPlayer = ()=>
             </select>
             
             {metrics ? (
-        <div>
-          <h3>Métricas del jugador seleccionado:</h3>
-          <p><strong>Ritmo:</strong> {metrics.stats.ritmo}</p>
-          <p><strong>Tiro:</strong> {metrics.stats.tiro}</p>
-          <p><strong>Pase:</strong> {metrics.stats.pase}</p>
-          <p><strong>Regate:</strong> {metrics.stats.regate}</p>
-          <p><strong>Defensa:</strong> {metrics.stats.defensa}</p>
-          <p><strong>Cabeza:</strong> {metrics.stats.cabeza}</p>
+        <div>             
+          <div className="metrics-container">
+                <h3>Métricas del jugador seleccionado:</h3>
+                <div className="metrics-grid">
+                    <div className="metric">
+                    <strong>Ritmo:</strong>
+                    <span>{metrics.stats.ritmo}</span>
+                    </div>
+                    <div className="metric">
+                    <strong>Tiro:</strong>
+                    <span>{metrics.stats.tiro}</span>
+                    </div>
+                    <div className="metric">
+                    <strong>Pase:</strong>
+                    <span>{metrics.stats.pase}</span>
+                    </div>
+                    <div className="metric">
+                    <strong>Regate:</strong>
+                    <span>{metrics.stats.regate}</span>
+                    </div>
+                    <div className="metric">
+                    <strong>Defensa:</strong>
+                    <span>{metrics.stats.defensa}</span>
+                    </div>
+                    <div className="metric">
+                    <strong>Cabeza:</strong>
+                    <span>{metrics.stats.cabeza}</span>
+                    </div>
+                </div>
+                </div>
+
+          {selectedPlayer && metrics && (<SimpleRadarChart metrics={metrics.stats} />
+        )}
         </div>
       ) : (
         <p>No se han encontrado métricas para este jugador.</p>
       )}
+
+       
 
 
         </div>

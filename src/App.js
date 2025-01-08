@@ -33,14 +33,24 @@ function App() {
                 <li><Link to="/crear-jugador">Crear Jugador</Link></li>
                 <li><Link to="/crear-item">Crear Ítem</Link></li>
                 <li><Link to="/crear-registro">Crear Registro</Link></li>
-                <li><Link to="/crear-metrica">Agregar metrica a jugador</Link></li>
+                
               </ul>
             </li>
+
+            <li className="dropdown">
+              Metricas
+              <ul className="dropdown-menu">
+                    <li><Link to="/crear-metrica">Agregar metrica a jugador</Link></li>
+                   <li><Link to="/por-jugador">Atributos básicos del jugador</Link></li>
+              </ul>
+            </li>
+
+
+
             <li className="dropdown">
               Estadísticas
               <ul className="dropdown-menu">
-                  <li><Link to="/ver-consolidado">Ver Consolidado</Link></li>
-                   <li><Link to="/por-jugador">Atributos básicos del jugador</Link></li>
+                  <li><Link to="/ver-consolidado">Ver Consolidado</Link></li>                   
               </ul>
             </li>
             <li className="dropdown">
