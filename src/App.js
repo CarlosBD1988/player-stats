@@ -4,11 +4,17 @@ import Home from "./components/Home";
 import CrearJugador from "./components/AddPlayer";
 import CrearItem from "./components/AddItem";
 import CrearRegistro from "./components/AddRecord";
+import AddMetrics from "./components/AddMetrics";
+
 import VerConsolidado from "./components/VerConsolidado";
+import MetricsPlayer from "./components/MetricsPlayer";
+
 import Audit from "./components/Audit";
+
 import Footer from "./components/Footer";
 
 import "./App.css";
+
 
 function App() {
   return (
@@ -27,12 +33,14 @@ function App() {
                 <li><Link to="/crear-jugador">Crear Jugador</Link></li>
                 <li><Link to="/crear-item">Crear Ítem</Link></li>
                 <li><Link to="/crear-registro">Crear Registro</Link></li>
+                <li><Link to="/crear-metrica">Agregar metrica a jugador</Link></li>
               </ul>
             </li>
             <li className="dropdown">
               Estadísticas
               <ul className="dropdown-menu">
-                <li><Link to="/ver-consolidado">Ver Consolidado</Link></li>
+                  <li><Link to="/ver-consolidado">Ver Consolidado</Link></li>
+                   <li><Link to="/por-jugador">Atributos básicos del jugador</Link></li>
               </ul>
             </li>
             <li className="dropdown">
@@ -50,7 +58,10 @@ function App() {
           <Route path="/crear-jugador" element={<CrearJugador />} />
           <Route path="/crear-item" element={<CrearItem />} />
           <Route path="/crear-registro" element={<CrearRegistro />} />
+          <Route path="/crear-metrica" element={<AddMetrics />} />
+
           <Route path="/ver-consolidado" element={<VerConsolidado />} />
+          <Route path="/por-jugador" element={< MetricsPlayer/>} />
           <Route path="/auditoria" element={<Audit />} />
         </Routes>
       </div>
