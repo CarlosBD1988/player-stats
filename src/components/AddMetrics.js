@@ -33,9 +33,11 @@ const AddMetrics= ()=>
       const handleInputChange = (e) => {
         const { name, value } = e.target;
     
+        const numericValue = value === "" ? "" : Number(value);
+
         // Validar que el valor esté entre 0 y 100
-        if (value === "" || (value >= 0 && value <= 100)) {
-          setFormData({ ...formData, [name]: value });
+        if (numericValue === "" || (numericValue >= 0 && numericValue <= 100)) {
+          setFormData({ ...formData, [name]: numericValue });
           setError(""); // Limpiar el error si el valor es válido
         } else {
           setError("El valor debe estar entre 0 y 100");
