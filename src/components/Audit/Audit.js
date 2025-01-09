@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, doc, getDoc,query ,orderBy} from "firebase/firestore";
-import { db } from "../../firebaseConfig"; // Asegúrate de importar tu instancia de Firestore correctamente.
+import { db } from "../../config/firebaseConfig"; // Asegúrate de importar tu instancia de Firestore correctamente.
 import "./Audit.css";
 
 const Audit = () => {

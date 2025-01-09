@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../../firebaseConfig";
+import { db } from "../../config/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import './ViewConsolidateStatics.css'; 
 

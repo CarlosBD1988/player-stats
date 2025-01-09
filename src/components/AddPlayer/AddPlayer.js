@@ -1,6 +1,6 @@
 // src/components/AddPlayer.js
 import { useState } from "react";
-import { db } from "../../firebaseConfig";
+import { db } from "../../config/firebaseConfig";
 import { collection, addDoc , serverTimestamp } from "firebase/firestore";
 import Swal from 'sweetalert2';
 import './AddPlayer.css'; 
