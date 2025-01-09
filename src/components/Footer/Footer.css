@@ -1,0 +1,16 @@
+
+.footer {
+    background-color: #282c34;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: calc(100% - 5%); /* Para mantener márgenes laterales */
+    margin: 0 auto; /* Centra el footer horizontalmente */
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+.text {
+      margin: 0;
+      font-size: 14px;
+    }

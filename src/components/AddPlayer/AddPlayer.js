@@ -1,33 +1,36 @@
 // src/components/AddPlayer.js
 import { useState } from "react";
-import { db } from "../firebaseConfig";
+import { db } from "../../firebaseConfig";
 import { collection, addDoc , serverTimestamp } from "firebase/firestore";
 import Swal from 'sweetalert2';
-import './Form.css'; // Asegúrate de que la ruta sea correcta
-const AddItem = () => {
-  const [name, setName ]= useState("");
+import './AddPlayer.css'; 
 
-  const handleAddItem = async () => {
+
+
+const AddPlayer = () => {
+  const [name, setName] = useState("");
+
+  const handleAddPlayer = async () => {
 
     try{
         if (name.trim()) 
         {
             console.log(name)
-            await addDoc(collection(db, "items"), { name, timestamp: serverTimestamp() });
+            await addDoc(collection(db, "players"), { name , timestamp: serverTimestamp() });
             setName("");
             Swal.fire({
                 title: 'Guardado',
-                text: 'Item creado exitosamente en la base de datos.',
+                text: 'Jugador creado exitosamente en la base de datos.',
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
         }
         else
         {
-            console.log("Itme inválido");
+            console.log("Nombre inválido");
             Swal.fire({
               title: 'Error',
-              text: 'El nombre del item no puede estar vacío.',
+              text: 'El nombre no puede estar vacío.',
               icon: 'error',
               confirmButtonText: 'OK'
             });
@@ -39,7 +42,7 @@ const AddItem = () => {
         console.log(error)
         Swal.fire({
             title: 'Error',
-            text: 'Hubo un problema al guardar el item.',
+            text: 'Hubo un problema al guardar el jugador.',
             icon: 'error',
             confirmButtonText: 'OK'
           });
@@ -50,16 +53,16 @@ const AddItem = () => {
 
   return (
     <div>
-      <h2>Agregar tipo de estadistica a medir:</h2>
+      <h2>Agregar Jugador</h2>
       <input
         type="text"
-        placeholder="Escribe el nombre del item  a evualuar aqui ..."
+        placeholder="Escribe el nombre del jugador aqui ..."
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button type="button" onClick={handleAddItem}>Crear item</button>
+      <button type="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );
 };
 
-export default AddItem;
+export default AddPlayer;

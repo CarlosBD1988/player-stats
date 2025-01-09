@@ -1,17 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
-import CrearJugador from "./components/AddPlayer";
-import CrearItem from "./components/AddItem";
-import CrearRegistro from "./components/AddRecord";
-import AddMetrics from "./components/AddMetrics";
+import Home from "./components/Home/Home";
+import CrearJugador from "./components/AddPlayer/AddPlayer";
+import CrearItem from "./components/AddItem/AddItem";
+import CrearRegistro from "./components/AddRecord/AddRecord";
+import AddMetrics from "./components/AddMetrics/AddMetrics";
 
 import VerConsolidado from "./components/VerConsolidado";
-import MetricsPlayer from "./components/MetricsPlayer";
+import MetricsPlayer from "./components/MetricsPlayer/MetricsPlayer";
 
-import Audit from "./components/Audit";
+import Audit from "./components/Audit/Audit";
 
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 

@@ -1,6 +1,6 @@
 // src/components/AddRecord.js
 import { useState, useEffect } from "react";
-import { db } from "../firebaseConfig";
+import { db } from "../../firebaseConfig";
 import { collection, addDoc, getDocs , query, where} from "firebase/firestore";
 import Swal from 'sweetalert2';
 
