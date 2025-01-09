@@ -47,7 +47,7 @@ const MetricsPlayer = ()=>
     return (
 
         <div>
-                <h2>Metricas jugador</h2>
+                <h2>Metricas por jugador</h2>
 
                 <select onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
@@ -59,10 +59,10 @@ const MetricsPlayer = ()=>
             </select>
             
             {metrics ? (
-        <div>             
-          <div className="metrics-container">
-                <h3>Métricas del jugador seleccionado:</h3>
-                <div className="metrics-grid">
+
+        <div>                      
+          <div className="metrics-container">                
+                <div className="metrics-grid"> 
                     <div className="metric">
                     <strong>Ritmo:</strong>
                     <span>{metrics.stats.ritmo}</span>
@@ -88,12 +88,16 @@ const MetricsPlayer = ()=>
                     <span>{metrics.stats.cabeza}</span>
                     </div>
                 </div>
-                
-          {selectedPlayer && metrics && (<SimpleRadarChart metrics={metrics.stats} />)}
-          <PlayerCard playerName={players.find(p => p.id === selectedPlayer)?.name} metrics={metrics.stats} />
-              </div>
-
-
+                <div className="container-graphics">
+                        <div className="PlayerCard">
+                              <PlayerCard playerName={players.find(p => p.id === selectedPlayer)?.name} metrics={metrics.stats} />
+                        </div>
+                        <div className="SimpleRadarChart">
+                              {selectedPlayer && metrics && (<SimpleRadarChart metrics={metrics.stats} />)}
+                        </div>
+                        
+                </div>                  
+          </div>
         </div>
       ) : (
         <p>No se han encontrado métricas para este jugador.</p>
@@ -102,7 +106,7 @@ const MetricsPlayer = ()=>
        
 
 
-        </div>
+      </div>
     )
 }
 export default MetricsPlayer;
