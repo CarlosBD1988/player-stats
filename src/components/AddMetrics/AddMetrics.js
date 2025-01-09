@@ -4,6 +4,7 @@ import { db } from "../../config/firebaseConfig"; // Asegúrate de importar tu i
 
 import Swal from 'sweetalert2';
 
+import "./AddMetrics.css"
 
 const AddMetrics= ()=>
 {
@@ -105,8 +106,8 @@ const AddMetrics= ()=>
                 ))}
             </select>
 
-        <form onSubmit={handleSubmit}>
-        <div>
+        <form onSubmit={handleSubmit} className="form-container">
+        <div class="form-item">
           <label>Ritmo (Promedio de velocidad y aceleración):</label>
           <input
             type="number"
@@ -120,7 +121,7 @@ const AddMetrics= ()=>
           />
         </div>
 
-        <div>
+        <div class="form-item">
           <label>Tiro (EA, tiro lejano y potencia):</label>
           <input
             type="number"
@@ -134,7 +135,7 @@ const AddMetrics= ()=>
           />
         </div>
 
-        <div>
+        <div class="form-item">
           <label>Pase (Promedio de pase corto, largo y centros):</label>
           <input
             type="number"
@@ -148,7 +149,7 @@ const AddMetrics= ()=>
           />
         </div>
 
-        <div>
+        <div class="form-item">
           <label>Regate (Regate, control, agilidad y equilibrio):</label>
           <input
             type="number"
@@ -162,7 +163,7 @@ const AddMetrics= ()=>
           />
         </div>
 
-        <div>
+        <div class="form-item">
           <label>Defensa (Marcaje, entradas, robos y fuerza):</label>
           <input
             type="number"
@@ -176,7 +177,7 @@ const AddMetrics= ()=>
           />
         </div>
 
-        <div>
+        <div class="form-item">
           <label>Cabeza (Salto, precisión y fuerza):</label>
           <input
             type="number"
