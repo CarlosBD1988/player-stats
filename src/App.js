@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home/Home";
-import CrearJugador from "./components/AddPlayer/AddPlayer";
-import CrearItem from "./components/AddItem/AddItem";
-import CrearRegistro from "./components/AddRecord/AddRecord";
+import AddJugador from "./components/AddPlayer/AddPlayer";
+import AddItem from "./components/AddItem/AddItem";
+import AddRecord from "./components/AddRecord/AddRecord";
 import AddMetrics from "./components/AddMetrics/AddMetrics";
 
-import VerConsolidado from "./components/VerConsolidado";
+import VerConsolidado from "./components/ViewConsolidateStatics/ViewConsolidateStatics";
 import MetricsPlayer from "./components/MetricsPlayer/MetricsPlayer";
 
 import Audit from "./components/Audit/Audit";
@@ -65,9 +65,9 @@ function App() {
         {/* Rutas */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/crear-jugador" element={<CrearJugador />} />
-          <Route path="/crear-item" element={<CrearItem />} />
-          <Route path="/crear-registro" element={<CrearRegistro />} />
+          <Route path="/crear-jugador" element={<AddJugador />} />
+          <Route path="/crear-item" element={<AddItem />} />
+          <Route path="/crear-registro" element={<AddRecord />} />
           <Route path="/crear-metrica" element={<AddMetrics />} />
 
           <Route path="/ver-consolidado" element={<VerConsolidado />} />

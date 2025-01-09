@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { db } from "../firebaseConfig";
+import { db } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
-import './Report.css'; // Asegúrate de que la ruta sea correcta
+import './ViewConsolidateStatics.css'; 
 
-
-const VerConsolidado = () => {
+const ViewConsolidateStatics = () => {
   const [records, setRecords] = useState([]);
   const [players, setPlayers] = useState([]);
   const [items, setItems] = useState([]);
@@ -85,4 +84,4 @@ const VerConsolidado = () => {
   );
 };
 
-export default VerConsolidado;
+export default ViewConsolidateStatics;
