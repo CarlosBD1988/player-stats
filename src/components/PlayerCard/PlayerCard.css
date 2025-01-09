@@ -1,0 +1,100 @@
+/* Contenedor principal */
+.player-card {
+    width: 250px;
+    height: min-height;
+    background: linear-gradient(to bottom, #f7d794, #f9a602);
+    border-radius: 15px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-family: Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Header: Rating, Posición, Bandera y Logo */
+  .player-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .rating {
+    background: gold;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .position {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .country-flag,
+  .club-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .country-flag img,
+  .club-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* Asegura que la imagen no se deforme */
+    border-radius: 50%;
+  }
+  
+  /* Imagen del jugador */
+  .player-image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: -20px; /* Ajusta la posición para evitar solapamiento */
+  }
+  
+  .player-image img {
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  /* Información del jugador */
+  .player-info {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .player-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    font-size: 14px;
+    color: #000; /* Cambia el color a negro para legibilidad */
+  }
+  
+  .metrics p {
+    margin: 0;
+    font-weight: bold;
+  }
+  

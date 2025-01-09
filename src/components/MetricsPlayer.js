@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs, query,where} from "firebase/firestore";
 import { db } from "../firebaseConfig"; 
 import SimpleRadarChart from "./SimpleRadarChart";
+import PlayerCard from "./PlayerCard/PlayerCard";
 
 
 const MetricsPlayer = ()=>
@@ -87,10 +88,12 @@ const MetricsPlayer = ()=>
                     <span>{metrics.stats.cabeza}</span>
                     </div>
                 </div>
-                </div>
+                
+          {selectedPlayer && metrics && (<SimpleRadarChart metrics={metrics.stats} />)}
+          <PlayerCard playerName={players.find(p => p.id === selectedPlayer)?.name} metrics={metrics.stats} />
+              </div>
 
-          {selectedPlayer && metrics && (<SimpleRadarChart metrics={metrics.stats} />
-        )}
+
         </div>
       ) : (
         <p>No se han encontrado métricas para este jugador.</p>
