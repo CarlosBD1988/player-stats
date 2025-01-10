@@ -16,7 +16,7 @@ const PlayerCard = ({ playerName, metrics }) => {
       </div>
 
       <div className="player-image">
-        <img src="ronaldo.png" alt={playerName} /> {/* Imagen del jugador */}
+        <img src={`/perfiles/${playerName}.png`} alt={playerName} /> {/* Imagen del jugador */}
       </div>
 
       <div className="player-info">
