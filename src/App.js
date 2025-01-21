@@ -22,10 +22,10 @@ function App() {
           <Link to="/" className="navbar-brand">Player Stats</Link>
           <ul className="navbar-menu">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Inicio</Link>
             </li>
             <li className="dropdown">
-              Actions
+              Acciones
               <ul className="dropdown-menu">
                 <li><Link to="/crear-jugador">Crear Jugador</Link></li>
                 <li><Link to="/crear-item">Crear Ítem</Link></li>
@@ -37,8 +37,8 @@ function App() {
             <li className="dropdown">
               Metricas
               <ul className="dropdown-menu">
-                    <li><Link to="/crear-metrica">Agregar metrica a jugador</Link></li>
-                   <li><Link to="/por-jugador">Atributos básicos del jugador</Link></li>
+                    <li><Link to="/crear-metrica">Agregar </Link></li>
+                    <li><Link to="/por-jugador">Visualizar </Link></li>
               </ul>
             </li>
 
@@ -51,9 +51,9 @@ function App() {
               </ul>
             </li>
             <li className="dropdown">
-              Auditoria  del sistema
+              Auditoria
               <ul className="dropdown-menu">
-                <li><Link to="/auditoria">Ver movimientos</Link></li>
+                <li><Link to="/auditoria">Ver Movimientos</Link></li>
               </ul>
             </li>
           </ul>

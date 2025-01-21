@@ -26,19 +26,19 @@ const PlayerCard = ({ playerName, metrics }) => {
             <strong>RIT:</strong> {metrics.ritmo || 80}
           </p>
           <p>
-            <strong>SHO:</strong> {metrics.tiro || 85}
+            <strong>SHO: </strong> {metrics.tiro || 85}
           </p>
           <p>
-            <strong>PAS:</strong> {metrics.pase || 82}
+            <strong>PAS: </strong> {metrics.pase || 82}
           </p>
           <p>
-            <strong>DRI:</strong> {metrics.regate || 87}
+            <strong>DRI: </strong> {metrics.regate || 87}
           </p>
           <p>
-            <strong>DEF:</strong> {metrics.defensa || 60}
+            <strong>DEF: </strong> {metrics.defensa || 70}
           </p>
           <p>
-            <strong>PHY:</strong> {metrics.cabeza || 75}
+            <strong>PHY: </strong> {metrics.cabeza || 75}
           </p>
         </div>
       </div>
