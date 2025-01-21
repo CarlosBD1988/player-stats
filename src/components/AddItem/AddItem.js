@@ -26,7 +26,7 @@ const AddItem = () => {
         }
         else
         {
-            console.log("Itme inválido");
+            console.log("Item inválido");
             Swal.fire({
               title: 'Error',
               text: 'El nombre del item no puede estar vacío.',

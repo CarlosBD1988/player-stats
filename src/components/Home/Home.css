@@ -1,6 +1,9 @@
 .home {
     text-align: center;
-    margin-top: 50px;
+    padding: auto;
+    margin-top: 5px;
+    background: #dad3d2;
+    font: optional;
   }
   
   .home h1 {
@@ -11,6 +14,6 @@
   .home-gif {
     max-width: 300px;
     height: auto;
-    margin-top: 20px;
+    margin-top: 10px;
   }
-  
+ 
