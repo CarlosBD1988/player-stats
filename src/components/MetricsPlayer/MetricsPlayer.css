@@ -10,13 +10,13 @@
   .metrics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 10PX;
     margin-top: 10px;    
   }
 
 .metric {
     background-color: #fff;
-    padding: 1px;
+    padding: 10px;
     border-radius:12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -29,16 +29,16 @@
   .metric span {
     font-size: 1.2rem;
     color: #555;
-    font-weight: 600;
+    font-weight: 400;
   }
   
   .container-graphics{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .SimpleRadarChart{    
-    padding: 7px;
+    padding: 10px;
     border-radius: 30px;    
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
   }

@@ -41,7 +41,7 @@ const AddMetrics= ()=>
           setFormData({ ...formData, [name]: numericValue });
           setError(""); // Limpiar el error si el valor es válido
         } else {
-          setError("El valor debe estar entre 0 y 100");
+          setError("El valor debe estar entre 0 y 99");
         }
       };
 
@@ -76,7 +76,7 @@ const AddMetrics= ()=>
       
           
           } else {
-            setError("Todos los valores deben estar entre 0 y 100.");
+            setError("Todos los valores deben estar entre 0 y 99.");
           }
         } else {
             Swal.fire({

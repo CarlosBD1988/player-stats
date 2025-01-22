@@ -10,6 +10,7 @@ import VerConsolidado from "./components/ViewConsolidateStatics/ViewConsolidateS
 import MetricsPlayer from "./components/MetricsPlayer/MetricsPlayer";
 import Audit from "./components/Audit/Audit";
 import Footer from "./components/Footer/Footer";
+import SignIn from "./components/SignIn/SignIn";
 
 import "./App.css";
 
