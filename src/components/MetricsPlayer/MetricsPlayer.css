@@ -32,12 +32,12 @@
     font-weight: 400;
   }
   
-  .container-graphics{
+  .container-graphics {
     display: flex;
     flex-direction: column;
   }
 
-  .SimpleRadarChart{    
+  .SimpleRadarChart {
     padding: 10px;
     border-radius: 30px;    
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);

@@ -57,6 +57,12 @@ function App() {
                 <li><Link to="/auditoria">Ver Movimientos</Link></li>
               </ul>
             </li>
+            <li className="dropdwon">
+             Login
+              <ul className="dropdown-menu">
+              <li><Link to="/SignIn">Login</Link></li>
+              </ul>
+            </li>
           </ul>
         </nav>
         <Footer />
@@ -71,6 +77,7 @@ function App() {
           <Route path="/ver-consolidado" element={<VerConsolidado />} />
           <Route path="/por-jugador" element={< MetricsPlayer/>} />
           <Route path="/auditoria" element={<Audit />} />
+          <Route path="/SignIn" element={<SignIn />} />
         </Routes>
       </div>
     </Router>

@@ -47,7 +47,7 @@ const MetricsPlayer = ()=>
     return (
 
         <div>
-                <h2>Metricas por jugador</h2>
+                <h2> Metrica Individual </h2>
 
                 <select onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
