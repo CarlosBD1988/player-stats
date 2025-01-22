@@ -1,15 +1,15 @@
 /* Contenedor principal */
 .player-card {
-    width: 320px;
+    width: 350px;
     height: min-height;
     background: linear-gradient(to bottom, #f7d794, gold);
     border-radius: 35px;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
     color: white;
     font-family: Arial, sans-serif;
-    position: relative;
+    position: center;
     overflow: hidden;
-    display: flex;
+    display: center;
     flex-direction: column;
     align-items: center;
   }
@@ -21,15 +21,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-    position: relative;
+    position: center;
   }
   
   .rating {
     background: gold;
     border-radius: 30%;
-    width: 50px;
-    height: 50px;
-    display: flex;
+    width: 30px;
+    height: 30px;
+    display: grid;
     justify-content: center;
     align-items: center;
     font-size: 30px;
