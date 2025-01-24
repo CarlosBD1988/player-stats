@@ -47,7 +47,7 @@ const MetricsPlayer = ()=>
     return (
 
         <div>
-                <h2>Metricas por jugador</h2>
+                <h2> Metrica Individual </h2>
 
                 <select onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
@@ -64,27 +64,27 @@ const MetricsPlayer = ()=>
           <div className="metrics-container">                
                 <div className="metrics-grid"> 
                     <div className="metric">
-                    <strong>Ritmo:</strong>
+                    <strong>Ritmo: </strong>
                     <span>{metrics.stats.ritmo}</span>
                     </div>
                     <div className="metric">
-                    <strong>Tiro:</strong>
+                    <strong>Tiro: </strong>
                     <span>{metrics.stats.tiro}</span>
                     </div>
                     <div className="metric">
-                    <strong>Pase:</strong>
+                    <strong>Pase: </strong>
                     <span>{metrics.stats.pase}</span>
                     </div>
                     <div className="metric">
-                    <strong>Regate:</strong>
+                    <strong>Regate: </strong>
                     <span>{metrics.stats.regate}</span>
                     </div>
                     <div className="metric">
-                    <strong>Defensa:</strong>
+                    <strong>Defensa: </strong>
                     <span>{metrics.stats.defensa}</span>
                     </div>
                     <div className="metric">
-                    <strong>Cabeza:</strong>
+                    <strong>Cabeza: </strong>
                     <span>{metrics.stats.cabeza}</span>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ const PlayerCard = ({ playerName, metrics }) => {
         <h3 className="player-name">{playerName}</h3>
         <div className="metrics">
           <p>
-            <strong>RIT:</strong> {metrics.ritmo || 80}
+            <strong>RIT: </strong> {metrics.ritmo || 80}
           </p>
           <p>
             <strong>SHO: </strong> {metrics.tiro || 85}
@@ -44,6 +44,5 @@ const PlayerCard = ({ playerName, metrics }) => {
       </div>
     </div>
   );
-};
-
+}  
 export default PlayerCard;

@@ -6,11 +6,9 @@ function Home() {
     <div className="home">
       <h1>WELCOME TO PLAYER STATS!</h1>
       <img src="logo.png" alt="Decorativo" className="home-gif" />
-    </div>
-      
+    </div>  
+        );
         
-  );
 }
-
 
 export default Home;

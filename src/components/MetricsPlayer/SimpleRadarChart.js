@@ -14,7 +14,7 @@ const SimpleRadarChart = ({ metrics }) => {
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <RadarChart outerRadius="80%" data={data}>
+      <RadarChart outerRadius="100%" data={data}>
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
         <PolarRadiusAxis />
