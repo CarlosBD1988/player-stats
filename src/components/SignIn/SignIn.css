@@ -1,0 +1,64 @@
+/* Estilos generales para el contenedor */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
+}
+.log{
+  width: 100px;
+  padding: 1px;
+}
+.login-form {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-container {
+  margin-bottom: 15px;
+}
+
+.input-container label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-container input:focus {
+  border-color: #7ca0c5;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #aaaaaa;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #cfcfd1;
+}
