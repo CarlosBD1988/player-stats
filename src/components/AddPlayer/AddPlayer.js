@@ -1,41 +1,125 @@
 // src/components/AddPlayer.js
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc , serverTimestamp } from "firebase/firestore";
+import { collection, addDoc,  getDocs,  query,   where,   updateDoc,   serverTimestamp } from "firebase/firestore";
 import Swal from 'sweetalert2';
 import './AddPlayer.css'; 
 
 
 
 const AddPlayer = () => {
+  
+  const [idTypes, setIdTypes] = useState([]);// Para almacenar los tipos de documento desde la BD
+  const [idType, setIdType] = useState("");
+  const [documentNumber, setDocumentNumber] = useState("");
   const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");   
+  const [country, setCountry] = useState("");
+  const [position, setPosition] = useState("");
+  const [fanTeam, setFanTeam] = useState("");
+  
+
+  const americanCountries = [
+    "Argentina", "Bolivia", "Brasil", "Chile", "Colombia", 
+    "Costa Rica", "Cuba", "Ecuador", "El Salvador", "Guatemala", 
+    "Honduras", "México", "Nicaragua", "Panamá", "Paraguay", 
+    "Perú", "República Dominicana", "Uruguay", "Venezuela"
+  ];
+
+  const southAmericanTeams = [
+    "Boca Juniors", "River Plate", "America de Cali", "Atletico Nacional", 
+    "Junior de Barranquilla", "Atletico Bucaramanga", "Millonarios","Real Cartagena"
+  ];
+
+  const playerPositions = [
+    "Portero", "Defensa", "Lateral", "Mediocampista", "Delantero"
+  ];
+
 
   const handleAddPlayer = async () => {
 
-    try{
-        if (name.trim()) 
-        {
-            console.log(name)
-            await addDoc(collection(db, "players"), { name , timestamp: serverTimestamp() });
-            setName("");
-            Swal.fire({
-                title: 'Guardado',
-                text: 'Jugador creado exitosamente en la base de datos.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        }
-        else
-        {
-            console.log("Nombre inválido");
-            Swal.fire({
-              title: 'Error',
-              text: 'El nombre no puede estar vacío.',
-              icon: 'error',
-              confirmButtonText: 'OK'
-            });
-        }
+    try
+    {
+      if (!name.trim() || !documentNumber.trim()) {
+        Swal.fire({
+          title: 'Error',
+          text: 'El nombre y el número de documento son obligatorios.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
 
+      const playersCollection = collection(db, "players");
+      // Verificar si el número de identificación ya existe
+      const queryById = query(playersCollection, where("documentNumber", "==", documentNumber));
+      const existingById = await getDocs(queryById);
+      if (!existingById.empty) {
+        Swal.fire({
+          title: 'Error',
+          text: 'El número de identificación ya existe en la base de datos.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return;      
+      }
+        // Verificar si el nombre del jugador ya existe
+        const queryByName = query(playersCollection, where("name", "==", name));
+        const existingByName = await getDocs(queryByName);
+
+        if (!existingByName.empty) {
+          const playerDoc = existingByName.docs[0]; // Tomar el primer resultado
+          await updateDoc(playerDoc.ref, {
+            weight,
+            height,
+            birthDate,
+            country,
+            position,
+            fanTeam,
+            idType,
+            documentNumber,
+            updatedAt: serverTimestamp()
+          });
+          Swal.fire({
+            title: 'Actualización Exitosa',
+            text: 'Los datos del jugador han sido actualizados correctamente.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        }else {
+          // Si no existe ni por ID ni por nombre, creamos un nuevo jugador
+          await addDoc(playersCollection, {
+            name,
+            weight,
+            height,
+            birthDate,
+            country,
+            position,
+            fanTeam,
+            idType,
+            documentNumber,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+          Swal.fire({
+            title: 'Guardado Exitoso',
+            text: 'El jugador ha sido creado exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        }
+        // Limpiar el formulario
+      setName("");
+      setWeight("");
+      setHeight("");
+      setBirthDate("");
+      setCountry("");
+      setPosition("");
+      setFanTeam("");
+      setIdType("");
+      setDocumentNumber("");   
     }
     catch(error)
     {
@@ -51,15 +135,81 @@ const AddPlayer = () => {
  
   };
 
+
+ // Obtener los tipos de documento desde Firestore
+ useEffect(() => {
+  const fetchIdTypes = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "IdTypes"));
+      const types = querySnapshot.docs.map(doc => ({ id: doc.id, name: doc.data().name }));
+      setIdTypes(types);
+    } catch (error) {
+      console.error("Error al cargar los tipos de documento:", error);
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudieron cargar los tipos de documento.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  };
+  fetchIdTypes();
+}, []);
+
+  
   return (
     <div>
-      <h2>Agregar Jugador</h2>
-      <input
-        type="text"
-        placeholder="Escribe el nombre del jugador aqui ..."
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <h2>Nuevo Jugador</h2>
+
+      <label htmlFor="playerIdType">Tipo de identificacion:</label>
+      <select id="playerIdType" value={idType} onChange={(e) => setIdType(e.target.value)}>
+        <option value="">Selecciona un tipo de documento</option>
+        {idTypes.map((type) => (
+          <option key={type.id} value={type.name}>{type.name}</option>
+        ))}
+      </select>
+
+      <label htmlFor="playerId">Numero de identificacion:</label>
+      <input id="playerId" type="number" placeholder="Número de documento" value={documentNumber} onChange={(e) => setDocumentNumber(e.target.value)}/>
+
+      <label htmlFor="playerName">Nombre Completo:</label>
+      <input id="playerName" type="text" placeholder="Escribe el nombre del jugador aqui ..." value={name} onChange={(e) => setName(e.target.value)}/>
+      
+      <label htmlFor="playerBirthDate">Fecha de Nacimiento:</label>
+      <input id="playerBirthDate" type="date" placeholder="Fecha de nacimiento" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="styled-date"/>
+
+      <label htmlFor="playerWeight">Peso (Kg):</label>
+      <input id="playerWeight" type="number" placeholder="Peso (kg)" value={weight} onChange={(e) => setWeight(e.target.value)}/>
+
+      <label htmlFor="playerHeight">Estatura (Cm):</label>
+      <input id="playerHeight" type="number" placeholder="Altura (cm)" value={height} onChange={(e) => setHeight(e.target.value)}/>
+
+      <label htmlFor="playerCountry">Pais:</label>
+      <select id="playerCountry" value={country} onChange={(e) => setCountry(e.target.value)} >
+        <option value="">Selecciona un país</option>
+        {americanCountries.map((country, index) => (
+          <option key={index} value={country}>{country}</option>
+        ))}
+      </select>
+
+      <label htmlFor="playerPosition">Posicion:</label>
+      <select id="playerPosition" value={position} onChange={(e) => setPosition(e.target.value)}>
+        <option value="">Selecciona una posición</option>
+        {playerPositions.map((pos, index) => (
+          <option key={index} value={pos}>{pos}</option>
+        ))}
+      </select>
+
+      <label htmlFor="playerFanTeam">Team:</label>
+      <select id="playerFanTeam"> value={fanTeam} onChange={(e) => setFanTeam(e.target.value)}>
+        <option value="">Equipo de fútbol favorito</option>
+        {southAmericanTeams.map((team, index) => (
+          <option key={index} value={team}>{team}</option>
+        ))}
+      </select>
+
+
+
       <button type="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );

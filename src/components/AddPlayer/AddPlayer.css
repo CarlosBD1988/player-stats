@@ -18,6 +18,12 @@ form {
     font-size: 24px;
     font-weight: bold;
   }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
   
   /* Estilos para el input */
   input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
@@ -36,6 +42,36 @@ form {
     border-color: #4CAF50;
     outline: none;
   }
+
+  .styled-date {
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    -webkit-appearance: none; /* Compatibilidad con Webkit */
+    -moz-appearance: none; /* Compatibilidad con Firefox */
+    padding: 12px 15px;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .styled-date:hover {
+    border-color: #888;
+  }
+  
+  .styled-date:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+  }
+  
+  .styled-date::-webkit-calendar-picker-indicator {
+    color: #333;
+    cursor: pointer;
+  }
+
   
   /* Estilo del botón */
   button {
