@@ -77,8 +77,7 @@ const MatchAttendance = () => {
           const tokenResponsable = await validarToken(pin); // Asume que tienes esta función implementada
           if (tokenResponsable) {
             // ID del item fijo
-            const itemId = "uKOAjjzOB6szDTkF9e0r";
-            const date = new Date().toISOString();
+            const itemId = "uKOAjjzOB6szDTkF9e0r";            
   
             // Crear registros en la colección "records" y "audit"
             const records = selectedPlayers.map(async (playerId) => {
