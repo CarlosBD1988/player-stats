@@ -10,8 +10,10 @@ import VerConsolidado from "./components/ViewConsolidateStatics/ViewConsolidateS
 import MetricsPlayer from "./components/MetricsPlayer/MetricsPlayer";
 import Audit from "./components/Audit/Audit";
 import Footer from "./components/Footer/Footer";
+import MatchAttendance from "./components/MatchAttendance/MatchAttendance";
 
 import "./App.css";
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
                 <li><Link to="/crear-jugador">Crear Jugador</Link></li>
                 <li><Link to="/crear-item">Crear Ítem</Link></li>
                 <li><Link to="/crear-registro">Crear Registro</Link></li>
+                <li><Link to="/confirmar-asistencia">Asistencia a partidos</Link></li>
                 
               </ul>
             </li>
@@ -66,6 +69,10 @@ function App() {
           <Route path="/crear-item" element={<AddItem />} />
           <Route path="/crear-registro" element={<AddRecord />} />
           <Route path="/crear-metrica" element={<AddMetrics />} />
+          <Route path="//confirmar-asistencia" element={<MatchAttendance />} />
+
+
+          
 
           <Route path="/ver-consolidado" element={<VerConsolidado />} />
           <Route path="/por-jugador" element={< MetricsPlayer/>} />

@@ -1,0 +1,135 @@
+/* Contenedor principal */
+.container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Títulos */
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  /* Etiquetas de los campos */
+  .label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  /* Input de fecha */
+  input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  /* Contenedor de jugadores */
+  .players-container {
+    margin-bottom: 20px;
+  }
+  
+  .player-item {
+    display: flex; 
+    margin-bottom: 4px;
+    width: 100%;
+  }
+  
+  /* Selector de jugador */
+  select {
+    flex: 1;
+    min-width: 250px; /* Ancho mínimo */
+    max-width: 350px; /* Controlar el ancho máximo */
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  
+  /* Botón de eliminar jugador */
+  .player-item button {
+    flex-shrink: 0;
+    padding: 5px 8px; /* Tamaño más pequeño */
+    background-color: #777; /* Color gris oscuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 36px; /* Tamaño fijo del botón */
+    height: 32px; 
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    transition: background-color 0.3s;
+  }
+  
+  .player-item button:hover {
+    background-color: #555; /* Gris más oscuro al hacer hover */
+  }
+  
+  /* Botón de añadir jugador */
+  .add-button {
+    padding: 10px 15px;
+    background-color: #4caf50; /* Verde sobrio */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .add-button:hover {
+    background-color: #388e3c;
+  }
+  
+  /* Botón de guardar */
+  .save-button {
+    padding: 10px 20px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .save-button:hover {
+    background-color: #1976d2;
+  }
+  
