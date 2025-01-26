@@ -19,33 +19,35 @@ import SignIn from "./components/SignIn/SignIn";
 import LandingPage from "./components/LandingPage/LandingPage"; 
 import Navbar from "./components/Navbar/Navbar";
 
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+
 
 import "./App.css";
 
 
 function App() {
   return (
-    <AuthProvider>
-
-    
+    <AuthProvider>    
     <Router>
       <div>       
-        <Navbar />
-        <Footer />
+       {/* Renderiza el Navbar y Footer solo si el usuario está autenticado */}
+      <Navbar />
+       
         {/* Rutas */}
         <Routes>
         <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/crear-jugador" element={<AddJugador />} />
-          <Route path="/crear-item" element={<AddItem />} />
-          <Route path="/crear-registro" element={<AddRecord />} />
-          <Route path="/crear-metrica" element={<AddMetrics />} />
-          <Route path="//confirmar-asistencia" element={<MatchAttendance />} />  
-          <Route path="/ver-consolidado" element={<VerConsolidado />} />
-          <Route path="/por-jugador" element={< MetricsPlayer/>} />
-          <Route path="/auditoria" element={<Audit />} />
+          <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="/crear-jugador" element={<PrivateRoute><AddJugador /></PrivateRoute>}/>
+          <Route path="/crear-item" element={<PrivateRoute><AddItem /></PrivateRoute>} />
+          <Route path="/crear-registro" element={<PrivateRoute><AddRecord /></PrivateRoute>} />
+          <Route path="/crear-metrica" element={<PrivateRoute><AddMetrics /></PrivateRoute>}  />
+          <Route path="//confirmar-asistencia" element={<PrivateRoute><MatchAttendance /></PrivateRoute>} />  
+          <Route path="/ver-consolidado" element={<PrivateRoute><VerConsolidado /></PrivateRoute>} />
+          <Route path="/por-jugador" element={<PrivateRoute><MetricsPlayer /></PrivateRoute>} />
+          <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
           <Route path="/SignIn" element={<SignIn />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
     </AuthProvider>

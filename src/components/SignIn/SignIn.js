@@ -39,7 +39,7 @@ const LoginForm = () => {
         if (user.password === password) {
           login(user); // Guardar el usuario en el contexto de autenticación
           Swal.fire('Bienvenido', `¡Hola, ${user.name} ${user.lastname}!`, 'success');
-          navigate('/'); // Redirigir al menú principal o a donde desees
+          navigate('/home'); // Redirigir al menú principal o a donde desees
         } else {
           Swal.fire('Error', 'Las credenciales son incorrectas', 'error');
         }
