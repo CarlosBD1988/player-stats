@@ -92,6 +92,14 @@
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);  /* Sombra de profundidad */
     transition: all 0.3s ease;
+    position: fixed;  /* Fijar el botón en la pantalla */
+    top: 20px;  /* Separarlo del borde superior */
+    right: 20px;  /* Separarlo del borde derecho */
+    z-index: 1000;  /* Asegurarse de que esté encima de otros elementos */
+
+    width: auto;  /* Hacer el ancho automático para el tamaño del contenido */
+  height: 50px;
+
   }
   
   /* Efecto hover - cambio de color y animación */
