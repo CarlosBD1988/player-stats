@@ -51,7 +51,7 @@ function Navbar() {
         {user ? (
           <>
             <li className="navbar-item">
-              Bienvenido, {user.name} {user.lastName}
+              Bienvenido, {user.name} {user.lastname}
             </li>
             <li className="navbar-item">
               <button onClick={logout}>Cerrar sesión</button>
