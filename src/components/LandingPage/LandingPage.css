@@ -1,0 +1,110 @@
+/* Contenedor principal */
+.welcome-container {
+    font-family: 'Roboto', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+    color: #333;
+  }
+  
+  /* Título principal */
+  .welcome-container h1 {
+    font-size: 2.5rem;
+    color: #1a202c;
+    margin-bottom: 20px;
+  }
+  
+  /* Nombre de la app */
+  .welcome-container .app-name {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* Texto introductorio */
+  .welcome-container .intro-text {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Subtítulo */
+  .welcome-container h3 {
+    font-size: 1.8rem;
+    color: #1a202c;
+    margin-bottom: 15px;
+  }
+  
+  /* Lista */
+  .welcome-container ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-container ul li {
+    font-size: 1rem;
+    color: #4a5568;
+    margin: 10px 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .welcome-container ul li::before {
+    content: '✔️';
+    color: #007bff;
+    margin-right: 8px;
+  }
+  
+  /* Texto final */
+  .welcome-container .cta-text {
+    font-size: 1.2rem;
+    color: #2d3748;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  
+  /* Estilo del botón */
+/* Contenedor del botón */
+.cta-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  /* Estilo del botón - Llamada a la acción */
+  .cta-btn {
+    padding: 15px 40px;
+    background-color: #FF4500;  /* Naranja brillante */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;  /* Esquinas redondeadas */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);  /* Sombra de profundidad */
+    transition: all 0.3s ease;
+  }
+  
+  /* Efecto hover - cambio de color y animación */
+  .cta-btn:hover {
+    background-color: #FF6347;  /* Rojo tomate brillante */
+    transform: translateY(-5px);  /* Sube el botón ligeramente */
+    box-shadow: 0 8px 25px rgba(255, 69, 0, 0.8);  /* Más sombra en hover */
+  }
+  
+  /* Efecto de foco */
+  .cta-btn:focus {
+    outline: none;  /* Eliminar el borde predeterminado */
+    box-shadow: 0 0 10px rgba(255, 69, 0, 1);  /* Sombra alrededor cuando está en foco */
+  }
+  
+  
