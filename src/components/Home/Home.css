@@ -1,13 +1,13 @@
 .home {
     text-align: center;
     padding: auto;
-    margin-top: 5px;
-    background: #dad3d2;
+    margin-top: 1px;
+    background: linear-gradient(rgb(233, 233, 233), rgba(177, 205, 247, 0.651));
     font: optional;
   }
   
   .home h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: #333;
   }
   
