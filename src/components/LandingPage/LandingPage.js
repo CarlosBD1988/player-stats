@@ -4,40 +4,53 @@ import { Link } from "react-router-dom";
 
 import "./LandingPage.css"
 
-function LandingPage() {
+const LandingPage = () => {
   return (
     <div className="landing-page">
-        <div class="welcome-container">
-            <h1>¡Bienvenido a <span class="app-name">Player Stats</span>! ⚽️</h1>
-            <p>
-            Descubre una plataforma avanzada para gestionar y analizar estadísticas deportivas, creada especialmente para potenciar el desempeño de los jugadores de nuestra escuela de fútbol.
-            </p>
-            <h3>📊 <strong>Qué puedes hacer aquí:</strong></h3>
-            <ul>
-              <li>🔍 Analiza tu progreso con estadísticas detalladas.</li>
-              <li>📈 Visualiza métricas clave de rendimiento.</li>
-              <li>🎯 Mejora con información personalizada.</li>
-            </ul>
-            <p class="cta-text">
-              💪 <strong>Nuestro objetivo es tu crecimiento deportivo.</strong> Esta herramienta está hecha para ayudarte a alcanzar tu máximo potencial.
-            </p>
-
-            <p class="cta-text">
-                Lleva tu rendimiento al siguiente nivel con nuestra herramienta exclusiva para el desarrollo deportivo. ¡Transformemos los datos en éxitos!
-            </p>
-            <p class="final-message">
-              ¡Comencemos a transformar datos en éxitos deportivos!
-            </p>
-        </div>
-
-        <div class="cta-btn-container">
+      {/* Sección Hero */}
+      <header className="hero-section">
+        <div className="hero-content">
+          <h1>Bienvenido al Mundo del Fútbol</h1>
+          <p>Donde la pasión y el talento se encuentran.</p>
+          <div class="cta-btn-container">
           <Link to="/signin">
           <button class="cta-btn">Empieza a Explorar</button>
           </Link>
         </div>
-     
+        </div>
+      </header>
+
+      {/* Sección de Información */}
+      <section className="info-section">
+        <h2>Últimas Noticias</h2>
+        <div className="cards-container">
+          <div className="card">
+            <h3>Nuevos Talentos</h3>
+            <p>Descubre a las jóvenes promesas del fútbol mundial.</p>
+          </div>
+          <div className="card">
+            <h3>Partidos en Vivo</h3>
+            <p>No te pierdas los partidos más emocionantes.</p>
+          </div>
+          <div className="card">
+            <h3>Entrenamientos</h3>
+            <p>Aprende las técnicas de los mejores jugadores.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección de Contacto */}
+      <section className="contact-section">
+        <h2>Contacto</h2>
+        <p>¿Tienes alguna pregunta? ¡Contáctanos!</p>
+        <form className="contact-form">
+          <input type="text" placeholder="Nombre" required />
+          <input type="email" placeholder="Correo Electrónico" required />
+          <textarea placeholder="Mensaje" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </section>
     </div>
   );
-}
-
+};
 export default LandingPage;
