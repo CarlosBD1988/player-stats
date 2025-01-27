@@ -19,9 +19,9 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-brand">Player Stats</Link>
+      <Link to="/home" className="navbar-brand">Player Stats</Link>
       <ul className="navbar-menu">
-        <li><Link to="/">Inicio</Link></li>
+        <li><Link to="/home">Inicio</Link></li>
         <li className="dropdown">
           Acciones
           <ul className="dropdown-menu">
@@ -47,12 +47,17 @@ function Navbar() {
           </ul>
         </li>
         
-        <li className="dropdown">
+        {user?.role === 'admin' && ( // Menu Auditoria solo visible para usuarios admin
+        <>         
+          <li className="dropdown">
           Auditoría
           <ul className="dropdown-menu">
             <li><Link to="/auditoria">Ver Movimientos</Link></li>
           </ul>
         </li>
+        
+        </> )}
+      
 
         <li className="dropdown">
         {user ? (
