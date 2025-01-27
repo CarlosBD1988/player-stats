@@ -1,11 +1,18 @@
 // src/components/Navbar/Navbar.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; // Importar el contexto de autenticación
 
 function Navbar() {
   const { user ,logout } = useAuth(); // Acceder al estado del usuario autenticado
+  const navigate = useNavigate();
 
+   // Función para manejar el cierre de sesión
+   const handleLogout = () => {
+    logout(); // Borra el usuario del estado
+    navigate("/SignIn"); // Redirige al login (o a "/" si prefieres la landing page)
+  };
+  
   if (!user) {
     return null; // Si no hay usuario, no mostramos el navbar
   }
@@ -54,7 +61,7 @@ function Navbar() {
               Bienvenido, {user.name} {user.lastname}
             </li>
             <li className="navbar-item">
-              <button onClick={logout}>Cerrar sesión</button>
+              <button onClick={handleLogout}>Cerrar sesión</button>
             </li>
           </>
         ) : (
