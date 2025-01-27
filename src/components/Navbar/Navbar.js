@@ -46,12 +46,17 @@ function Navbar() {
           </ul>
         </li>
         
-        <li className="dropdown">
+        {user?.role === 'admin' && ( // Menu Auditoria solo visible para usuarios admin
+        <>         
+          <li className="dropdown">
           Auditoría
           <ul className="dropdown-menu">
             <li><Link to="/auditoria">Ver Movimientos</Link></li>
           </ul>
         </li>
+        
+        </> )}
+      
 
         <li className="dropdown">
         {user ? (
