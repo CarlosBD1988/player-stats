@@ -2,6 +2,9 @@
 import { useState,useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
 import { collection, addDoc,  getDocs,  query,   where,   updateDoc,   serverTimestamp } from "firebase/firestore";
+import { useAuth } from "../../context/AuthContext";
+
+
 import Swal from 'sweetalert2';
 import './AddPlayer.css'; 
 
@@ -9,6 +12,7 @@ import './AddPlayer.css';
 
 const AddPlayer = () => {
   
+    const { user } = useAuth();
   const [idTypes, setIdTypes] = useState([]);// Para almacenar los tipos de documento desde la BD
   const [idType, setIdType] = useState("");
   const [documentNumber, setDocumentNumber] = useState("");
@@ -80,6 +84,7 @@ const AddPlayer = () => {
             fanTeam,
             idType,
             documentNumber,
+            schoolId:user.schoolId,
             updatedAt: serverTimestamp()
           });
           Swal.fire({
@@ -100,6 +105,7 @@ const AddPlayer = () => {
             fanTeam,
             idType,
             documentNumber,
+            schoolId:user.schoolId,
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
           });
