@@ -2,7 +2,7 @@
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoute = ({ children ,allowedRoles = []}) => {
   const { user } = useAuth();
 
   // Si no hay usuario autenticado, redirige al login
@@ -10,7 +10,11 @@ const PrivateRoute = ({ children }) => {
     return <Navigate to="/SignIn" />;
   }
 
-  // Si el usuario está autenticado, renderiza el componente
+   // Si hay roles definidos y el usuario no tiene uno permitido, redirige
+   if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/no-autorizado" />; // Crea esta ruta
+  }
+
   return children;
 };
 

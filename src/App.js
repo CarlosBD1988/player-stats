@@ -20,6 +20,8 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
+
 
 
 import "./App.css";
@@ -37,7 +39,7 @@ function App() {
         <Routes>
         <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
-          <Route path="/crear-jugador" element={<PrivateRoute><AddJugador /></PrivateRoute>}/>
+          <Route path="/crear-jugador" element={<PrivateRoute allowedRoles={['admin','tecnico']}><AddJugador /></PrivateRoute>}/>
           <Route path="/crear-item" element={<PrivateRoute><AddItem /></PrivateRoute>} />
           <Route path="/crear-registro" element={<PrivateRoute><AddRecord /></PrivateRoute>} />
           <Route path="/crear-metrica" element={<PrivateRoute><AddMetrics /></PrivateRoute>}  />
@@ -46,6 +48,8 @@ function App() {
           <Route path="/por-jugador" element={<PrivateRoute><MetricsPlayer /></PrivateRoute>} />
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
           <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/no-autorizado" element={<UnauthorizedPage />} />
+
         </Routes>
         <Footer />
       </div>
