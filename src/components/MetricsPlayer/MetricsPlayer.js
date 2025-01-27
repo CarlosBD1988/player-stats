@@ -3,22 +3,32 @@ import { collection, getDocs, query,where} from "firebase/firestore";
 import { db } from "../../config/firebaseConfig"; 
 import SimpleRadarChart from "./SimpleRadarChart";
 import PlayerCard from "../PlayerCard/PlayerCard";
+
+import { useAuth } from "../../context/AuthContext";
+
 import "./MetricsPlayer.css";
 
 const MetricsPlayer = ()=>
 {
+
+    const { user } = useAuth(); // Obtener el usuario autenticado
     const [players, setPlayers] = useState([]);
     const [selectedPlayer, setSelectedPlayer] = useState("");
     const [metrics, setMetrics] = useState(null);
 
     useEffect(() => {
         const fetchPlayers  = async () => {
-          const playerSnapshot = await getDocs(collection(db, "players"));         
-          setPlayers(playerSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+        
+        //const playerSnapshot = await getDocs(collection(db, "players"));            
+        const playerQuery = query(collection(db, "players"), where("schoolId", "==", user.schoolId));
+        const playerSnapshot = await getDocs(playerQuery);
+
+
+        setPlayers(playerSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
           
         };
         fetchPlayers ();
-      }, []);
+      }, [user.schoolId]);
 
 
 
@@ -49,7 +59,7 @@ const MetricsPlayer = ()=>
         <div>
                 <h2> Metrica Individual </h2>
 
-                <select onChange={(e) => setSelectedPlayer(e.target.value)}>
+                <select className="select1" onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
                     {players.map((player) => (
                     <option key={player.id} value={player.id}>

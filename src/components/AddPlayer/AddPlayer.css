@@ -1,61 +1,29 @@
 /* Estilos generales del formulario */
-form {
-    background-color: #f9f9f9;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.formu-addplayer
+{   
+    width: min(350px, 90%); /* Limita el ancho del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 3rem 1.5rem; /* Agrega espacio interno */
+    border: 5px solid #ccc; /* Borde para visualizar los límites */
+    background-color: #f9f9f9; /* Fondo para contraste */
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+  .formu_label{
+    display: grid;
   }
   
-  /* Título del formulario */
-  form h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  /* Estilos para el input */
-  input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
-  }
-  
-  /* Cambio de borde del input al hacer focus */
-  input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-    border-color: #4CAF50;
-    outline: none;
-  }
-
   .styled-date {
-    appearance: none; /* Elimina el estilo por defecto del navegador */
-    -webkit-appearance: none; /* Compatibilidad con Webkit */
-    -moz-appearance: none; /* Compatibilidad con Firefox */
-    padding: 12px 15px;
-    font-size: 16px;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    outline: none;
-    cursor: pointer;
     width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .styled-date:hover {
@@ -63,106 +31,29 @@ form {
   }
   
   .styled-date:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+   border-color: #007bff;
+   outline: none;
+   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
   }
   
   .styled-date::-webkit-calendar-picker-indicator {
-    color: #333;
-    cursor: pointer;
+   filter: invert(0.5); /* Cambia el color del ícono del calendario */
+   cursor: pointer;
   }
 
-  
-  /* Estilo del botón */
-  button {
-    width: 100%;
-    padding: 12px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Efecto hover sobre el botón */
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Estilo para botones deshabilitados */
-  button:disabled {
-    background-color: #ccc;
+  .styled-date::placeholder {
+    color: #999;
+  }  
+
+  .styled-date:disabled {
+    background-color: #e9ecef;
     cursor: not-allowed;
-  }
-  
+  }  
 
-/* Estilos generales de los selects */
-select {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #fff;
-    appearance: none; /* Remover el estilo predeterminado del navegador */
-    transition: border-color 0.3s ease;
-  }
-  
-  /* Cambio de borde del select al hacer focus */
-  select:focus {
-    border-color: #4CAF50;
-    outline: none;
-  }
-  
-  /* Estilo para la flecha del select */
-  select::-ms-expand {
-    display: none; /* Remover la flecha predeterminada en IE y Edge */
-  }
-  
-  select:focus::-ms-expand {
-    display: block; /* Mostrar la flecha al hacer foco en IE y Edge */
-  }
-  
-  /* Estilo de las opciones dentro del select */
-  option {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #fff;
-    color: #333;
-  }
-  
-  /* Estilo del select cuando es deshabilitado */
-  select:disabled {
-    background-color: #e0e0e0;
-    cursor: not-allowed;
-  }
- 
-
-  /* Estilo responsive para pantallas más pequeñas */
-  @media screen and (max-width: 600px) {
-    form {
-      padding: 20px;
-    }
-  
-    form h2 {
-      font-size: 22px;
-    }
-  
-    input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-  
-    button {
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-    select {
-        padding: 10px 12px;
-        font-size: 14px;
-      }
-  }
+.log-players {
+  max-width: 30%;
+  height: auto;
+  margin: auto ;
+  text-align: center;
+}
   
