@@ -35,6 +35,7 @@
   color: #fff; /* Texto blanco para contraste */
   padding: 15px 20px;
   display: flex;
+  margin-left: 10px;
   justify-content: space-between; /* Espacio entre elementos */
   align-items: center;
   font-family: 'Arial', sans-serif;

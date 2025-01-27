@@ -10,6 +10,7 @@ const LandingPage = () => {
       {/* Sección Hero */}
       <header className="hero-section">
         <div className="hero-content">
+        <img src="logo.png" alt="Decorativo" className="Log-landingp" />
           <h1>Bienvenido al Mundo del Fútbol</h1>
           <p>Donde la pasión y el talento se encuentran.</p>
           <div class="cta-btn-container">

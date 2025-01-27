@@ -12,6 +12,12 @@ body {
   align-items: center;
 }
 
+.Log-landingp{
+  max-width: 300px;
+  height: auto;
+  margin-top: 10px;
+}
+
 /* Sección Hero */
 .hero-section {
   width: 100%;
@@ -31,7 +37,7 @@ body {
 
 .hero-content p {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .cta-button {
