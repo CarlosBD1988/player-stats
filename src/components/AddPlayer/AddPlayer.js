@@ -158,9 +158,10 @@ const AddPlayer = () => {
 
   
   return (
-    <div>
+    
+    <div className="formu-addplayer">
       <h2>Nuevo Jugador</h2>
-
+      <img src="logo.png" alt="Decorativo" className="log-players" />     
       <label htmlFor="playerIdType">Tipo de identificacion:</label>
       <select id="playerIdType" value={idType} onChange={(e) => setIdType(e.target.value)}>
         <option value="">Selecciona un tipo de documento</option>
@@ -173,7 +174,7 @@ const AddPlayer = () => {
       <input id="playerId" type="number" placeholder="Número de documento" value={documentNumber} onChange={(e) => setDocumentNumber(e.target.value)}/>
 
       <label htmlFor="playerName">Nombre Completo:</label>
-      <input id="playerName" type="text" placeholder="Escribe el nombre del jugador aqui ..." value={name} onChange={(e) => setName(e.target.value)}/>
+      <input id="playerName" type="text" placeholder="Escribe el nombre del jugador" value={name} onChange={(e) => setName(e.target.value)}/>
       
       <label htmlFor="playerBirthDate">Fecha de Nacimiento:</label>
       <input id="playerBirthDate" type="date" placeholder="Fecha de nacimiento" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="styled-date"/>
@@ -201,16 +202,13 @@ const AddPlayer = () => {
       </select>
 
       <label htmlFor="playerFanTeam">Team:</label>
-      <select id="playerFanTeam"> value={fanTeam} onChange={(e) => setFanTeam(e.target.value)}>
+      <select id="playerFanTeam" value={fanTeam} onChange={(e) => setFanTeam(e.target.value)}>
         <option value="">Equipo de fútbol favorito</option>
         {southAmericanTeams.map((team, index) => (
           <option key={index} value={team}>{team}</option>
         ))}
       </select>
-
-
-
-      <button type="button" onClick={handleAddPlayer}>Crear jugador</button>
+      <button className button type="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );
 };
