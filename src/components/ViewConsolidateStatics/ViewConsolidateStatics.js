@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs,query, where} from "firebase/firestore";
+
+import { useAuth } from "../../context/AuthContext";
 import './ViewConsolidateStatics.css'; 
 
 const ViewConsolidateStatics = () => {
+
+  const { user } = useAuth(); // Obtener el usuario autenticado
+
   const [records, setRecords] = useState([]);
   const [players, setPlayers] = useState([]);
   const [items, setItems] = useState([]);
@@ -12,7 +17,13 @@ const ViewConsolidateStatics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const playerSnapshot = await getDocs(collection(db, "players"));
+
+        if (!user?.schoolId) return;
+
+        const playerQuery = query(collection(db, "players"), where("schoolId", "==", user.schoolId));
+        const playerSnapshot = await getDocs(playerQuery);
+        //const playerSnapshot = await getDocs(collection(db, "players"));        
+        
         const itemSnapshot = await getDocs(collection(db, "items"));
         const recordSnapshot = await getDocs(collection(db, "records"));
 
@@ -43,7 +54,7 @@ const ViewConsolidateStatics = () => {
     };
 
     fetchData();
-  }, []);
+  }, [user.schoolId]);
 
   // Calcular el total acumulado por jugador e ítem
   const calculateTotal = (player, item) => {
