@@ -19,9 +19,8 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-brand">Player Stats</Link>
       <ul className="navbar-menu">
-        <li><Link to="/">Inicio</Link></li>
+        <li><Link to="/home">Inicio</Link></li>
         <li className="dropdown">
           Acciones
           <ul className="dropdown-menu">
@@ -61,7 +60,7 @@ function Navbar() {
               Bienvenido, {user.name} {user.lastname}
             </li>
             <li className="navbar-item">
-              <button onClick={handleLogout}>Cerrar sesión</button>
+              <label onClick={handleLogout}> Cerrar sesión </label>
             </li>
           </>
         ) : (
