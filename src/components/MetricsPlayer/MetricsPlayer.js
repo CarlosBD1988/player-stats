@@ -49,7 +49,7 @@ const MetricsPlayer = ()=>
         <div>
                 <h2> Metrica Individual </h2>
 
-                <select onChange={(e) => setSelectedPlayer(e.target.value)}>
+                <select className="select1" onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
                     {players.map((player) => (
                     <option key={player.id} value={player.id}>

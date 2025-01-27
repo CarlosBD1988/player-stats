@@ -1,118 +1,140 @@
-/* Contenedor principal */
-.welcome-container {
-    font-family: 'Roboto', sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    line-height: 1.8;
-    color: #333;
-  }
-  
-  /* Título principal */
-  .welcome-container h1 {
-    font-size: 2.5rem;
-    color: #1a202c;
-    margin-bottom: 20px;
-  }
-  
-  /* Nombre de la app */
-  .welcome-container .app-name {
-    color: #007bff;
-    font-weight: bold;
-  }
-  
-  /* Texto introductorio */
-  .welcome-container .intro-text {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  /* Subtítulo */
-  .welcome-container h3 {
-    font-size: 1.8rem;
-    color: #1a202c;
-    margin-bottom: 15px;
-  }
-  
-  /* Lista */
-  .welcome-container ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  
-  .welcome-container ul li {
-    font-size: 1rem;
-    color: #4a5568;
-    margin: 10px 0;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .welcome-container ul li::before {
-    content: '✔️';
-    color: #007bff;
-    margin-right: 8px;
-  }
-  
-  /* Texto final */
-  .welcome-container .cta-text {
-    font-size: 1.2rem;
-    color: #2d3748;
-    font-weight: 500;
-    margin-bottom: 30px;
-  }
-  
-  /* Estilo del botón */
-/* Contenedor del botón */
-.cta-btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-  }
-  
-  /* Estilo del botón - Llamada a la acción */
-  .cta-btn {
-    padding: 15px 40px;
-    background-color: #FF4500;  /* Naranja brillante */
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 50px;  /* Esquinas redondeadas */
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);  /* Sombra de profundidad */
-    transition: all 0.3s ease;
-    position: fixed;  /* Fijar el botón en la pantalla */
-    top: 20px;  /* Separarlo del borde superior */
-    right: 20px;  /* Separarlo del borde derecho */
-    z-index: 1000;  /* Asegurarse de que esté encima de otros elementos */
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background: linear-gradient(rgb(233, 233, 233), rgba(177, 205, 247, 0.651));
+}
 
-    width: auto;  /* Hacer el ancho automático para el tamaño del contenido */
-  height: 50px;
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  }
-  
-  /* Efecto hover - cambio de color y animación */
-  .cta-btn:hover {
-    background-color: #FF6347;  /* Rojo tomate brillante */
-    transform: translateY(-5px);  /* Sube el botón ligeramente */
-    box-shadow: 0 8px 25px rgba(255, 69, 0, 0.8);  /* Más sombra en hover */
-  }
-  
-  /* Efecto de foco */
-  .cta-btn:focus {
-    outline: none;  /* Eliminar el borde predeterminado */
-    box-shadow: 0 0 10px rgba(255, 69, 0, 1);  /* Sombra alrededor cuando está en foco */
-  }
-  
-  
+/* Sección Hero */
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  color: rgb(15, 14, 14);
+  background-color: #575150;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #2b2120;
+}
+
+/* Sección de Información */
+.info-section {
+  padding: 4rem 2rem;
+  border-radius: 10px; /* Esquinas redondeadas */
+  background-color: rgb(245, 243, 243);
+  text-align: center;
+}
+
+.info-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 30%;
+  padding: 1.5rem;
+  margin: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Sección de Contacto */
+.contact-section {
+  margin: auto;
+  padding: 4rem 2rem;
+  border-radius: 10px; /* Esquinas redondeadas */
+  background-color: #dfdfdf;
+  color: rgb(49, 48, 48);
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  margin: auto;
+  display: column;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 80%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  background-color: #a8a8a8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.contact-form button:hover {
+  background-color: #7e7e7e;
+}

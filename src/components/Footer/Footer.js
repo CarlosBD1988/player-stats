@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <p className="text">
-        &copy; {new Date().getFullYear()} Player Stats. Todos los derechos reservados.
+        &copy; {new Date().getFullYear()} Statistics Football. Todos los derechos reservados.
       </p>
     </footer>
   );
