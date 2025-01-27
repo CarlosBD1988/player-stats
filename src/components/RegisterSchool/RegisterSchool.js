@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { db } from "../../config/firebaseConfig";
 import { collection, addDoc, serverTimestamp, getDocs, query, where } from "firebase/firestore";
 
+import {generateRandomPassword} from "../../Utils/generateRandomPassword"
 import Swal from "sweetalert2";
 
 const RegisterSchool = () => {
@@ -71,14 +72,7 @@ const RegisterSchool = () => {
         setFormData({ ...formData, [id]: value });
       };
 
-      const generateRandomPassword = () => {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-        let password = "";
-        for (let i = 0; i < 8; i++) {
-          password += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return password;
-      };
+     
 
       const handleSubmit = async (e) => {
         e.preventDefault();

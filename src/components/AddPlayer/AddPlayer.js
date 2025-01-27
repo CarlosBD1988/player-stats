@@ -2,6 +2,9 @@
 import { useState,useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
 import { collection, addDoc,  getDocs,  query,   where,   updateDoc,   serverTimestamp } from "firebase/firestore";
+import { useAuth } from "../../context/AuthContext";
+import {generateRandomPassword} from "../../Utils/generateRandomPassword"
+
 import Swal from 'sweetalert2';
 import './AddPlayer.css'; 
 
@@ -9,10 +12,13 @@ import './AddPlayer.css';
 
 const AddPlayer = () => {
   
+    const { user } = useAuth();
   const [idTypes, setIdTypes] = useState([]);// Para almacenar los tipos de documento desde la BD
   const [idType, setIdType] = useState("");
   const [documentNumber, setDocumentNumber] = useState("");
   const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [mail, setMail] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");   
@@ -80,6 +86,7 @@ const AddPlayer = () => {
             fanTeam,
             idType,
             documentNumber,
+            schoolId:user.schoolId,
             updatedAt: serverTimestamp()
           });
           Swal.fire({
@@ -92,6 +99,7 @@ const AddPlayer = () => {
           // Si no existe ni por ID ni por nombre, creamos un nuevo jugador
           await addDoc(playersCollection, {
             name,
+            lastName,
             weight,
             height,
             birthDate,
@@ -100,12 +108,27 @@ const AddPlayer = () => {
             fanTeam,
             idType,
             documentNumber,
+            email:mail,
+            schoolId:user.schoolId,
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
           });
+
+            const password = generateRandomPassword();
+            await addDoc(collection(db, "Users"), {
+                        email: mail,
+                        name: name,                        
+                        lastname: lastName,
+                        role: "jugador",
+                        password: password,
+                        schoolId: user.schoolId,
+                        createdAt: serverTimestamp(),
+            });
+
+
           Swal.fire({
             title: 'Guardado Exitoso',
-            text: 'El jugador ha sido creado exitosamente.',
+            text: 'El jugador y usuario de acceso han sido creado exitosamente.',
             icon: 'success',
             confirmButtonText: 'OK'
           });
@@ -120,6 +143,8 @@ const AddPlayer = () => {
       setFanTeam("");
       setIdType("");
       setDocumentNumber("");   
+      setLastName("");
+      setMail("");
     }
     catch(error)
     {
@@ -154,7 +179,7 @@ const AddPlayer = () => {
     }
   };
   fetchIdTypes();
-}, []);
+}, [user.schoolId]);
 
   
   return (
@@ -173,8 +198,11 @@ const AddPlayer = () => {
       <label htmlFor="playerId">Numero de identificacion:</label>
       <input id="playerId" type="number" placeholder="Número de documento" value={documentNumber} onChange={(e) => setDocumentNumber(e.target.value)}/>
 
-      <label htmlFor="playerName">Nombre Completo:</label>
+      <label htmlFor="playerName">Nombres:</label>
       <input id="playerName" type="text" placeholder="Escribe el nombre del jugador" value={name} onChange={(e) => setName(e.target.value)}/>
+
+      <label htmlFor="playerLastName">Apellidos:</label>
+      <input id="playerLastName" type="text" placeholder="Escribe los apellidos del jugador" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
       
       <label htmlFor="playerBirthDate">Fecha de Nacimiento:</label>
       <input id="playerBirthDate" type="date" placeholder="Fecha de nacimiento" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="styled-date"/>
@@ -208,6 +236,11 @@ const AddPlayer = () => {
           <option key={index} value={team}>{team}</option>
         ))}
       </select>
+
+      <label htmlFor="playerEmail">Email:</label>
+      <input id="playerEmail" type="email" placeholder="Escribe correo electronico para el usuario de acceso" value={mail} onChange={(e) => setMail(e.target.value)}/>
+
+
       <button className button type="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );
