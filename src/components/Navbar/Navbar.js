@@ -49,9 +49,10 @@ function Navbar() {
         {user?.role === 'admin' && ( // Menu Auditoria solo visible para usuarios admin
         <>         
           <li className="dropdown">
-          Auditoría
+          Admin Panel
           <ul className="dropdown-menu">
-            <li><Link to="/auditoria">Ver Movimientos</Link></li>
+          <li><Link to="/crear-escuela">Crear nueva escuela</Link></li>
+            <li><Link to="/auditoria">Auditoria</Link></li>            
           </ul>
         </li>
         

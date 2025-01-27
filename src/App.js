@@ -18,6 +18,7 @@ import MatchAttendance from "./components/MatchAttendance/MatchAttendance";
 import SignIn from "./components/SignIn/SignIn";
 import LandingPage from "./components/LandingPage/LandingPage"; 
 import Navbar from "./components/Navbar/Navbar";
+import RegisterSchool from "./components/RegisterSchool/RegisterSchool";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
@@ -25,6 +26,7 @@ import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
 
 
 import "./App.css";
+
 
 
 function App() {
@@ -47,6 +49,7 @@ function App() {
           <Route path="/ver-consolidado" element={<PrivateRoute><VerConsolidado /></PrivateRoute>} />
           <Route path="/por-jugador" element={<PrivateRoute><MetricsPlayer /></PrivateRoute>} />
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
+          <Route path="/crear-escuela" element={<PrivateRoute><RegisterSchool /></PrivateRoute>} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/no-autorizado" element={<UnauthorizedPage />} />
 
