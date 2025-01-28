@@ -68,7 +68,6 @@
     border-radius: 4px;
     font-size: 14px;
     color: #333;
-    background-color: #f9f9f9;
     box-sizing: border-box;
     white-space: nowrap;
   }
@@ -98,7 +97,7 @@
   /* Botón de añadir jugador */
   .add-button {
     padding: 10px 15px;
-    background-color: #4caf50; /* Verde sobrio */
+    background-color: #949494; /* Verde sobrio */
     color: white;
     border: none;
     border-radius: 4px;
@@ -112,13 +111,13 @@
   }
   
   .add-button:hover {
-    background-color: #388e3c;
+    background-color: #d3d3d3;
   }
   
   /* Botón de guardar */
   .save-button {
     padding: 10px 20px;
-    background-color: #2196f3;
+    background-color: #9c9a9a;
     color: white;
     border: none;
     border-radius: 4px;
@@ -126,10 +125,10 @@
     font-size: 16px;
     width: 100%;
     margin-top: 20px;
-    transition: background-color 0.3s;
+    transition: background-color 0.1s;
   }
   
   .save-button:hover {
-    background-color: #1976d2;
+    background-color: #e0e0e0;
   }
   
