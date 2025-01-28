@@ -14,7 +14,7 @@ const IndividualMetrics = () => {
 
       if (!user?.playerId) {
         // Si playerId es undefined o null, establecemos un error y detenemos la ejecución
-        setError("Usuario con Role de 'tecnico' poer lo cual no tiene metricas establecidas.");
+        setError("No se han encontrado métricas para este jugador.");
         return;
       }
 
