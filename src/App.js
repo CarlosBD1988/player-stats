@@ -19,6 +19,7 @@ import SignIn from "./components/SignIn/SignIn";
 import LandingPage from "./components/LandingPage/LandingPage"; 
 import Navbar from "./components/Navbar/Navbar";
 import RegisterSchool from "./components/RegisterSchool/RegisterSchool";
+import IndividualMetrics from "./components/IndividualMetrics/IndividualMetrics";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
@@ -39,18 +40,28 @@ function App() {
        
         {/* Rutas */}
         <Routes>
-        <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+          
+          
           <Route path="/crear-jugador" element={<PrivateRoute allowedRoles={['admin','tecnico']}><AddJugador /></PrivateRoute>}/>
           <Route path="/crear-item" element={<PrivateRoute><AddItem /></PrivateRoute>} />
-          <Route path="/crear-registro" element={<PrivateRoute><AddRecord /></PrivateRoute>} />
-          <Route path="/crear-metrica" element={<PrivateRoute><AddMetrics /></PrivateRoute>}  />
-          <Route path="//confirmar-asistencia" element={<PrivateRoute><MatchAttendance /></PrivateRoute>} />  
+          <Route path="/crear-registro" element={<PrivateRoute><AddRecord /></PrivateRoute>} />          
+          <Route path="/confirmar-asistencia" element={<PrivateRoute><MatchAttendance /></PrivateRoute>} />  
+          
+
           <Route path="/ver-consolidado" element={<PrivateRoute><VerConsolidado /></PrivateRoute>} />
+          
+          <Route path="/crear-metrica" element={<PrivateRoute><AddMetrics /></PrivateRoute>}  />
           <Route path="/por-jugador" element={<PrivateRoute><MetricsPlayer /></PrivateRoute>} />
-          <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
+          <Route path="/individual" element={<PrivateRoute><IndividualMetrics /></PrivateRoute>} />
+          
           <Route path="/crear-escuela" element={<PrivateRoute><RegisterSchool /></PrivateRoute>} />
+          <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
+          
+          
           <Route path="/SignIn" element={<SignIn />} />
+          
           <Route path="/no-autorizado" element={<UnauthorizedPage />} />
 
         </Routes>
@@ -62,4 +73,5 @@ function App() {
 }
 
 export default App;
+
 

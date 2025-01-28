@@ -97,7 +97,7 @@ const AddPlayer = () => {
           });
         }else {
           // Si no existe ni por ID ni por nombre, creamos un nuevo jugador
-          await addDoc(playersCollection, {
+          const playerRef =await addDoc(playersCollection, {
             name,
             lastName,
             weight,
@@ -121,10 +121,10 @@ const AddPlayer = () => {
                         lastname: lastName,
                         role: "jugador",
                         password: password,
-                        schoolId: user.schoolId,
+                        schoolId: user.schoolId,     
+                        playerId: playerRef.id,
                         createdAt: serverTimestamp(),
             });
-
 
           Swal.fire({
             title: 'Guardado Exitoso',
