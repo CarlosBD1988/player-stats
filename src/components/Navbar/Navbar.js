@@ -21,21 +21,37 @@ function Navbar() {
     <nav className="navbar">
       <ul className="navbar-menu">
         <li><Link to="/home">Inicio</Link></li>
-        <li className="dropdown">
-          Acciones
-          <ul className="dropdown-menu">
-            <li><Link to="/crear-jugador">Crear Jugador</Link></li>
-            <li><Link to="/crear-item">Crear Ítem</Link></li>
-            <li><Link to="/crear-registro">Crear Registro</Link></li>
-            <li><Link to="/confirmar-asistencia">Asistencia a partidos</Link></li>
-          </ul>
-        </li>
+        
+        {['admin', 'tecnico'].includes(user?.role) && (
+        <>  
+          <li className="dropdown">
+            Acciones
+            <ul className="dropdown-menu">
+              <li><Link to="/crear-jugador">Crear Jugador</Link></li>
+              <li><Link to="/crear-item">Crear Ítem</Link></li>
+              <li><Link to="/crear-registro">Crear Registro</Link></li>
+              <li><Link to="/confirmar-asistencia">Asistencia a partidos</Link></li>
+            </ul>
+          </li>
+        </>
+        )}
+
 
         <li className="dropdown">
           Métricas
           <ul className="dropdown-menu">
-            <li><Link to="/crear-metrica">Agregar</Link></li>
-            <li><Link to="/por-jugador">Visualizar</Link></li>
+          {['admin', 'tecnico'].includes(user?.role) && (
+            <> 
+              <li><Link to="/crear-metrica">Agregar</Link></li>
+              <li><Link to="/por-jugador">Visualizar por jugador</Link></li>
+            </>
+          )}  
+          
+          {['admin', 'jugador'].includes(user?.role) && (
+            <> 
+              <li><Link to="/individual">Mis Metricas</Link></li>
+          </>
+          )} 
           </ul>
         </li>
 
@@ -51,8 +67,8 @@ function Navbar() {
           <li className="dropdown">
           Admin Panel
           <ul className="dropdown-menu">
-          <li><Link to="/crear-escuela">Crear nueva escuela</Link></li>
-            <li><Link to="/auditoria">Auditoria</Link></li>            
+              <li><Link to="/crear-escuela">Crear nueva escuela</Link></li>
+              <li><Link to="/auditoria">Auditoria</Link></li>            
           </ul>
         </li>
         
