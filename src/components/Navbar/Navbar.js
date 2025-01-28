@@ -47,7 +47,7 @@ function Navbar() {
             </>
           )}  
           
-          {['admin', 'jugador'].includes(user?.role) && (
+          {['admin','tecnico', 'jugador'].includes(user?.role) && (
             <> 
               <li><Link to="/individual">Mis Metricas</Link></li>
           </>
