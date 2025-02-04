@@ -70,7 +70,7 @@ const LoginForm = () => {
           <label htmlFor="password">Contraseña:</label>
           <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Ingresa tu contraseña"/>
         </div>
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading} className='button-in'>
           {loading ? 'Iniciando...' : 'Iniciar sesión'}
         </button>
       </form>

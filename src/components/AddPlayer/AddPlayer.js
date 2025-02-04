@@ -185,8 +185,8 @@ const AddPlayer = () => {
   return (
     
     <div className="formu-addplayer">
-      <h2>Nuevo Jugador</h2>
-      <img src="logo.png" alt="Decorativo" className="log-players" />     
+      <img src="logo.png" alt="Decorativo" className="log-players" />   
+      <h2>Nuevo Jugador</h2>        
       <label htmlFor="playerIdType">Tipo de identificacion:</label>
       <select id="playerIdType" value={idType} onChange={(e) => setIdType(e.target.value)}>
         <option value="">Selecciona un tipo de documento</option>
@@ -238,9 +238,7 @@ const AddPlayer = () => {
       </select>
 
       <label htmlFor="playerEmail">Email:</label>
-      <input id="playerEmail" type="email" placeholder="Escribe correo electronico para el usuario de acceso" value={mail} onChange={(e) => setMail(e.target.value)}/>
-
-
+      <input id="playerEmail" type="email" placeholder="Email para inicion de sesion" value={mail} onChange={(e) => setMail(e.target.value)}/>
       <button className button type="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );
