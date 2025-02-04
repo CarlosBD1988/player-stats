@@ -1,7 +1,10 @@
 // src/components/AddRecord.js
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, getDocs , query, where} from "firebase/firestore";
+import { collection, addDoc, getDocs} from "firebase/firestore";
+
+import { useAuth } from "../../context/AuthContext";
+
 import Swal from 'sweetalert2';
 
 const AddRecord = () => {
@@ -10,6 +13,9 @@ const AddRecord = () => {
   const [selectedPlayer, setSelectedPlayer] = useState("");
   const [selectedItem, setSelectedItem] = useState("");
   const [value, setValue] = useState("");
+
+  const { user } = useAuth();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,72 +29,47 @@ const AddRecord = () => {
 
   const handleAddRecord = async () => {
     if (selectedPlayer && selectedItem && value) {
-      // Mostrar SweetAlert para pedir el PIN
+      // Mostrar SweetAlert para confirmar la acción
       Swal.fire({
-        title: "Ingrese el PIN",
-        input: "password", // Oculta los caracteres para mayor seguridad
-        inputPlaceholder: "Ingrese su PIN de 4 dígitos",
-        inputAttributes: {
-          maxlength: 4,
-          autocapitalize: "off",
-          autocorrect: "off",
-        },
+        title: "¿Está seguro de almacenar este record?",
+        text: "Esta acción guardará la estadística de manera permanente.",
+        icon: "question",
         showCancelButton: true,
-        confirmButtonText: "Validar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sí, guardar",
+        cancelButtonText: "No, cancelar",
         customClass: {
-            input: 'custom-input', 
-            popup: "custom-swal-popup",
-          },
-        preConfirm: async (pin) => {
-          if (!pin || pin.length !== 4) {
-            Swal.showValidationMessage("Debe ingresar un PIN válido de 4 dígitos.");
-          }
-          return pin; // Retorna el PIN ingresado
+          popup: "custom-swal-popup",
         },
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const pin = result.value;
-            console.log(pin)
-          // Validar el PIN en la colección Tokens
-          const tokenResponsable = await validarToken(pin);
-          console.log(tokenResponsable)
-          if (tokenResponsable) {
-            // Si el PIN es válido, realizar la acción original
-            await addDoc(collection(db, "records"), {
-              playerId: selectedPlayer,
-              itemId: selectedItem,
-              value: parseInt(value),
-              date: new Date().toISOString(),
-            });
+          // Si el usuario confirma, guardar en Firestore
+          await addDoc(collection(db, "records"), {
+            playerId: selectedPlayer,
+            itemId: selectedItem,
+            value: parseInt(value),
+            date: new Date().toISOString(),
+          });
   
-            Swal.fire({
-              title: "Guardado",
-              text: "Estadística registrada correctamente.",
-              icon: "success",
-              confirmButtonText: "OK",
-            });
-            //Almacenar registro de auditoria
-            await addDoc(collection(db, "audit"), {
-              user: tokenResponsable,
-              action:"new record",
-              playerId: selectedPlayer,
-              itemId: selectedItem,
-              value: parseInt(value),
-              date: new Date().toISOString(),
-            });
+          Swal.fire({
+            title: "Guardado",
+            text: "Estadística registrada correctamente.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
   
-            setValue("");
-          } else {
-            // Si el PIN no es válido
-            Swal.fire({
-              title: "Acceso Denegado",
-              text: "El PIN ingresado no es válido o no tiene permisos.",
-              icon: "error",
-              confirmButtonText: "OK",
-            });
-          }
+          // Registrar en auditoría
+          await addDoc(collection(db, "audit"), {
+            user: user.name + " " + user.lastname,
+            action: "new record",
+            playerId: selectedPlayer,
+            itemId: selectedItem,
+            value: parseInt(value),
+            date: new Date().toISOString(),
+          });
+  
+          setValue("");
         } else {
+          // Si el usuario cancela
           Swal.fire("Cancelado", "La acción ha sido cancelada.", "info");
         }
       });
@@ -96,26 +77,7 @@ const AddRecord = () => {
       Swal.fire("Error", "Por favor complete todos los campos antes de guardar.", "error");
     }
   };
-
-
-  const validarToken = async (pin) => {
-    try {
-      // Buscar el token en la colección Tokens
-      const tokenRef = collection(db, "Tokens");
-      const q = query(tokenRef, where("tokenRef", "==", pin)); // Validar por el campo tokenRef
-      const snapshot = await getDocs(q);
   
-      if (!snapshot.empty) {
-        const tokenDoc = snapshot.docs[0].data();
-        return tokenDoc.user; // Retorna el nombre del usuario responsable
-      } else {
-        return null; // No existe el token
-      }
-    } catch (error) {
-      console.error("Error al validar el token:", error);
-      return null;
-    }
-  };
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
