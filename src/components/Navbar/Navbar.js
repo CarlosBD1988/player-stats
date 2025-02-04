@@ -29,8 +29,9 @@ function Navbar() {
             <ul className="dropdown-menu">
               <li><Link to="/crear-jugador">Crear Jugador</Link></li>
               <li><Link to="/crear-item">Crear Ítem</Link></li>
-              <li><Link to="/crear-registro">Crear Registro</Link></li>
+              <li><Link to="/crear-registro">Crear Registro individual</Link></li>
               <li><Link to="/confirmar-asistencia">Asistencia a partidos</Link></li>
+              <li><Link to="/crear-registros-masivo">Crear Registro multiples</Link></li>
             </ul>
           </li>
         </>
@@ -97,3 +98,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
