@@ -25,9 +25,7 @@ const LoginForm = () => {
   // Manejo del envío del formulario
   const handleSignIn  = async (event) => {
     event.preventDefault(); 
-    console.log('Usuario:', email); console.log('Contraseña:', password);
     setLoading(true);
-
     try {
       // Buscar en la base de datos de Firebase
       const q = query(collection(db, 'Users'), where('email', '==', email));
