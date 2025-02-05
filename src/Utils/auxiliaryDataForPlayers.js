@@ -11,7 +11,7 @@
   ];
 
   export const playerPositions = [
-    "Portero", "Defensa", "Lateral", "Mediocampista", "Delantero"
+    "Portero", "Defensa", "Lateral", "Mediocampista", "Delantero", "Extremo"
   ];
 
   
