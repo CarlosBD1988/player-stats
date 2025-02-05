@@ -21,11 +21,12 @@ import Navbar from "./components/Navbar/Navbar";
 import RegisterSchool from "./components/RegisterSchool/RegisterSchool";
 import IndividualMetrics from "./components/IndividualMetrics/IndividualMetrics";
 import AddMultipleRecords from "./components/AddMultipleRecords/AddMultipleRecords";
-
+import AddCategories from "./components/AddCategories/AddCategories"
+import AddHeadquarters from "./components/AddHeadquarters/AddHeadquarters"
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
-
+import AddTechnicalDirectors from "./components/AddTechnicalDirectors/AddTechnicalDirectors"
 
 
 import "./App.css";
@@ -60,6 +61,12 @@ function App() {
           <Route path="/individual" element={<PrivateRoute><IndividualMetrics /></PrivateRoute>} />
           
           <Route path="/crear-escuela" element={<PrivateRoute><RegisterSchool /></PrivateRoute>} />
+          <Route path="/crear-categoria" element={<PrivateRoute><AddCategories /></PrivateRoute>} />
+          <Route path="/crear-sede" element={<PrivateRoute><AddHeadquarters /></PrivateRoute>} />
+          <Route path="/crear-tecnico" element={<PrivateRoute><AddTechnicalDirectors /></PrivateRoute>} />
+          
+
+
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
           
           

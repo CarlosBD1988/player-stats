@@ -63,11 +63,26 @@ function Navbar() {
           </ul>
         </li>
         
+        {['admin','administrativo'].includes(user?.role) && ( 
+        <>         
+          <li className="dropdown">
+          Panel administrativo
+          <ul className="dropdown-menu">
+              
+              <li><Link to="/crear-categoria">Crear Categoria</Link></li>
+              <li><Link to="/crear-sede">Crear Sede</Link></li>    
+              <li><Link to="/crear-tecnico">Crear Tecnico</Link></li>    
+
+                            
+          </ul>
+        </li>        
+        </> )}
+
         {user?.role === 'admin' && ( // Menu Auditoria solo visible para usuarios admin
         <>         
           <li className="dropdown">
-          Admin Panel
-          <ul className="dropdown-menu">
+          Admin del sistema
+          <ul className="dropdown-menu">          
               <li><Link to="/crear-escuela">Crear nueva escuela</Link></li>
               <li><Link to="/auditoria">Auditoria</Link></li>            
           </ul>
@@ -80,7 +95,7 @@ function Navbar() {
         {user ? (
           <>
             <li className="navbar-item">
-              Bienvenido, {user.name} {user.lastname}
+              Bienvenido, {user.name} {user.lastname} - <strong>Rol: {user.role}</strong> 
             </li>
             <li className="navbar-item">
               <label onClick={handleLogout}> Cerrar sesión </label>
@@ -98,4 +113,6 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
 
