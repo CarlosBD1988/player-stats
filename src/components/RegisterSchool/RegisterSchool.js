@@ -89,6 +89,17 @@ const RegisterSchool = () => {
             return;
         }
 
+        const emailQuery = query(collection(db, "Users"), where("email", "==", formData.representativeEmail));
+        const emailSnapshot = await getDocs(emailQuery);
+        if (!emailSnapshot.empty) {
+          Swal.fire({
+            icon: "error",
+            title: "Correo ya registrado",
+            text: "El correo ingresado ya está en uso.",
+          });
+          return;
+        }
+
         // Create the school document
         const schoolDocRef = await addDoc(collection(db, "Schools"), {
             nameSchool: formData.schoolName,
@@ -169,7 +180,7 @@ const RegisterSchool = () => {
           <div >
             <div>
               <label htmlFor="schoolAddress">Dirección:</label>
-              <input id="schoolAddress" type="text" placeholder="Ingrese la dirección" value={formData.address}
+              <input id="schoolAddress" type="text" placeholder="Ingrese la dirección" value={formData.schoolAddress}
             onChange={handleChange} required/>
             </div>
 
@@ -210,7 +221,7 @@ const RegisterSchool = () => {
           </div>
             <div>
               <label htmlFor="schoolPhone">Teléfono:</label>
-              <input id="schoolPhone" type="text" placeholder="Ingrese el teléfono" value={formData.schoolPhone}
+              <input id="schoolPhone" type="text" placeholder="Ingrese el teléfono" pattern="\d*" value={formData.schoolPhone}
             onChange={handleChange} required />
             </div>
             <div>
