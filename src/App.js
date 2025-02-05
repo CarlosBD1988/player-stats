@@ -20,12 +20,16 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import RegisterSchool from "./components/RegisterSchool/RegisterSchool";
 import IndividualMetrics from "./components/IndividualMetrics/IndividualMetrics";
+import AddMultipleRecords from "./components/AddMultipleRecords/AddMultipleRecords";
+import AddCategories from "./components/AddCategories/AddCategories"
+import AddHeadquarters from "./components/AddHeadquarters/AddHeadquarters"
 import WatchTv from "./components/WatchTv/WatchTv";
 import Fichajes from "./components/Fichajes/Fichajes";
 
+
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
-
+import AddTechnicalDirectors from "./components/AddTechnicalDirectors/AddTechnicalDirectors"
 
 
 import "./App.css";
@@ -50,6 +54,7 @@ function App() {
           <Route path="/crear-item" element={<PrivateRoute><AddItem /></PrivateRoute>} />
           <Route path="/crear-registro" element={<PrivateRoute><AddRecord /></PrivateRoute>} />          
           <Route path="/confirmar-asistencia" element={<PrivateRoute><MatchAttendance /></PrivateRoute>} />  
+          <Route path="/crear-registros-masivo" element={<PrivateRoute><AddMultipleRecords /></PrivateRoute>} />  
           
 
           <Route path="/ver-consolidado" element={<PrivateRoute><VerConsolidado /></PrivateRoute>} />
@@ -59,6 +64,12 @@ function App() {
           <Route path="/individual" element={<PrivateRoute><IndividualMetrics /></PrivateRoute>} />
           
           <Route path="/crear-escuela" element={<PrivateRoute><RegisterSchool /></PrivateRoute>} />
+          <Route path="/crear-categoria" element={<PrivateRoute><AddCategories /></PrivateRoute>} />
+          <Route path="/crear-sede" element={<PrivateRoute><AddHeadquarters /></PrivateRoute>} />
+          <Route path="/crear-tecnico" element={<PrivateRoute><AddTechnicalDirectors /></PrivateRoute>} />
+          
+
+
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
           <Route path="/WatchTv" element={<WatchTv />} />
           <Route path="/Fichajes" element={<Fichajes />} />

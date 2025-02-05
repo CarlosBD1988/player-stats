@@ -5,10 +5,9 @@ import { collection, addDoc,  getDocs,  query,   where,   updateDoc,   serverTim
 import { useAuth } from "../../context/AuthContext";
 import {generateRandomPassword} from "../../Utils/generateRandomPassword"
 
+import { americanCountries , southAmericanTeams, playerPositions} from "../../Utils/auxiliaryDataForPlayers"
 import Swal from 'sweetalert2';
 import './AddPlayer.css'; 
-
-
 
 const AddPlayer = () => {
   
@@ -25,24 +24,6 @@ const AddPlayer = () => {
   const [country, setCountry] = useState("");
   const [position, setPosition] = useState("");
   const [fanTeam, setFanTeam] = useState("");
-  
-
-  const americanCountries = [
-    "Argentina", "Bolivia", "Brasil", "Chile", "Colombia", 
-    "Costa Rica", "Cuba", "Ecuador", "El Salvador", "Guatemala", 
-    "Honduras", "México", "Nicaragua", "Panamá", "Paraguay", 
-    "Perú", "República Dominicana", "Uruguay", "Venezuela"
-  ];
-
-  const southAmericanTeams = [
-    "Boca Juniors", "River Plate", "America de Cali", "Atletico Nacional", 
-    "Junior de Barranquilla", "Atletico Bucaramanga", "Millonarios","Real Cartagena"
-  ];
-
-  const playerPositions = [
-    "Portero", "Defensa", "Lateral", "Mediocampista", "Delantero"
-  ];
-
 
   const handleAddPlayer = async () => {
 
