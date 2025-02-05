@@ -20,6 +20,8 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import RegisterSchool from "./components/RegisterSchool/RegisterSchool";
 import IndividualMetrics from "./components/IndividualMetrics/IndividualMetrics";
+import WatchTv from "./components/WatchTv/WatchTv";
+import Fichajes from "./components/Fichajes/Fichajes";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
@@ -58,7 +60,8 @@ function App() {
           
           <Route path="/crear-escuela" element={<PrivateRoute><RegisterSchool /></PrivateRoute>} />
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
-          
+          <Route path="/WatchTv" element={<WatchTv />} />
+          <Route path="/Fichajes" element={<Fichajes />} />
           
           <Route path="/SignIn" element={<SignIn />} />
           
