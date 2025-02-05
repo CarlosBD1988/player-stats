@@ -23,6 +23,9 @@ import IndividualMetrics from "./components/IndividualMetrics/IndividualMetrics"
 import AddMultipleRecords from "./components/AddMultipleRecords/AddMultipleRecords";
 import AddCategories from "./components/AddCategories/AddCategories"
 import AddHeadquarters from "./components/AddHeadquarters/AddHeadquarters"
+import WatchTv from "./components/WatchTv/WatchTv";
+import Fichajes from "./components/Fichajes/Fichajes";
+
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
@@ -68,7 +71,8 @@ function App() {
 
 
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
-          
+          <Route path="/WatchTv" element={<WatchTv />} />
+          <Route path="/Fichajes" element={<Fichajes />} />
           
           <Route path="/SignIn" element={<SignIn />} />
           

@@ -62,12 +62,16 @@ const LandingPage = () => {
         <h2>Explora las Categorías</h2>
         <div className="cards-container">
           <div className="card">
+          <Link to="/WatchTv">
             <button type="submit">Partidos en Vivo</button>
+            </Link>
             <img src="images/tv.png" alt="Decorativo" className="img-card" />
             <p>No te pierdas los partidos más emocionantes.</p>
           </div>
           <div className="card">
+          <Link to="/Fichajes">
           <button type="submit">Fichajes</button>
+          </Link>
           <img src="images/ficha.png" alt="Decorativo" className="img-card" />
             <p>Entérate de las últimas incorporaciones al fútbol mundial.</p>
           </div>
