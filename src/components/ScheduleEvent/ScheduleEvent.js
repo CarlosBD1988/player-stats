@@ -1,13 +1,16 @@
 import { useState,useEffect } from "react";
-import "./ScheduleEvent.css";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../config/firebaseConfig";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs,addDoc } from "firebase/firestore";
+import Swal from 'sweetalert2';
 
+
+import "./ScheduleEvent.css";
 
 const ScheduleEvent = () => {
     const { user } = useAuth();
     const [categories, setCategories] = useState([]);
+    const [events, setEvents] = useState([]);
 
 
     useEffect(() => {
@@ -28,10 +31,11 @@ const ScheduleEvent = () => {
 
 
 
-  const [events, setEvents] = useState([]);
+
 
   const handleAddEvent = () => {
-    setEvents([...events, { type: "", date: "", day: "", time: "", category: "", location: "", opponent: "" }]);
+    setEvents([...events, { type: "", date: "", time: "", category: "", location: "", opponent: "" }]);
+
   };
 
   const handleEventChange = (index, field, value) => {
@@ -44,9 +48,53 @@ const ScheduleEvent = () => {
     setEvents(events.filter((_, i) => i !== index));
   };
 
-  const handleSaveEvents = () => {
-    console.log("Eventos programados:", events);
-    alert("Eventos guardados exitosamente");
+  const handleSaveEvents = async () => {
+  
+          if (!user?.schoolId) {
+            Swal.fire("Error", "No se pudo obtener el ID de la escuela", "error");
+            return;
+          }
+
+          for (const event of events) {
+            if (!event.type || !event.date || !event.time || !event.category || !event.location) {
+              Swal.fire("Campos incompletos", "Por favor completa todos los campos obligatorios", "warning");
+              return;
+            }
+
+            if (event.type === "match" && !event.opponent) {
+              Swal.fire("Campos incompletos", "El equipo contrincante es obligatorio para partidos", "warning");
+              return;
+            }
+          }
+
+          try {
+            for (const event of events) {
+            
+              const eventData = { 
+                schoolId: user.schoolId, 
+                date: event.date, 
+                time: event.time, 
+                category: event.category, 
+                location: event.location 
+              };
+
+              if (event.type === "training") {
+                await addDoc(collection(db, "trainings"), eventData);
+              } else if (event.type === "match") {
+                if (!event.opponent) {
+                  Swal.fire("Campos incompletos", "El equipo contrincante es obligatorio para partidos", "warning");
+                  return;
+                }
+                await addDoc(collection(db, "matches"), { ...eventData, opponent: event.opponent });
+              }
+            }
+            Swal.fire("Éxito", "Eventos guardados correctamente", "success");
+              setEvents([]); // Limpiar formulario después de guardar
+          }
+          catch (error) {
+              console.error("Error guardando eventos:", error);
+              Swal.fire("Error", "Hubo un problema al guardar los eventos", "error");
+          } 
   };
 
   return (
@@ -64,6 +112,7 @@ const ScheduleEvent = () => {
 
           <label htmlFor="date" className="LblInput">Fecha:</label>
           <input id="date" type="date" onChange={(e) => handleEventChange(index, "date", e.target.value)} placeholder="Fecha" />
+
           {event.type === "training" && (
             <>    
              <label htmlFor="timeTraining" className="LblInput">Hora entrenamiento:</label>
