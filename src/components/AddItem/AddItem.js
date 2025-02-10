@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { db } from "../../config/firebaseConfig";
 import { collection, addDoc , serverTimestamp } from "firebase/firestore";
+import { useAuth } from "../../context/AuthContext";
+
 import Swal from 'sweetalert2';
 import './AddItem.css'; 
 
@@ -9,13 +11,15 @@ import './AddItem.css';
 const AddItem = () => {
   const [name, setName ]= useState("");
 
+  const { user } = useAuth();
+
   const handleAddItem = async () => {
 
     try{
         if (name.trim()) 
         {
             console.log(name)
-            await addDoc(collection(db, "items"), { name, timestamp: serverTimestamp() });
+            await addDoc(collection(db, "items"), { name, timestamp: serverTimestamp(), schoolId:user.schoolid });
             setName("");
             Swal.fire({
                 title: 'Guardado',

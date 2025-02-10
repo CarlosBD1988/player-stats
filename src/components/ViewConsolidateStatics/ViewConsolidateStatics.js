@@ -24,7 +24,10 @@ const ViewConsolidateStatics = () => {
         const playerSnapshot = await getDocs(playerQuery);
         //const playerSnapshot = await getDocs(collection(db, "players"));        
         
-        const itemSnapshot = await getDocs(collection(db, "items"));
+        
+        const itemsQuery = query(collection(db, "items"), where("schoolId", "==", user.schoolId));
+        const itemSnapshot = await getDocs(itemsQuery);
+        
         const recordSnapshot = await getDocs(collection(db, "records"));
 
         const playersMap = playerSnapshot.docs.reduce((acc, doc) => {
