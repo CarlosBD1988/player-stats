@@ -31,6 +31,8 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
 import AddTechnicalDirectors from "./components/AddTechnicalDirectors/AddTechnicalDirectors"
 
+import ScheduleEvent from "./components/ScheduleEvent/ScheduleEvent"
+
 
 import "./App.css";
 
@@ -67,6 +69,8 @@ function App() {
           <Route path="/crear-categoria" element={<PrivateRoute><AddCategories /></PrivateRoute>} />
           <Route path="/crear-sede" element={<PrivateRoute><AddHeadquarters /></PrivateRoute>} />
           <Route path="/crear-tecnico" element={<PrivateRoute><AddTechnicalDirectors /></PrivateRoute>} />
+
+          <Route path="/crear-agenda" element={<PrivateRoute><ScheduleEvent /></PrivateRoute>} />
           
 
 

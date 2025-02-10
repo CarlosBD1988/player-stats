@@ -1,0 +1,79 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.event-box {
+    background-color: #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.event-box select,
+.event-box input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.LblInput {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    color: #333;
+}
+
+.SaveButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.DeleteButton{
+    background-color: #aa0909;
+    display: block;
+    width: 100%;
+    padding: 10px;    
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.AddButton{
+    background-color: #0d9134;
+    display: block;
+    width: 100%;
+    padding: 10px;    
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+
+

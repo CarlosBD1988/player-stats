@@ -12,14 +12,14 @@ const VerTv = () => {
         const response = await axios.get(
           'https://api.football-data.org/v4/matches',
           {
-            headers: { 'X-Auth-Token': 'a3687d2e4c0649ee8beb0c0601030ea3' } // API Key football-data.org
+            headers: { 'X-Auth-Token': process.env.REACT_APP_X_AUTH_TOKEN_API_FOOTBAL } // API Key football-data.org
           }
         );
-        setMatches(response.data.matches);
+        setMatches(response.data.matches || []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data", error);
-        setLoading(false);
+        setLoading(true);
       }
     };
 
@@ -33,16 +33,22 @@ const VerTv = () => {
         <p>Cargando...</p>
       ) : (
         <div className="matches-list">
-          {matches.map((match) => (
-            <div key={match.id} className="match-card">
-              <div className="teams">
-                <span className="team">{match.homeTeam.name}</span>
-                <span className="score">{match.score.fullTime.homeTeam} - {match.score.fullTime.awayTeam}</span>
-                <span className="team">{match.awayTeam.name}</span>
+          {matches.length > 0 ? (
+            matches.map((match) => (
+              <div key={match.id} className="match-card">
+                <div className="teams">
+                  <span className="team">{match.homeTeam?.name || "Equipo Local"}</span>
+                  <span className="score">
+                    {match.score?.fullTime?.homeTeam ?? "?"} - {match.score?.fullTime?.awayTeam ?? "?"}
+                  </span>
+                  <span className="team">{match.awayTeam?.name || "Equipo Visitante"}</span>
+                </div>
+                <p>{new Date(match.utcDate).toLocaleString()}</p>
               </div>
-              <p>{new Date(match.utcDate).toLocaleString()}</p>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No hay partidos disponibles en este momento.</p>
+          )}
         </div>
       )}
     </div>
