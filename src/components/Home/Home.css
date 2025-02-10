@@ -15,4 +15,33 @@
     height: auto;
     margin-top: 10px;
   }
- 
+
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 400px;
+    margin: auto;
+  }
+  .trainings-container {
+    display: flex;
+    gap: 10px;
+  }
+  .training-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+  }
+
+  .arrow {
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  
+  .arrow:hover {
+    color: #007bff;
+  }
