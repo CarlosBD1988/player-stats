@@ -85,6 +85,7 @@ function Navbar() {
           Admin del sistema
           <ul className="dropdown-menu">          
               <li><Link to="/crear-escuela">Crear nueva escuela</Link></li>
+              <li><Link to="/crear-usuario">Crear nuevo usuario del sistema</Link></li>
               <li><Link to="/auditoria">Auditoria</Link></li>            
           </ul>
         </li>
