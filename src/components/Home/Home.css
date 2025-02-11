@@ -1,19 +1,92 @@
 .home {
-    text-align: center;
-    padding: auto;
-    margin-top: 1px;
-    background: linear-gradient(rgb(233, 233, 233), rgba(177, 205, 247, 0.651));
-    font: optional;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-logo {
+  width: 200px;
+  height: auto;
+}
+
+.events-container {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-section {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 180px;
+}
+
+.event-section h3 {
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.event-box {
+  background: #f9f9f9;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.arrow {
+  cursor: pointer;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.arrow:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
   }
-  
-  .home h1 {
-    font-size: 1.5rem;
-    color: #333;
+
+  .events-container {
+    position: static;
+    transform: none;
+    margin-top: 20px;
   }
-  
-  .home-gif {
-    max-width: 300px;
-    height: auto;
-    margin-top: 10px;
+
+  .event-section {
+    width: 100%;
   }
- 
+}

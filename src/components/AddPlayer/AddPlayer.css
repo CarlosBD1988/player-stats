@@ -3,7 +3,7 @@
 {   
     width: min(350px, 90%); /* Limita el ancho del formulario */
     margin: 0 auto; /* Centra el formulario horizontalmente */
-    padding: 3rem 1.5rem; /* Agrega espacio interno */
+    padding: 3rem 10rem; /* Agrega espacio interno */
     border: 5px solid #ccc; /* Borde para visualizar los límites */
     background-color: #f9f9f9; /* Fondo para contraste */
     border-radius: 10px; /* Esquinas redondeadas */
@@ -13,7 +13,7 @@
   .formu_label{
     display: grid;
   }
-  
+ 
   .styled-date {
     width: 100%;
     padding: 0.75rem;
@@ -51,9 +51,7 @@
   }  
 
 .log-players {
-  max-width: 30%;
-  height: auto;
-  margin: auto ;
-  text-align: center;
+  width: min(100px, 90%);
+  
 }
   

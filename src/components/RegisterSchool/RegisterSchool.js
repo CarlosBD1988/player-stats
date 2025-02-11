@@ -5,6 +5,9 @@ import { collection, addDoc, serverTimestamp, getDocs, query, where } from "fire
 import {generateRandomPassword} from "../../Utils/generateRandomPassword"
 import Swal from "sweetalert2";
 
+import departmentsAndCities from "../../Utils/departmentsAndCities"
+
+
 const RegisterSchool = () => {
 
     const [formData, setFormData] = useState({
@@ -21,41 +24,6 @@ const RegisterSchool = () => {
         department: "",
         city: "",
       });
-
-      const departmentsAndCities = [
-        { department: "Amazonas", cities: ["Leticia"] },
-        { department: "Antioquia", cities: ["Medellín"] },
-        { department: "Arauca", cities: ["Arauca"] },
-        { department: "Atlántico", cities: ["Barranquilla"] },
-        { department: "Bolívar", cities: ["Cartagena"] },
-        { department: "Boyacá", cities: ["Tunja"] },
-        { department: "Caldas", cities: ["Manizales"] },
-        { department: "Caquetá", cities: ["Florencia"] },
-        { department: "Casanare", cities: ["Yopal"] },
-        { department: "Cauca", cities: ["Popayán"] },
-        { department: "Cesar", cities: ["Valledupar"] },
-        { department: "Chocó", cities: ["Quibdó"] },
-        { department: "Córdoba", cities: ["Montería"] },
-        { department: "Cundinamarca", cities: ["Bogotá"] },
-        { department: "Guainía", cities: ["Inírida"] },
-        { department: "Guaviare", cities: ["San José del Guaviare"] },
-        { department: "Huila", cities: ["Neiva"] },
-        { department: "La Guajira", cities: ["Riohacha"] },
-        { department: "Magdalena", cities: ["Santa Marta"] },
-        { department: "Meta", cities: ["Villavicencio"] },
-        { department: "Nariño", cities: ["Pasto"] },
-        { department: "Norte de Santander", cities: ["Cúcuta"] },
-        { department: "Putumayo", cities: ["Mocoa"] },
-        { department: "Quindío", cities: ["Armenia"] },
-        { department: "Risaralda", cities: ["Pereira"] },
-        { department: "San Andrés y Providencia", cities: ["San Andrés"] },
-        { department: "Santander", cities: ["Bucaramanga","Floridablanca","Piedecuesta","Giron"] },    
-        { department: "Sucre", cities: ["Sincelejo"] },
-        { department: "Tolima", cities: ["Ibagué"] },
-        { department: "Valle del Cauca", cities: ["Cali"] },
-        { department: "Vaupés", cities: ["Mitú"] },
-        { department: "Vichada", cities: ["Puerto Carreño"] },
-      ];
 
       const handleDepartmentChange = (e) => {
         const department = e.target.value;
@@ -89,6 +57,17 @@ const RegisterSchool = () => {
             return;
         }
 
+        const emailQuery = query(collection(db, "Users"), where("email", "==", formData.representativeEmail));
+        const emailSnapshot = await getDocs(emailQuery);
+        if (!emailSnapshot.empty) {
+          Swal.fire({
+            icon: "error",
+            title: "Correo ya registrado",
+            text: "El correo ingresado ya está en uso.",
+          });
+          return;
+        }
+
         // Create the school document
         const schoolDocRef = await addDoc(collection(db, "Schools"), {
             nameSchool: formData.schoolName,
@@ -110,16 +89,17 @@ const RegisterSchool = () => {
             email: formData.representativeEmail,
             name: formData.representativeName,
             lastname: formData.representativeLastName,
-            role: "tecnico",
+            role: "administrativo",
             password: password,
             schoolId: schoolId,
             createdAt: serverTimestamp(),
           });
+          
 
           Swal.fire({
             icon: "success",
             title: "Éxito",
-            text: "Escuela y usuario creados exitosamente.",
+            text: "Escuela y usuario administrativo creados exitosamente.",
           });
 
           setFormData({
@@ -169,7 +149,7 @@ const RegisterSchool = () => {
           <div >
             <div>
               <label htmlFor="schoolAddress">Dirección:</label>
-              <input id="schoolAddress" type="text" placeholder="Ingrese la dirección" value={formData.address}
+              <input id="schoolAddress" type="text" placeholder="Ingrese la dirección" value={formData.schoolAddress}
             onChange={handleChange} required/>
             </div>
 
@@ -210,7 +190,7 @@ const RegisterSchool = () => {
           </div>
             <div>
               <label htmlFor="schoolPhone">Teléfono:</label>
-              <input id="schoolPhone" type="text" placeholder="Ingrese el teléfono" value={formData.schoolPhone}
+              <input id="schoolPhone" type="text" placeholder="Ingrese el teléfono" pattern="\d*" value={formData.schoolPhone}
             onChange={handleChange} required />
             </div>
             <div>

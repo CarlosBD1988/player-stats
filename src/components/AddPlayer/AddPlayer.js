@@ -5,10 +5,9 @@ import { collection, addDoc,  getDocs,  query,   where,   updateDoc,   serverTim
 import { useAuth } from "../../context/AuthContext";
 import {generateRandomPassword} from "../../Utils/generateRandomPassword"
 
+import { americanCountries , southAmericanTeams, playerPositions} from "../../Utils/auxiliaryDataForPlayers"
 import Swal from 'sweetalert2';
 import './AddPlayer.css'; 
-
-
 
 const AddPlayer = () => {
   
@@ -25,24 +24,6 @@ const AddPlayer = () => {
   const [country, setCountry] = useState("");
   const [position, setPosition] = useState("");
   const [fanTeam, setFanTeam] = useState("");
-  
-
-  const americanCountries = [
-    "Argentina", "Bolivia", "Brasil", "Chile", "Colombia", 
-    "Costa Rica", "Cuba", "Ecuador", "El Salvador", "Guatemala", 
-    "Honduras", "México", "Nicaragua", "Panamá", "Paraguay", 
-    "Perú", "República Dominicana", "Uruguay", "Venezuela"
-  ];
-
-  const southAmericanTeams = [
-    "Boca Juniors", "River Plate", "America de Cali", "Atletico Nacional", 
-    "Junior de Barranquilla", "Atletico Bucaramanga", "Millonarios","Real Cartagena"
-  ];
-
-  const playerPositions = [
-    "Portero", "Defensa", "Lateral", "Mediocampista", "Delantero"
-  ];
-
 
   const handleAddPlayer = async () => {
 
@@ -185,8 +166,8 @@ const AddPlayer = () => {
   return (
     
     <div className="formu-addplayer">
-      <h2>Nuevo Jugador</h2>
-      <img src="logo.png" alt="Decorativo" className="log-players" />     
+      <img src="logo.png" alt="Decorativo" className="log-players" />   
+      <h2>Nuevo Jugador</h2>        
       <label htmlFor="playerIdType">Tipo de identificacion:</label>
       <select id="playerIdType" value={idType} onChange={(e) => setIdType(e.target.value)}>
         <option value="">Selecciona un tipo de documento</option>
@@ -238,9 +219,7 @@ const AddPlayer = () => {
       </select>
 
       <label htmlFor="playerEmail">Email:</label>
-      <input id="playerEmail" type="email" placeholder="Escribe correo electronico para el usuario de acceso" value={mail} onChange={(e) => setMail(e.target.value)}/>
-
-
+      <input id="playerEmail" type="email" placeholder="Email para inicion de sesion" value={mail} onChange={(e) => setMail(e.target.value)}/>
       <button className button type="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );
