@@ -23,7 +23,8 @@ const ViewConsolidateStatics = () => {
         const itemsQuery = query(collection(db, "items"), where("schoolId", "==", user.schoolId));
         const itemSnapshot = await getDocs(itemsQuery);
         
-        const recordSnapshot = await getDocs(collection(db, "records"));
+        const recordsQuery = query(collection(db, "records"), where("schoolId", "==", user.schoolId));
+        const recordSnapshot = await getDocs(recordsQuery);
 
         const playersData = playerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         const itemsData = itemSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
