@@ -90,3 +90,76 @@
     width: 100%;
   }
 }
+
+
+@media (max-width: 767px) {
+  body {
+      font-size: 14px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
+  }
+
+  header {
+      padding: 15px;
+  }
+
+  .container {
+      padding: 15px;
+  }
+
+  .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .menu li {
+      margin: 10px 0;
+  }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+      font-size: 16px;
+  }
+
+  header {
+      padding: 20px;
+  }
+
+  .container {
+      padding: 25px;
+  }
+
+  .menu {
+      display: flex;
+      justify-content: space-around;
+  }
+
+  .menu li {
+      margin: 0 10px;
+  }
+}
+
+/* Estilos para pantallas grandes (escritorios) */
+@media (min-width: 1025px) {
+  body {
+      font-size: 18px;
+  }
+
+  header {
+      padding: 30px;
+  }
+
+  .container {
+      padding: 40px;
+  }
+
+  .menu {
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .menu li {
+      margin: 0 20px;
+  }
+}

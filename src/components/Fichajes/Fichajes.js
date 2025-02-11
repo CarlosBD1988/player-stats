@@ -1,55 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Fichajes.css'; // Archivo de estilos
+import './Fichajes.css';  // Importamos el archivo CSS con el estilo lujoso
+import React, { useState, useEffect } from 'react';
 
-const Ficha = () => {
-  const [transfers, setTransfers] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Fichajes = () => {
+  const [players, setPlayers] = useState([]);  // Estado para almacenar los jugadores
+  const [loading, setLoading] = useState(true);  // Estado de carga
+  const [error, setError] = useState(null);  // Estado de error
 
   useEffect(() => {
-    const fetchTransfers = async () => {
+    const fetchPlayers = async () => {
+      const apiUrl = 'https://v3.football.api-sports.io/transfers';  // URL de la API de API-Football
+      const apiKey = '280d01cfa3ec3f235930239729ecbce1';  // Reemplaza con tu clave de API
+
+      const teamId = 33;  // ID del equipo (por ejemplo, FC Barcelona)
+
       try {
-        const response = await axios.get(
-          'https://api.futbol-transfers.com/players', // URL ficticia para la API de fichajes
-          {
-            headers: { 'X-Auth-Token': 'a3687d2e4c0649ee8beb0c0601030ea3' } // Sustituye con tu API Key real
+        const response = await fetch(`${apiUrl}?team=${teamId}`, {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': apiKey,  // La clave de API
+            'X-RapidAPI-Host': 'v3.football.api-sports.io'  // El host de la API
           }
-        );
-        setTransfers(response.data); // Simulamos que response.data es un array con los fichajes
-        setLoading(false);
+        });
+
+        if (!response.ok) {
+          throw new Error('No se pudieron obtener los datos');
+        }
+
+        const data = await response.json();
+        setPlayers(data.response);  // Guardamos los jugadores en el estado
       } catch (error) {
-        console.error('Error al obtener los fichajes', error);
-        setLoading(false);
+        setError(error.message);  // Si ocurre un error, lo guardamos
+      } finally {
+        setLoading(false);  // Terminamos de cargar
       }
     };
 
-    fetchTransfers();
-  }, []);
+    fetchPlayers();  // Llamamos a la función para obtener los jugadores
+  }, []);  // Solo se ejecuta una vez cuando el componente se monta
+
+  if (loading) {
+    return <div>Cargando...</div>;  // Mostramos un mensaje mientras cargan los datos
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;  // Mostramos un mensaje de error si ocurre
+  }
 
   return (
-    <div className="container">
-      <h1>Fichajes de Fútbol a Nivel Mundial</h1>
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        <div className="transfers-list">
-          {transfers.map((transfer, index) => (
-            <div key={index} className="transfer-card">
-              <div className="player-info">
-                <img src={transfer.player.imageUrl} alt={transfer.player.name} className="player-image" />
-                <div>
-                  <h2 className="player-name">{transfer.player.name}</h2>
-                  <p className="player-from">De: {transfer.fromClub}</p>
-                  <p className="player-to">A: {transfer.toClub}</p>
-                  <p className="player-price">Precio: {transfer.transferFee}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+    <div>
+      <h1>Jugadores del FC Barcelona</h1>
+      <ul>
+        {players.map(player => (
+          <li key={player.player.id}>
+            <img src={player.player.photo} alt={player.player.name} width={50} />
+            <p>{player.player.name}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default Ficha;
+export default Fichajes;

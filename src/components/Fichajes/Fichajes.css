@@ -1,71 +1,153 @@
+/* Fichajes.css */
+.fichajes-container {
+  font-family: 'Georgia', serif;
+  background-color: #f4f4f4;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+.title {
+  text-align: center;
+  font-size: 36px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.players-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.player-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 150px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.player-photo {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.player-details {
+  margin-top: 10px;
+}
+
+.player-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.player-team {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 24px;
+  color: #e74c3c;
+}
+
+.loading {
+  color: #f39c12;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+
+@media (max-width: 767px) {
+  body {
+      font-size: 14px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
   }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: #333;
+
+  header {
+      padding: 15px;
   }
-  
-  .transfers-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+
+  .container {
+      padding: 15px;
   }
-  
-  .transfer-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+
+  .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
   }
-  
-  .transfer-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+  .menu li {
+      margin: 10px 0;
   }
-  
-  .player-info {
-    display: flex;
-    align-items: center;
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+      font-size: 16px;
   }
-  
-  .player-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 20px;
+
+  header {
+      padding: 20px;
   }
-  
-  .player-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #007bff;
+
+  .container {
+      padding: 25px;
   }
-  
-  .player-from, .player-to, .player-price {
-    font-size: 1rem;
-    color: #666;
+
+  .menu {
+      display: flex;
+      justify-content: space-around;
   }
-  
-  .player-from, .player-to {
-    margin-top: 5px;
+
+  .menu li {
+      margin: 0 10px;
   }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-    }
-  
-    .transfers-list {
-      grid-template-columns: 1fr;
-    }
+}
+
+/* Estilos para pantallas grandes (escritorios) */
+@media (min-width: 1025px) {
+  body {
+      font-size: 18px;
   }
+
+  header {
+      padding: 30px;
+  }
+
+  .container {
+      padding: 40px;
+  }
+
+  .menu {
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .menu li {
+      margin: 0 20px;
+  }
+}
