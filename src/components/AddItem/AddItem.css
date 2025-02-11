@@ -1,11 +1,11 @@
 /* Estilos generales del formulario */
 form {
-    background-color: #f9f9f9;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(187, 84, 84, 0.1);
     width: 100%;
     max-width: 400px;
+    border: 2px solid rgb(92, 92, 92);
     margin: 0 auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -33,7 +33,7 @@ form {
   
   /* Cambio de borde del input al hacer focus */
   input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-    border-color: #4CAF50;
+    border-color: #161616;
     outline: none;
   }
   
@@ -41,7 +41,7 @@ form {
   button {
     width: 100%;
     padding: 12px 15px;
-    background-color: #4CAF50;
+    background-color: #0c0c0c;
     color: white;
     border: none;
     border-radius: 4px;
@@ -52,7 +52,7 @@ form {
   
   /* Efecto hover sobre el botón */
   button:hover {
-    background-color: #45a049;
+    background-color: #050505;
   }
   
   /* Estilo para botones deshabilitados */
@@ -77,7 +77,7 @@ select {
   
   /* Cambio de borde del select al hacer focus */
   select:focus {
-    border-color: #4CAF50;
+    border-color: #161616;
     outline: none;
   }
   

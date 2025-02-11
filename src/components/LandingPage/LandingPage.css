@@ -37,7 +37,8 @@
 }
 
 .card {
-  background: linear-gradient(45deg, #cccccc,#8391da,#e0eaff,#ffffff);
+  border: 2px solid rgb(92, 92, 92);
+  background: transparent;
   padding: 20px;
   border-radius: 8px;
   width: 30%;
@@ -58,10 +59,6 @@
   color: white;
   border: none;
   cursor: pointer;
-}
-
-.contact-form p {
-  color: rgb(13, 16, 151);
 }
 
 .Log-landingp {
