@@ -94,6 +94,7 @@ const RegisterSchool = () => {
             schoolId: schoolId,
             createdAt: serverTimestamp(),
           });
+          
 
           Swal.fire({
             icon: "success",

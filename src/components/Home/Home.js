@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "./Home.css";
 import { db } from "../../config/firebaseConfig";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 function Home() {
   const { user } = useAuth();
   const [trainings, setTrainings] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [matches, setMatches] = useState([]);
+  const [trainingPage, setTrainingPage] = useState(0);
+  const [matchPage, setMatchPage] = useState(0);
 
   useEffect(() => {
     if (user?.schoolId) {
@@ -22,47 +24,73 @@ function Home() {
           console.error("Error fetching trainings: ", error);
         }
       };
+
+      const fetchMatches = async () => {
+        try {
+          const q = query(collection(db, "matches"), where("schoolId", "==", user.schoolId));
+          const querySnapshot = await getDocs(q);
+          const fetchedMatches = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          setMatches(fetchedMatches);
+        } catch (error) {
+          console.error("Error fetching matches: ", error);
+        }
+      };
+
       fetchTrainings();
+      fetchMatches();
     }
-    
   }, [user?.schoolId]);
 
-  const nextSlide = () => {
-    if (currentIndex + 2 < trainings.length) {
-      setCurrentIndex(currentIndex + 2);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 2);
-    }
-  };
+  // Funciones para paginación (1 evento por página)
+  const nextTrainingPage = () => setTrainingPage(prev => (prev + 1 < trainings.length ? prev + 1 : prev));
+  const prevTrainingPage = () => setTrainingPage(prev => (prev > 0 ? prev - 1 : prev));
+  const nextMatchPage = () => setMatchPage(prev => (prev + 1 < matches.length ? prev + 1 : prev));
+  const prevMatchPage = () => setMatchPage(prev => (prev > 0 ? prev - 1 : prev));
 
   return (
     <div className="home">
-      <h1>WELCOME TO STATISTICS FOOTBALL!</h1>
-      <img src="logo.png" alt="Decorativo" className="home-gif" />
+      <div className="content">
+        <h1>WELCOME TO STATISTICS FOOTBALL!</h1>
+        <img src="logo.png" alt="Decorativo" className="home-logo" />
+      </div>
 
-      {trainings.length > 0 && (
-        <div className="trainings-section">
-          <h2>Próximos Entrenamientos</h2>
-          <div className="carousel">
-            {currentIndex > 0 && <FaArrowLeft className="arrow left" onClick={prevSlide} />}
-            <div className="trainings-container">
-              {trainings.slice(currentIndex, currentIndex + 2).map(training => (
-                <div key={training.id} className="training-card">
-                  <p><strong>Fecha:</strong> {training.date}</p>
-                  <p><strong>Hora:</strong> {training.time}</p>
-                  <p><strong>Categoría:</strong> {training.category}</p>
-                  <p><strong>Ubicación:</strong> {training.location}</p>
-                </div>
-              ))}
+      {/* Contenedor de eventos a la derecha */}
+      <div className="events-container">
+        {/* Entrenamientos */}
+        <div className="event-section">
+          <h3>Entrenamientos</h3>
+          {trainings.length > 0 ? (
+            <div className="event-box">
+              <p><strong>Fecha:</strong> {trainings[trainingPage].date}</p>
+              <p><strong>Hora:</strong> {trainings[trainingPage].time}</p>
+              <p><strong>Categoría:</strong> {trainings[trainingPage].category}</p>
+              <p><strong>Ubicación:</strong> {trainings[trainingPage].location}</p>
             </div>
-            {currentIndex + 2 < trainings.length && <FaArrowRight className="arrow right" onClick={nextSlide} />}
+          ) : <p>No hay entrenamientos</p>}
+          <div className="pagination">
+            <FaArrowLeft className="arrow" onClick={prevTrainingPage} />
+            <FaArrowRight className="arrow" onClick={nextTrainingPage} />
           </div>
         </div>
-      )}
+
+        {/* Partidos */}
+        <div className="event-section">
+          <h3>Partidos</h3>
+          {matches.length > 0 ? (
+            <div className="event-box">
+              <p><strong>Fecha:</strong> {matches[matchPage].date}</p>
+              <p><strong>Hora:</strong> {matches[matchPage].time}</p>
+              <p><strong>Categoría:</strong> {matches[matchPage].category}</p>
+              <p><strong>Contrincante:</strong> {matches[matchPage].opponent}</p>
+              <p><strong>Ubicación:</strong> {matches[matchPage].location}</p>
+            </div>
+          ) : <p>No hay partidos</p>}
+          <div className="pagination">
+            <FaArrowLeft className="arrow" onClick={prevMatchPage} />
+            <FaArrowRight className="arrow" onClick={nextMatchPage} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
