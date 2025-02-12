@@ -97,7 +97,7 @@ function Navbar() {
         {user ? (
           <>
             <li className="navbar-item">
-              Bienvenido, {user.name} {user.lastname} - <strong>Rol: {user.role}</strong> 
+              Bienvenido, {user.name} {user.lastname} - <strong>Rol: {user.role}</strong> {user.school && ` - Escuela: ${user.school}`}
             </li>
             <li className="navbar-item">
               <label onClick={handleLogout}> Cerrar sesión </label>
