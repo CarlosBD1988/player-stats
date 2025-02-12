@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs,query ,where} from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
@@ -15,13 +15,19 @@ const AddMultipleRecords = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const playerSnapshot = await getDocs(collection(db, "players"));
-      const itemSnapshot = await getDocs(collection(db, "items"));
+
+      const playerQuery=query(collection(db, "players"), where("schoolId", "==", user.schoolId));
+      const playerSnapshot = await getDocs(playerQuery);
+            
+      const itemsQuery=query(collection(db, "items"), where("schoolId", "==", user.schoolId));
+      const itemSnapshot = await getDocs(itemsQuery);
+
+
       setPlayers(playerSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       setItems(itemSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     };
     fetchData();
-  }, []);
+  }, [user.schoolId]);
 
   const handleAddStat = () => {
     setStats([...stats, { itemId: "", value: "" }]);

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc,setDoc} from "firebase/firestore";
+import { collection, getDocs, doc,setDoc,query,where} from "firebase/firestore";
 import { db } from "../../config/firebaseConfig"; // Asegúrate de importar tu instancia de Firestore correctamente.
-
+import { useAuth } from "../../context/AuthContext";
 import Swal from 'sweetalert2';
 
 import "./AddMetrics.css"
 
 const AddMetrics= ()=>
 {
+    const { user } = useAuth();
     const [players, setPlayers] = useState([]);
     const [selectedPlayer, setSelectedPlayer] = useState("");
     const [formData, setFormData] = useState({
@@ -22,12 +23,15 @@ const AddMetrics= ()=>
 
     useEffect(() => {
         const fetchData = async () => {
-          const playerSnapshot = await getDocs(collection(db, "players"));         
+
+          const playerQuery=query(collection(db, "players"),where("schoolId", "==", user.schoolId));
+          const playerSnapshot = await getDocs(playerQuery);
+          
           setPlayers(playerSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
           
         };
         fetchData();
-      }, []);
+      }, [user.schoolId]);
 
 
 

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 import { db } from '../../config/firebaseConfig'; // Asegúrate de tener esta configuración
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where ,doc,getDoc} from 'firebase/firestore';
 
 
 
@@ -34,9 +34,19 @@ const LoginForm = () => {
       if (!querySnapshot.empty) {
         const user = querySnapshot.docs[0].data();
         // Verificar la contraseña (Asegúrate de encriptarla en producción)
-        if (user.password === password) {
-          login(user); // Guardar el usuario en el contexto de autenticación
-          Swal.fire('Bienvenido', `¡Hola, ${user.name} ${user.lastname}!`, 'success');
+        if (user.password === password) 
+        {
+          const schoolRef = doc(db, "Schools", user.schoolId); 
+          const schoolSnap = await getDoc(schoolRef);
+          let schoolName = 'Uknow';
+          if (schoolSnap.exists()) {
+            schoolName = schoolSnap.data().nameSchool;            
+          }
+
+          const updatedUser  = { ...user, school:schoolName };
+          login(updatedUser); // Guardar el usuario en el contexto de autenticación
+
+          Swal.fire('Bienvenido', `¡Hola, ${user.name} ${user.lastname}! , Escuela: ${schoolName}`, 'success');
           navigate('/home'); // Redirigir al menú principal o a donde desees
         } else {
           Swal.fire('Error', 'Las credenciales son incorrectas', 'error');
