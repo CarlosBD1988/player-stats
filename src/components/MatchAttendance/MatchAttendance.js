@@ -1,12 +1,14 @@
 // src/components/MatchAttendance.js
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
+import { useAuth } from "../../context/AuthContext";
 import { collection, getDocs, query, where, addDoc} from "firebase/firestore";
 import Swal from "sweetalert2";
 import "./MatchAttendance.css"
 
 
 const MatchAttendance = () => {
+  const { user } = useAuth();
   const [players, setPlayers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([""]); // Array dinámico para las listas desplegables
   const [matchDate, setMatchDate] = useState("");
@@ -14,14 +16,15 @@ const MatchAttendance = () => {
   useEffect(() => {
     // Cargar la lista de jugadores desde la colección "players"
     const fetchPlayers = async () => {
-      const playerSnapshot = await getDocs(collection(db, "players"));
+      const playerQuery=query(collection(db, "players"),where("schoolId", "==", user.schoolId));
+      const playerSnapshot = await getDocs(playerQuery);
       setPlayers(playerSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     };
     fetchPlayers();
 
     // Establecer la fecha por defecto como la fecha actual
     setMatchDate(new Date().toISOString().split("T")[0]);
-  }, []);
+  }, [user.schoolId]);
 
   const handleAddPlayer = () => {
     setSelectedPlayers([...selectedPlayers, ""]); // Agregar un nuevo campo para seleccionar jugadores
