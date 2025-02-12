@@ -31,6 +31,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
 import AddTechnicalDirectors from "./components/AddTechnicalDirectors/AddTechnicalDirectors"
 import AddUser from "./components/AddUser/Adduser";
+import BulkAddPlayers from "./components/BulkAddPlayers/BulkAddPlayers"
 
 import ScheduleEvent from "./components/ScheduleEvent/ScheduleEvent"
 
@@ -72,6 +73,8 @@ function App() {
           <Route path="/crear-tecnico" element={<PrivateRoute><AddTechnicalDirectors /></PrivateRoute>} />
 
           <Route path="/crear-agenda" element={<PrivateRoute><ScheduleEvent /></PrivateRoute>} />
+
+          <Route path="/cargar-csv-players" element={<PrivateRoute><BulkAddPlayers /></PrivateRoute>} />
           
 
 
