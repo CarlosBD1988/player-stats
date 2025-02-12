@@ -48,6 +48,7 @@ const AddRecord = () => {
             itemId: selectedItem,
             value: parseInt(value),
             date: new Date().toISOString(),
+            schoolId:user.schoolId
           });
   
           Swal.fire({

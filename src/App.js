@@ -30,6 +30,7 @@ import Fichajes from "./components/Fichajes/Fichajes";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UnauthorizedPage from './components/UnauthorizedPage/UnauthorizedPage';
 import AddTechnicalDirectors from "./components/AddTechnicalDirectors/AddTechnicalDirectors"
+import AddUser from "./components/AddUser/Adduser";
 
 import ScheduleEvent from "./components/ScheduleEvent/ScheduleEvent"
 
@@ -75,6 +76,7 @@ function App() {
 
 
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
+          <Route path="/crear-usuario" element={<PrivateRoute><AddUser /></PrivateRoute>} />
           <Route path="/WatchTv" element={<WatchTv />} />
           <Route path="/Fichajes" element={<Fichajes />} />
           

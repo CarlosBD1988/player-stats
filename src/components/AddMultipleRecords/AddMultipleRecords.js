@@ -55,6 +55,7 @@ const AddMultipleRecords = () => {
               itemId: stat.itemId,
               value: parseInt(stat.value),
               date: new Date().toISOString(),
+              schoolId:user.schoolId
             })
           );
 
