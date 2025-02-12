@@ -73,7 +73,7 @@ function Navbar() {
               <li><Link to="/crear-sede">Crear Sede</Link></li>    
               <li><Link to="/crear-tecnico">Crear Tecnico</Link></li>    
               <li><Link to="/crear-agenda">Publicar evento</Link></li>    
-
+              <li><Link to="/cargar-csv-players">Crear jugadores desde CSV</Link></li>               
                             
           </ul>
         </li>        
