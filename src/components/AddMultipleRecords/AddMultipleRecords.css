@@ -31,6 +31,7 @@
   }
   
   .stat-row {
+    padding: 2%;
     width: 100%;
     display: flex;
     align-items: stretch;    
@@ -40,46 +41,48 @@
   
   .stat-row select {
     padding: 8px;
-    border: 1px solid #444;
-    background: #68686d;
-    color: #ffffff;
+    border: 1px solid #ffffff;
+    background: #ffffff;
+    color: #202020;
     border-radius: 5px;
   }
 
 
   .stat-row input {
-    padding: 8px;
-    border: 1px solid #444;
-    background: #68686d;
-    color: #ffffff;
+    padding: 6px;
+    border: 1px solid #f8f7f7;
+    background: #ffffff;
+    color: #000000;
     border-radius: 5px;
   } 
 
   .delete-btn {
-    background: #e74c3c;
+    background: linear-gradient(45deg, #022730,#0e1538,#223596,#18bae2);
     color: white;  
+    
 }
 
   
   .add-btn {
-    background: #4caf50;
+    background: linear-gradient(45deg, #022730,#0e1538,#223596,#18bae2);
     color: white;
   }
   
   .add-btn:hover {
-    background: #3d8b40;
+    background: linear-gradient(45deg, #18bae2,#223596,#0e1538,#022730);
   }
   
 
   
   .delete-btn:hover {
-    background: #c0392b;
+    background: linear-gradient(45deg, #18bae2,#223596,#0e1538,#022730);
+    
   }
   
   .save-btn {
     width: 100%;
     padding: 10px;
-    background: #007bff;
+    background: linear-gradient(45deg, #022730,#0e1538,#223596,#18bae2);
     color: white;
     border: none;
     cursor: pointer;
@@ -90,7 +93,7 @@
   }
   
   .save-btn:hover {
-    background: #0056b3;
+    background: linear-gradient(45deg, #18bae2,#223596,#0e1538,#022730);
   }
   
 

@@ -193,7 +193,7 @@ const AddMetrics= ()=>
 
         {error && <p style={{ color: 'red' }}>{error}</p>} {/* Mostrar mensaje de error si es necesario */}
 
-        <button type="submit">Guardar Estadísticas</button>
+        <button className="button" type="submit">Guardar Estadísticas</button>
       </form>
 
             

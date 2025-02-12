@@ -220,7 +220,7 @@ const AddPlayer = () => {
 
       <label htmlFor="playerEmail">Email:</label>
       <input id="playerEmail" type="email" placeholder="Email para inicion de sesion" value={mail} onChange={(e) => setMail(e.target.value)}/>
-      <button className button type="button" onClick={handleAddPlayer}>Crear jugador</button>
+      <button type="button" className="button" onClick={handleAddPlayer}>Crear jugador</button>
     </div>
   );
 };

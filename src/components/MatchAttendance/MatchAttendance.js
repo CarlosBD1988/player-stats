@@ -142,7 +142,7 @@ const MatchAttendance = () => {
 
 
   return (
-    <div className="container">
+    <div className="formu-addplayer">
       <h2>Asistencia a Partidos</h2>
       <div>
         <label htmlFor="matchDate" className="label">Fecha del Partido:</label>
@@ -152,9 +152,9 @@ const MatchAttendance = () => {
       <div className="players-container">
         <h3>Jugadores:</h3>
 
-        <button className="add-button" onClick={handleAddPlayer}>Agregar</button>
+        <button className="button" onClick={handleAddPlayer}>Agregar</button>
         {selectedPlayers.map((playerId, index) => (
-          <div className="player-item" key={index}>
+          <div className="player-ite" key={index}>
             <select value={playerId} onChange={(e) => handlePlayerChange(index, e.target.value)}>
               <option value="">Seleccionar jugador</option>
               {players.map((player) => (
@@ -164,7 +164,7 @@ const MatchAttendance = () => {
               ))}
             </select>
             {selectedPlayers.length > 1 && (
-              <button onClick={() => handleRemovePlayer(index)}>X</button>
+              <button className="button" onClick={() => handleRemovePlayer(index)}>X</button>
             )}
           </div>
         ))}
@@ -172,7 +172,7 @@ const MatchAttendance = () => {
         
       </div>
 
-      <button className="save-button " onClick={handleSave}>Guardar</button>
+      <button className="button" onClick={handleSave}>Guardar</button>
     </div>
   );
 };

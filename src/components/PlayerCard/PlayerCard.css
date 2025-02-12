@@ -1,15 +1,13 @@
 /* Contenedor principal */
 .player-card {
+    padding: 2%;  
     width: 350px;
-    height: min-height;
     background: linear-gradient(to bottom, #f7d794, gold);
     border-radius: 35px;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
     color: white;
     font-family: Arial, sans-serif;
-    position: center;
     overflow: hidden;
-    display: center;
     flex-direction: column;
     align-items: center;
   }
@@ -38,20 +36,22 @@
   }
   
   .position {
-    font-size: 17px;
+    font-size: 11px;
     font-weight: bold;
   }
-  
+
+  /*logo seleccion pais */
   .country-flag,
   .club-logo {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
-  
+
+  /*logo club */
   .country-flag img,
   .club-logo img {
-    width: 100%;
-    height:100%;
+    width: 80%;
+    height:80%;
     object-fit: contain;  /* Asegura que la imagen no se deforme */
     border-radius: 50%;
   }
@@ -59,14 +59,14 @@
   /* Imagen del jugador */
   .player-image {
     width: 100%;
-        height: auto;
+    height: 100%;
     display: flex;
     justify-content: center;
-    margin-top: -40px; /* Ajusta la posición para evitar solapamiento */
+    margin-top: 10px; /* Ajusta la posición para evitar solapamiento */
   }
   
   .player-image img {
-    width: 60%;
+    width: 50%;
     border-radius: 10%;
     height: auto;
     object-fit: cover;
@@ -76,7 +76,7 @@
   /* Información del jugador */
   .player-info {
     text-align: center;
-    margin-top: -60px;
+    margin-top: 20px;
   }
   
   .player-name {

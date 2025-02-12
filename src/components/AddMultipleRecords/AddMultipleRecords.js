@@ -84,7 +84,7 @@ const AddMultipleRecords = () => {
   };
 
   return (
-    <div className="container">
+    <div className="formu-addplayer">
 
       <div className="title-container"> 
         <h2>Agregar Múltiples Registros</h2>

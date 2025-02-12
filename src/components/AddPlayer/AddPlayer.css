@@ -1,13 +1,10 @@
 /* Estilos generales del formulario */
 .formu-addplayer
 {   
-    width: 50%;
-    margin: 0 auto; /* Centra el formulario horizontalmente */
-    padding: 3rem 10rem; /* Agrega espacio interno */
+    margin: 2%; /* Centra el formulario horizontalmente */
+    padding: 2rem 7rem; /* Agrega espacio interno */
     border: 5px solid #ccc; /* Borde para visualizar los límites */
     background-color: #f9f9f9; /* Fondo para contraste */
-    border-radius: 10px; /* Esquinas redondeadas */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
     font-family: "Plus Jakarta Sans", sans-serif;
   }
   .formu_label{
@@ -52,7 +49,7 @@
 
 .log-players {
   width: min(100px, 90%);
-  
+ 
 }
 
 

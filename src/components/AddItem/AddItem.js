@@ -62,7 +62,7 @@ const AddItem = () => {
   };
 
   return (
-    <div>
+    <div className="creacion">
       <h2>Agregar tipo de estadistica a medir:</h2>
       <input
         type="text"
@@ -80,7 +80,7 @@ const AddItem = () => {
         ¿Es una métrica exclusiva para porteros?
       </label>
 
-      <button type="button" onClick={handleAddItem}>Crear item</button>
+      <button type="button" className="button" onClick={handleAddItem}>Crear item</button>
     </div>
   );
 };

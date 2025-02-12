@@ -90,7 +90,7 @@ const AddRecord = () => {
 
 
   return (
-    <div>
+    <div className="creacion">
       <h2>Agregar Registro</h2>
       <select onChange={(e) => setSelectedPlayer(e.target.value)}>
         <option value="">Seleccionar jugador</option>
@@ -115,7 +115,7 @@ const AddRecord = () => {
         onChange={handleChange}
         max="100"
       />
-      <button onClick={handleAddRecord}>Agregar</button>
+      <button className="button" onClick={handleAddRecord}>Agregar</button>
     </div>
   );
 };
