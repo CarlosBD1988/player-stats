@@ -21,12 +21,14 @@ const AddHeadquarters = () => {
     setBranches(branches.filter((_, i) => i !== index));
   };
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user || !user.schoolId) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/headquarters", {
+      const response = await fetch(`${API_URL}/headquarters`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
