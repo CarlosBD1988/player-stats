@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import Swal from "sweetalert2";
 
 const AddHeadquarters = () => {
@@ -27,19 +25,39 @@ const AddHeadquarters = () => {
     e.preventDefault();
     if (!user || !user.schoolId) return;
 
-    const promises = branches.map(branch =>
-      addDoc(collection(db, "sedes"), { ...branch, schoolId: user.schoolId , createdAt: serverTimestamp()})
-    );
+    try {
+      const response = await fetch("http://localhost:5000/api/headquarters", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          schoolId: user.schoolId,
+          branches,
+        }),
+      });
 
-    await Promise.all(promises);
+      if (!response.ok) {
+        throw new Error("Error al guardar las sedes");
+      }
 
-    Swal.fire({
-      icon: "success",
-      title: "Éxito",
-      text: "Sedes guardadas exitosamente.",
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Sedes guardadas exitosamente.",
+      });
+      setBranches([{ name: "", address: "", description: "" }]);
+    }
+    catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+      });
+    }
+  
 
-    setBranches([{ name: "", address: "", description: "" }]);
+    
   };
 
   return (
