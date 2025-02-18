@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { db } from "../../config/firebaseConfig";
-import { collection, addDoc,serverTimestamp } from "firebase/firestore";
 import Swal from "sweetalert2";
+
 const AddCategories = () => {
   const { user } = useAuth();
   const [categories, setCategories] = useState([{ name: "", description: "" }]);
+
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (index, e) => {
     const { name, value } = e.target;
@@ -25,18 +26,44 @@ const AddCategories = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user || !user.schoolId) return;
+    try {
+           const response = await fetch(`${API_URL}/categories`, {
+             method: "POST",
+             headers: {
+               "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+               schoolId: user.schoolId,
+               categories,
+             }),
+           });
 
-    const promises = categories.map(category =>
-      addDoc(collection(db, "categories"), { ...category, schoolId: user.schoolId , createdAt: serverTimestamp()})
-    );
+           const data = await response.json();
+     
+           if (!response.ok) {
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: data.error,
+              });
+           }
+     
+           Swal.fire({
+             icon: "success",
+             title: "Éxito",
+             text: data.message,
+           });
+           setCategories([{ name: "",description: "" }]);
+         }
+         catch (error) {
+           Swal.fire({
+             icon: "error",
+             title: "Error",
+             text: error.message,
+           });
+         }     
 
-    await Promise.all(promises);
 
-        Swal.fire({
-            icon: "success",
-            title: "Éxito",
-            text: "Categorías guardadas exitosamente.",
-          });  
     setCategories([{ name: "", description: "" }]);
   };
 
