@@ -1,87 +1,63 @@
-import React, { useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import Swal from 'sweetalert2';
-import { db } from '../../config/firebaseConfig'; // Asegúrate de tener esta configuración
-import { collection, getDocs, query, where ,doc,getDoc} from 'firebase/firestore';
-
-
-
-import './SignIn.css'; // Importando el archivo de estilos CSS
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import Swal from "sweetalert2";
+import "./SignIn.css";
 
 const LoginForm = () => {
-  // Estado para los campos del formulario
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login } = useAuth();
-  const navigate = useNavigate(); // Para redirigir al menú
-  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
 
-  // Manejo del envío del formulario
-  const handleSignIn  = async (event) => {
-    event.preventDefault(); 
+  const API_URL = process.env.REACT_APP_API_URL;
+
+  const handleSignIn = async (event) => {
+    event.preventDefault();
     setLoading(true);
+
     try {
-      // Buscar en la base de datos de Firebase
-      const q = query(collection(db, 'Users'), where('email', '==', email));
-      const querySnapshot = await getDocs(q);
-      
-      if (!querySnapshot.empty) {
-        const user = querySnapshot.docs[0].data();
-        // Verificar la contraseña (Asegúrate de encriptarla en producción)
-        if (user.password === password) 
-        {
-          const schoolRef = doc(db, "Schools", user.schoolId); 
-          const schoolSnap = await getDoc(schoolRef);
-          let schoolName = 'Uknow';
-          if (schoolSnap.exists()) {
-            schoolName = schoolSnap.data().nameSchool;            
-          }
 
-          const updatedUser  = { ...user, school:schoolName };
-          login(updatedUser); // Guardar el usuario en el contexto de autenticación
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-          Swal.fire('Bienvenido', `¡Hola, ${user.name} ${user.lastname}! , Escuela: ${schoolName}`, 'success');
-          navigate('/home'); // Redirigir al menú principal o a donde desees
-        } else {
-          Swal.fire('Error', 'Las credenciales son incorrectas', 'error');
-        }
+      const data = await response.json();
+
+      if (response.ok) {
+        login(data.user); // Guarda el usuario en el contexto
+        localStorage.setItem("token", data.token); // Guarda el token en localStorage
+        Swal.fire("Bienvenido", `¡Hola, ${data.user.name} ${data.user.lastname}!`, "success");
+        navigate("/home");
       } else {
-        Swal.fire('Error', 'Las credenciales son incorrectas', 'error');
+        Swal.fire("Error", data.error, "error");
       }
     } catch (error) {
-      Swal.fire('Error', 'Ocurrió un error al intentar iniciar sesión', 'error');
+      Swal.fire("Error", "No se pudo conectar con el servidor", "error");
     }
-    
+
     setLoading(false);
-
-
-
-
-
-
   };
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleSignIn }>      
-        <h2>Iniciar sesión</h2> 
-        <img src="logo.png" alt="Decorativo" className="log" />       
+      <form className="login-form" onSubmit={handleSignIn}>
+        <h2>Iniciar sesión</h2>
+        <img src="logo.png" alt="Decorativo" className="log" />
         <div className="input-container">
           <label htmlFor="email">Usuario:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}  required placeholder="Ingresa tu Email"/>
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Ingresa tu Email" />
         </div>
         <div className="input-container">
           <label htmlFor="password">Contraseña:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Ingresa tu contraseña"/>
+          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Ingresa tu contraseña" />
         </div>
-        <button type="submit" disabled={loading} className='button-in'>
-          {loading ? 'Iniciando...' : 'Iniciar sesión'}
+        <button type="submit" disabled={loading} className="button-in">
+          {loading ? "Iniciando..." : "Iniciar sesión"}
         </button>
       </form>
     </div>
