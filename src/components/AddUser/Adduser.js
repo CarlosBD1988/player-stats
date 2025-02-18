@@ -15,6 +15,8 @@ const AddUser = () => {
   const [schools, setSchools] = useState([]);
   const { user } = useAuth();
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchSchools = async () => {
       const schoolCollection = collection(db, "Schools");
@@ -26,23 +28,33 @@ const AddUser = () => {
   }, []);
 
   const handleAddUser = async () => {
+
     if (!email.trim() || !lastname.trim() || !name.trim() || !schoolId) {
       Swal.fire("Error", "Todos los campos son obligatorios.", "error");
       return;
     }
 
     try {
-      const usersRef = collection(db, "Users");
-      const emailQuery = query(usersRef, where("email", "==", email));
-      const existingUsers = await getDocs(emailQuery);
-      
-      if (!existingUsers.empty) {
-        Swal.fire("Error", "El correo electrónico ya está registrado.", "error");
-        return;
-      }
-
       const password = generateRandomPassword();
-      await addDoc(usersRef, { email, lastname, name, role, schoolId, password,  createdAt: serverTimestamp(),createBy:user.name });
+      const response = await fetch(`${API_URL}/auth/create-user`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name,lastname,role, password, schoolId}),
+      });
+
+      const data = await response.json();
+             
+      if (response.ok) 
+      {
+        Swal.fire(
+          "Éxito", 
+          `Usuario creado correctamente.\n\nContraseña generada: ${password}`, 
+          "success"
+        );
+      }
+      else{
+              Swal.fire("Error", data.error, "error");
+      }
 
       setEmail("");
       setLastname("");
@@ -50,14 +62,10 @@ const AddUser = () => {
       setRole("admin");
       setSchoolId("");
 
-      Swal.fire(
-        "Éxito", 
-        `Usuario creado correctamente.\n\nContraseña generada: ${password}`, 
-        "success"
-      );
+     
     } catch (error) {
       console.error(error);
-      Swal.fire("Error", "Hubo un problema al guardar el usuario.", "error");
+      Swal.fire("Error", "Hubo un problema al crear el usuario.", "error");
     }
   };
 
