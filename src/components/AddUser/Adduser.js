@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, getDocs, query, where,serverTimestamp  } from "firebase/firestore";
-import { useAuth } from "../../context/AuthContext";
+import { collection, getDocs,  } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { generateRandomPassword } from "../../Utils/generateRandomPassword";
 
@@ -13,7 +12,6 @@ const AddUser = () => {
   const [role, setRole] = useState("admin");
   const [schoolId, setSchoolId] = useState("");
   const [schools, setSchools] = useState([]);
-  const { user } = useAuth();
 
   const API_URL = process.env.REACT_APP_API_URL;
 
