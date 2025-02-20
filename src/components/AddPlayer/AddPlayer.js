@@ -25,12 +25,13 @@ const AddPlayer = () => {
   const [position, setPosition] = useState("");
   const [fanTeam, setFanTeam] = useState("");
 
-
+  const [loading, setLoading] = useState(false); 
 
   const handleAddPlayer = async () => {
 
     try
     {
+      setLoading(true); 
       if (!name.trim() ||  !lastname.trim() || !documentNumber.trim() || !email.trim()) {
         Swal.fire({
           title: 'Error',
@@ -103,6 +104,9 @@ const AddPlayer = () => {
             confirmButtonText: 'OK'
           });
 
+    }
+    finally {
+      setLoading(false); // Finalizar el estado de carga
     }
  
   };
@@ -186,7 +190,16 @@ const AddPlayer = () => {
 
       <label htmlFor="playerEmail">Email:</label>
       <input id="playerEmail" type="email" placeholder="Email para inicion de sesion" value={email} onChange={(e) => setMail(e.target.value)} required/>
-      <button className button type="button" onClick={handleAddPlayer}>Crear jugador</button>
+      
+      <button 
+          type="button" 
+          onClick={handleAddPlayer} 
+          disabled={loading} 
+          className={loading ? "loading-button" : ""}
+        >
+          {loading ? "Guardando datos..." : "Crear jugador"}
+      </button>
+
     </div>
   );
 };
