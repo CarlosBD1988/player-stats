@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { db } from "../../config/firebaseConfig";
-import { collection, addDoc , serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
-
 import Swal from 'sweetalert2';
 import './AddItem.css'; 
 
@@ -15,25 +12,35 @@ const AddItem = () => {
   const { user } = useAuth();
 
   const handleAddItem = async () => {
-
+    const API_URL = process.env.REACT_APP_API_URL;
     try{
         if (name.trim()) 
-        {
-            console.log(name)
-            const type = isForGoalkeeper ? "portero" : "general"; // Definir el tipo
+        {           
+            const type = isForGoalkeeper ? "portero" : "general"; // Definir el tipo de item
 
-
-
-            await addDoc(collection(db, "items"), { name,type, timestamp: serverTimestamp(), schoolId:user.schoolId });
-            setName("");
-            setIsForGoalkeeper(false); // Reiniciar checkbox después de guardar
-
-            Swal.fire({
-                title: 'Guardado',
-                text: 'Item creado exitosamente en la base de datos.',
-                icon: 'success',
-                confirmButtonText: 'OK'
+            
+            const response = await fetch(`${API_URL}/items/create`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name,type,schoolId:user.schoolId}),
             });
+            const data = await response.json();
+            if(response.ok)
+            {
+                Swal.fire({
+                  title: 'Guardado',
+                  text: 'Item creado exitosamente en la base de datos.',
+                  icon: 'success',
+                  confirmButtonText: 'OK'
+              });
+              setIsForGoalkeeper(false);
+              setName("");
+            }
+            else{            
+                     Swal.fire("Error", "Error creando jugador: " + data.error, "error");
+           }       
+
+          
         }
         else
         {
