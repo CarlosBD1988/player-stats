@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, getDocs,query ,where} from "firebase/firestore";
+import { collection, getDocs,query ,where} from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
@@ -45,6 +45,8 @@ const AddMultipleRecords = () => {
   };
 
   const handleAddRecords = async () => {
+
+    const API_URL = process.env.REACT_APP_API_URL;
     if (selectedPlayer && stats.every((stat) => stat.itemId && stat.value)) {
       Swal.fire({
         title: "¿Está seguro de almacenar estos registros?",
@@ -54,32 +56,28 @@ const AddMultipleRecords = () => {
         confirmButtonText: "Sí, guardar",
         cancelButtonText: "No, cancelar",
       }).then(async (result) => {
-        if (result.isConfirmed) {
-          const batch = stats.map((stat) =>
-            addDoc(collection(db, "records"), {
-              playerId: selectedPlayer,
-              itemId: stat.itemId,
-              value: parseInt(stat.value),
-              date: new Date().toISOString(),
-              schoolId:user.schoolId
-            })
-          );
+        if (result.isConfirmed) 
+        {         
 
-          await Promise.all(batch);
+          const response = await fetch(`${API_URL}/records/add-multiple-record`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              playerId:selectedPlayer,                            
+              stats,
+              schoolId:user.schoolId, 
+              username: user.name,
+              }),
+          });
 
-          const batchAudit = stats.map((stat) =>
-            addDoc(collection(db, "audit"), {
-              user: user.name + " " + user.lastname,
-              itemId: stat.itemId,
-              value: parseInt(stat.value),
-              action: "new record",
-              playerId: selectedPlayer,              
-              date: new Date().toISOString(),
-            })
-          );
-          await Promise.all(batchAudit);        
-
-          Swal.fire("Guardado", "Todas las estadísticas han sido registradas.", "success");
+          const data = await response.json();
+          if(response.ok)
+          {
+            Swal.fire({title: 'Guardado', text: data.message,icon: 'success',confirmButtonText: 'OK'});
+          }
+          else  {
+            Swal.fire("Error", "Error registrando estadistica." + data.error, "error");
+          }     
           setStats([{ itemId: "", value: "" }]);
         } else {
           Swal.fire("Cancelado", "La acción ha sido cancelada.", "info");
