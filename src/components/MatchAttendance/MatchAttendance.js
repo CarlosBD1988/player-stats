@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
 import { useAuth } from "../../context/AuthContext";
-import { collection, getDocs, query, where, addDoc} from "firebase/firestore";
+import { collection, getDocs, query, where} from "firebase/firestore";
 import Swal from "sweetalert2";
 import "./MatchAttendance.css"
 
@@ -42,107 +42,37 @@ const MatchAttendance = () => {
   };
 
   const handleSave = async () => {
+
+    const API_URL = process.env.REACT_APP_API_URL;
     // Validar que todos los jugadores tengan un valor seleccionado
     if (selectedPlayers.some((player) => player === "")) {
       Swal.fire("Error", "Todos los jugadores deben ser seleccionados.", "error");
       return;
     }
-  
-    // Solicitar el PIN para la validación
-    Swal.fire({
-      title: "Ingrese el PIN",
-      input: "password", // Oculta los caracteres para mayor seguridad
-      inputPlaceholder: "Ingrese su PIN de 4 dígitos",
-      inputAttributes: {
-        maxlength: 4,
-        autocapitalize: "off",
-        autocorrect: "off",
-      },
-      showCancelButton: true,
-      confirmButtonText: "Validar",
-      cancelButtonText: "Cancelar",
-      customClass: {
-        input: "custom-input",
-        popup: "custom-swal-popup",
-      },
-      preConfirm: async (pin) => {
-        if (!pin || pin.length !== 4) {
-          Swal.showValidationMessage("Debe ingresar un PIN válido de 4 dígitos.");
-        }
-        return pin; // Retorna el PIN ingresado
-      },
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const pin = result.value;
-  
-        try {
-          // Validar el PIN en la colección Tokens
-          const tokenResponsable = await validarToken(pin); // Asume que tienes esta función implementada
-          if (tokenResponsable) {
-            // ID del item fijo
-            const itemId = "uKOAjjzOB6szDTkF9e0r";            
-  
-            // Crear registros en la colección "records" y "audit"
-            const records = selectedPlayers.map(async (playerId) => {
-              // Registro en "records"
-              await addDoc(collection(db, "records"), {
-                playerId: playerId,
-                itemId: itemId,
-                value: 1,
-                date: new Date().toISOString(),
-              });
-  
-              // Registro en "audit"
-              await addDoc(collection(db, "audit"), {
-                user: tokenResponsable, // El nombre del dueño del token usado
-                action: "new record",
-                playerId: playerId,
-                itemId: itemId,
-                value: 1,
-                date: new Date().toISOString(),
-              });
-            });
-  
-            // Asegurarse de que todos los registros se completen antes de continuar
-            await Promise.all(records);
-  
-            // Mostrar mensaje de éxito
-            Swal.fire("Éxito", "Estadísticas guardadas exitosamente.", "success");
-  
-            // Reiniciar el formulario
-            setSelectedPlayers([""]);
-          } else {
-            // Si el PIN no es válido, mostrar mensaje de error
-            Swal.fire("Error", "El PIN ingresado no es válido.", "error");
-          }
-        } catch (error) {
+    
+    try
+    {
+      const formattedPlayers = selectedPlayers.map(playerId => ({ playerId }));
+
+      const response = await fetch(`${API_URL}/assistance/register-assistance`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ schoolId:user.schoolId,responsableRegister:user.name, selectedPlayers:formattedPlayers }),
+      });
+      const data = await response.json();
+      if(response.ok)
+      {
+        Swal.fire({title: 'Guardado', text: data.message,icon: 'success',confirmButtonText: 'OK'});
+      }
+      else  {
+        Swal.fire("Error", "Error registrando asistencias" + data.error, "error");
+      }
+    }       
+        catch (error) {
           console.error("Error al guardar la asistencia:", error);
-          Swal.fire("Error", "Hubo un problema al guardar la asistencia.", "error");
-        }
-      }
-    });
+          Swal.fire("Error", "Hubo un problema al guardar la asistencia. "+ error , "error");
+        }  
   };
-  
-
-  const validarToken = async (pin) => {
-    try {
-      // Buscar el token en la colección Tokens
-      const tokenRef = collection(db, "Tokens");
-      const q = query(tokenRef, where("tokenRef", "==", pin)); // Validar por el campo tokenRef
-      const snapshot = await getDocs(q);
-  
-      if (!snapshot.empty) {
-        const tokenDoc = snapshot.docs[0].data();
-        return tokenDoc.user; // Retorna el nombre del usuario responsable
-      } else {
-        return null; // No existe el token
-      }
-    } catch (error) {
-      console.error("Error al validar el token:", error);
-      return null;
-    }
-  };
-
 
   return (
     <div className="container">
