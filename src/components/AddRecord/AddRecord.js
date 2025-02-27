@@ -1,7 +1,7 @@
 // src/components/AddRecord.js
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, getDocs,query,where} from "firebase/firestore";
+import { collection, getDocs,query,where} from "firebase/firestore";
 
 import { useAuth } from "../../context/AuthContext";
 
@@ -33,8 +33,11 @@ const AddRecord = () => {
   }, [user.schoolId]);
 
   const handleAddRecord = async () => {
+
+    const API_URL = process.env.REACT_APP_API_URL;
+
     if (selectedPlayer && selectedItem && value) {
-      // Mostrar SweetAlert para confirmar la acción
+    
       Swal.fire({
         title: "¿Está seguro de almacenar este record?",
         text: "Esta acción guardará la estadística de manera permanente.",
@@ -46,36 +49,30 @@ const AddRecord = () => {
           popup: "custom-swal-popup",
         },
       }).then(async (result) => {
-        if (result.isConfirmed) {
-          // Si el usuario confirma, guardar en Firestore
-          await addDoc(collection(db, "records"), {
-            playerId: selectedPlayer,
-            itemId: selectedItem,
-            value: parseInt(value),
-            date: new Date().toISOString(),
-            schoolId:user.schoolId
-          });
-  
-          Swal.fire({
-            title: "Guardado",
-            text: "Estadística registrada correctamente.",
-            icon: "success",
-            confirmButtonText: "OK",
-          });
-  
-          // Registrar en auditoría
-          await addDoc(collection(db, "audit"), {
-            user: user.name + " " + user.lastname,
-            action: "new record",
-            playerId: selectedPlayer,
-            itemId: selectedItem,
-            value: parseInt(value),
-            date: new Date().toISOString(),
-          });
-  
+        if (result.isConfirmed) 
+        {    
+              const response = await fetch(`${API_URL}/records/add-record`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    playerId:selectedPlayer,
+                    itemId:selectedItem,
+                    value,
+                    schoolId:user.schoolId, 
+                    username: user.name}),
+                });
+
+                const data = await response.json();
+                if(response.ok)
+                {
+                  Swal.fire({title: 'Guardado', text: data.message,icon: 'success',confirmButtonText: 'OK'});
+                }
+                else  {
+                  Swal.fire("Error", "Error registrando estadistica." + data.error, "error");
+                }   
           setValue("");
-        } else {
-          // Si el usuario cancela
+        } 
+        else{      
           Swal.fire("Cancelado", "La acción ha sido cancelada.", "info");
         }
       });
