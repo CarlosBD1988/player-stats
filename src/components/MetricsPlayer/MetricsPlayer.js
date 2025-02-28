@@ -10,56 +10,77 @@ import "./MetricsPlayer.css";
 
 const MetricsPlayer = ()=>
 {
-
+    
     const { user } = useAuth(); // Obtener el usuario autenticado
     const [players, setPlayers] = useState([]);
     const [selectedPlayer, setSelectedPlayer] = useState("");
     const [metrics, setMetrics] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
 
     useEffect(() => {
         const fetchPlayers  = async () => {
         
         //const playerSnapshot = await getDocs(collection(db, "players"));            
         const playerQuery = query(collection(db, "players"), where("schoolId", "==", user.schoolId));
-        const playerSnapshot = await getDocs(playerQuery);
-
-
+        const playerSnapshot = await getDocs(playerQuery);     
         setPlayers(playerSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
           
         };
         fetchPlayers ();
       }, [user.schoolId]);
 
-
-
       useEffect(() => {
-        if (selectedPlayer) {
-          const fetchMetrics = async () => {
-            const metricsQuery = query(
-              collection(db, "playerStats"),
-              where("playerId", "==", selectedPlayer)
-            );
-    
-            const metricsSnapshot = await getDocs(metricsQuery);
-            const metricsData = metricsSnapshot.docs.map((doc) => doc.data());
-    
-            if (metricsData.length > 0) {
-              setMetrics(metricsData[metricsData.length - 1]); // Solo se muestra la última entrada de métricas
+        if (!selectedPlayer) return;
+
+        const fetchMetrics = async () => {
+          setLoading(true);
+          setError(null);
+          setMetrics(null)
+          try {
+            const API_URL = process.env.REACT_APP_API_URL;      
+            const response = await fetch(`${API_URL}/metrics/read-metric/${selectedPlayer}`);            
+
+            if (!response.ok) throw new Error("No se pudieron obtener las métricas");
+
+            const data = await response.json();
+
+            if (data.length > 0) {
+              console.log(data[data.length - 1])
+              setMetrics(data[data.length - 1]); // 🔥 Toma la última métrica de la lista
             } else {
-              setMetrics(null); // Si no hay métricas, poner a null
+              setMetrics(null);
             }
-          };
+            
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setLoading(false);
+          }
+        };
     
-          fetchMetrics();
+        fetchMetrics();
+      }, [selectedPlayer]);
+      
+
+      const handlePlayerChange = (e) => {
+        const playerId = e.target.value;
+        setSelectedPlayer(playerId);
+      
+        if (!playerId) {
+          setMetrics(null); // 🔥 Limpiar la métrica cuando no hay jugador seleccionado
         }
-      }, [selectedPlayer]); 
+      };
+
+
 
     return (
-
         <div>
-                <h2> Metrica Individual </h2>
+                <h2> Metrica Individual: </h2>
 
-                <select className="select1" onChange={(e) => setSelectedPlayer(e.target.value)}>
+                <select className="select1" onChange={handlePlayerChange} value={selectedPlayer}>
                     <option value="">Seleccionar jugador</option>
                     {players.map((player) => (
                     <option key={player.id} value={player.id}>
@@ -68,7 +89,10 @@ const MetricsPlayer = ()=>
                 ))}
             </select>
             
-            {metrics ? (
+            {loading && <p>Cargando métricas...</p>}
+            {error && <p style={{ color: "red" }}>Error: {error}</p>}
+
+        {!loading && metrics && (
 
         <div>                      
           <div className="metrics-container">                
@@ -108,15 +132,11 @@ const MetricsPlayer = ()=>
                         
                 </div>                  
           </div>
-        </div>
-      ) : (
-        <p>No se han encontrado métricas para este jugador.</p>
+        </div>      
       )}
-
        
-
-
+      {!loading && !metrics && selectedPlayer && <p>No hay métricas disponibles para este jugador.</p>}
       </div>
-    )
-}
+    );
+};
 export default MetricsPlayer;

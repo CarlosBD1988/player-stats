@@ -103,7 +103,7 @@ const AddMetrics= ()=>
     return (
 
         <div>
-                <h2>Estadística por jugador</h2>
+                <h2>Registro metrica por jugador.</h2>
 
                 <select onChange={(e) => setSelectedPlayer(e.target.value)}>
                     <option value="">Seleccionar jugador</option>
