@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc,setDoc,query,where} from "firebase/firestore";
+import { collection, getDocs,query,where} from "firebase/firestore";
 import { db } from "../../config/firebaseConfig"; // Asegúrate de importar tu instancia de Firestore correctamente.
 import { useAuth } from "../../context/AuthContext";
 import Swal from 'sweetalert2';
@@ -8,6 +8,7 @@ import "./AddMetrics.css"
 
 const AddMetrics= ()=>
 {
+  const API_URL = process.env.REACT_APP_API_URL;
     const { user } = useAuth();
     const [players, setPlayers] = useState([]);
     const [selectedPlayer, setSelectedPlayer] = useState("");
@@ -51,34 +52,42 @@ const AddMetrics= ()=>
 
 
       const handleSubmit = async (e) => {
-        e.preventDefault();
-      
-        // Validar que se haya seleccionado un jugador
-        if (selectedPlayer) {
-          // Validación de los datos: Asegúrate de que todos los campos estén dentro del rango de 0-100
+        e.preventDefault();      
+       
+        if (selectedPlayer) {          
           const allValuesValid = Object.values(formData).every(
             (value) => value >= 0 && value <= 100
           );
       
-          if (allValuesValid) {
-            // Crear un nuevo documento en la colección "playerStats"
-            // Usamos doc() sin ID para que Firestore genere un ID único automáticamente
-            const newDocRef = doc(collection(db, "playerStats"));
-      
-            await setDoc(newDocRef, {
-              playerId: selectedPlayer, // Puedes agregar el ID del jugador si lo necesitas para referencia
-              stats: formData,
-              date: new Date().toISOString(),
-            });
+          if (allValuesValid) 
+          {            
+                const response = await fetch(`${API_URL}/metrics/add-metric`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    playerId: selectedPlayer,                            
+                    stats:formData,
+                    schoolId:user.schoolId,              
+                    }),
+                });
 
-            Swal.fire({
-                            title: 'Guardado',
-                            text: 'Metricas guardadas correctamente.',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        });
-      
-          
+                const data = await response.json();
+                  if(response.ok){
+                  Swal.fire({
+                    title: 'Guardado',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                }else{
+                  Swal.fire({
+                    title: 'Error',
+                    text: data.error,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                }      
+
           } else {
             setError("Todos los valores deben estar entre 0 y 99.");
           }
@@ -90,12 +99,7 @@ const AddMetrics= ()=>
                 confirmButtonText: 'OK'
             });         
         }
-      };
-      
-
-   
-
-
+      }; 
     return (
 
         <div>
