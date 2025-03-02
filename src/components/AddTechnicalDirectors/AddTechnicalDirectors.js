@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../config/firebaseConfig";
-import { collection, addDoc, getDocs,serverTimestamp } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import {generateRandomPassword} from "../../Utils/generateRandomPassword"
 
 import Swal from "sweetalert2";
 
 const AddTechnicalDirectors = () => {
+
+  const API_URL = process.env.REACT_APP_API_URL;
   const { user } = useAuth();
   const [directors, setDirectors] = useState([
     { firstName: "", lastName: "", birthDate: "", idType: "", idNumber: "",email:"" }
@@ -39,31 +41,35 @@ const AddTechnicalDirectors = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!user || !user.schoolId) return;
+    
+    try{
+      const response = await fetch(`${API_URL}/technical/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          schoolId: user.schoolId,
+          directors,
+        }),
+      });
 
-    const promises = directors.map(async (director) => {
-        const password = generateRandomPassword();
-        await  addDoc(collection(db, "tecnicos"), { ...director, schoolId: user.schoolId,createdAt: serverTimestamp() })
-        await addDoc(collection(db, "Users"), {
-            email: director.email,
-            name: director.firstName,
-            lastname: director.lastName,
-            role: "tecnico",
-            password: password,
-            schoolId: user.schoolId,
-            createdAt: serverTimestamp(),
-          });
-  });
+      const data = await response.json();
 
-    await Promise.all(promises);
+      if (!response.ok) {
+              Swal.fire({ icon: "error", title: "Error",text: data.error});
+              return;
+      }
+      Swal.fire({icon: "success",title: "Éxito", text: data.message, });
 
-    Swal.fire({
-      icon: "success",
-      title: "Éxito",
-      text: "Directores técnicos guardados exitosamente.",
-    });
-
+    }
+    catch(error){
+        Swal.fire({icon: "error",title: "Error",text: error.message});
+    }
     setDirectors([{ firstName: "", lastName: "", birthDate: "", idType: "", idNumber: "" }]);
+
   };
 
   return (

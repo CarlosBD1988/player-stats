@@ -46,6 +46,7 @@ const AddCategories = () => {
                 title: "Error",
                 text: data.error,
               });
+              return;
            }
      
            Swal.fire({
