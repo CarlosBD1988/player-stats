@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { collection, query, where, getDocs} from "firebase/firestore";
-import { db } from "../../config/firebaseConfig"; 
 import { useAuth } from "../../context/AuthContext";
 import PlayerCard from "../PlayerCard/PlayerCard";
 import SimpleRadarChart from "../MetricsPlayer/SimpleRadarChart";
@@ -8,32 +6,36 @@ import SimpleRadarChart from "../MetricsPlayer/SimpleRadarChart";
 const IndividualMetrics = () => {
   const { user } = useAuth(); // Obtener el usuario autenticado
   const [metrics, setMetrics] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
+
   useEffect(() => {
-    const fetchMetrics = async () => {
 
-      if (!user?.playerId) {
-        // Si playerId es undefined o null, establecemos un error y detenemos la ejecución
-        setError("No se han encontrado métricas para este jugador.");
-        return;
-      }
+    if (!user?.playerId) {
+      setError("No hay ningún usuario seleccionado.");
+      return;
+    }
+    setError(null);
+    setMetrics(null)
 
+    const fetchMetrics = async () => {       
+      try {
+        const API_URL = process.env.REACT_APP_API_URL;      
+        const response = await fetch(`${API_URL}/metrics/read-metric/${user.playerId}`);            
+        console.log(user.playerId)
+        if (!response.ok) {
+          setError("No se pudieron obtener las métricas error API, "+ response.error);          
+        }
 
-      const metricsQuery = query(
-        collection(db, "playerStats"),
-        where("playerId", "==", user.playerId)
-      );
+        const data = await response.json();
 
-      const metricsSnapshot = await getDocs(metricsQuery);
-      const metricsData = metricsSnapshot.docs.map((doc) => doc.data());
-
-      if (metricsData.length > 0) {
-        // Supongamos que queremos mostrar el último documento en la lista
-        setMetrics(metricsData[metricsData.length - 1]);
-      } else {
-        setMetrics(null); // Si no hay métricas, lo dejamos vacío
-      }      
-
+        if (data.length > 0) {          
+          setMetrics(data[data.length - 1]); 
+        } else {
+          setMetrics(null);
+        }        
+      } catch (error) {
+        setError(error.message);
+      }    
     };
 
     fetchMetrics();
