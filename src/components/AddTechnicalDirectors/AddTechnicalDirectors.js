@@ -44,6 +44,13 @@ const AddTechnicalDirectors = () => {
 
     if (!user || !user.schoolId) return;
     
+    const directorsWithPasswords = directors.map(director => ({
+      ...director,
+      password: generateRandomPassword()
+  }));
+
+
+
     try{
       const response = await fetch(`${API_URL}/technical/create`, {
         method: "POST",
@@ -52,7 +59,7 @@ const AddTechnicalDirectors = () => {
         },
         body: JSON.stringify({
           schoolId: user.schoolId,
-          directors,
+          directors:directorsWithPasswords,
         }),
       });
 
