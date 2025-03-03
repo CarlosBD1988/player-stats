@@ -32,15 +32,12 @@
 
 /* Navbar container */
 .navbar {
-  background-color: #333; /* Fondo oscuro profesional */
-  color: #fff; /* Texto blanco para contraste */
-  padding: 15px 20px;
   display: flex;
-  margin-left: 10px;
-  justify-content: space-between; /* Espacio entre elementos */
+  justify-content: space-between;
   align-items: center;
-  font-family: 'Arial', sans-serif;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  background-color: #333;
+  padding: 15px;
+  color: white;
 }
 
 /* Logo or title */
@@ -51,9 +48,15 @@
   text-decoration: none;
 }
 
+.logo img {
+  width: 50px; /* Ajusta el tamaño según lo que necesites */
+  height: 50px; /* Mantiene la proporción */
+  border-radius: 24px ;
+  opacity: 0.7;
+}
+
 /* Navbar menu */
-.navbar-menu {
-  position: relative; /* Posición relativa para desplegable */
+.navbar-menu {  
   display: flex;
   list-style-type: none;
   margin: 0;
@@ -63,7 +66,7 @@
 /* Navbar items */
 .navbar-menu > li {
   position: relative; /* Necesario para submenús */
-  padding: 10px 20px;
+  padding: 4px 12px;
   cursor: pointer;
   color: #fff;
   transition: background-color 0.3s ease-in-out;
@@ -85,7 +88,7 @@
   margin: 0;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra elegante */
-  z-index: 1000;
+
 }
 
 /* Mostrar submenú al pasar el mouse */
@@ -116,6 +119,15 @@
   color: #00bcd4; /* Azul profesional */
 }
 
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
 
 @keyframes App-logo-spin {
   from {
@@ -125,3 +137,79 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar-menu.active {
+  display: flex; /* Mostrar en móviles */
+}
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+}
+.dropdown-menu.show {
+  display: flex; /* Mostrar cuando se haga clic */
+}
+
+
+@media (max-width: 800px) {
+
+
+  .content img {
+    display: none;  /* Oculta el menú por defecto */
+  }
+  .navbar-menu {
+      display: none;  /* Oculta el menú por defecto */
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      text-align: center;
+      z-index: 1000;
+  }
+
+  .navbar-menu > li {
+    position: relative; /* Mantiene la estructura */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+
+
+  .navbar-menu > li > ul {
+    position: relative; /* Para que aparezcan dentro del flujo normal */
+    top: auto;
+    left: auto;
+    width: 100%; /* Hace que el submenú ocupe el ancho completo */
+    display: none; /* Ocultamos por defecto */
+    background-color: #6c745f; /* Mantiene el color */
+    text-align: center; /* Centra el texto */
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .navbar-menu > li.active > ul {
+    display: block;
+  }
+
+
+  .navbar-menu > li > ul > li {
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+   
+  }
+
+  .navbar-menu button {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
+  }
+  .menu-toggle {
+      display: block;  /* Muestra el botón de hamburguesa */
+  }
+  .navbar-menu.active {
+    display: flex;
+  }
+}
+
