@@ -22,7 +22,7 @@
 .events-container {
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: 70%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
