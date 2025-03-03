@@ -75,7 +75,7 @@
   color: #0056b3;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .home {
     flex-direction: column;
   }

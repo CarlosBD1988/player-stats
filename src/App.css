@@ -88,7 +88,7 @@
   margin: 0;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra elegante */
-  z-index: 1000;
+
 }
 
 /* Mostrar submenú al pasar el mouse */
@@ -138,10 +138,24 @@
   }
 }
 
-
+.navbar-menu.active {
+  display: flex; /* Mostrar en móviles */
+}
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+}
+.dropdown-menu.show {
+  display: flex; /* Mostrar cuando se haga clic */
+}
 
 
 @media (max-width: 800px) {
+
+
+  .content img {
+    display: none;  /* Oculta el menú por defecto */
+  }
   .navbar-menu {
       display: none;  /* Oculta el menú por defecto */
       flex-direction: column;
@@ -151,9 +165,51 @@
       width: 100%;
       background-color: #333;
       text-align: center;
+      z-index: 1000;
+  }
+
+  .navbar-menu > li {
+    position: relative; /* Mantiene la estructura */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+
+
+  .navbar-menu > li > ul {
+    position: relative; /* Para que aparezcan dentro del flujo normal */
+    top: auto;
+    left: auto;
+    width: 100%; /* Hace que el submenú ocupe el ancho completo */
+    display: none; /* Ocultamos por defecto */
+    background-color: #444; /* Mantiene el color */
+    text-align: center; /* Centra el texto */
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .navbar-menu > li.active > ul {
+    display: block;
+  }
+
+
+  .navbar-menu > li > ul > li {
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+    color: yellow;
+  }
+
+  .navbar-menu button {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
   }
   .menu-toggle {
       display: block;  /* Muestra el botón de hamburguesa */
+  }
+  .navbar-menu.active {
+    display: flex;
   }
 }
 
