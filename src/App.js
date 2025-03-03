@@ -33,6 +33,8 @@ import AddTechnicalDirectors from "./components/AddTechnicalDirectors/AddTechnic
 import AddUser from "./components/AddUser/Adduser";
 import BulkAddPlayers from "./components/BulkAddPlayers/BulkAddPlayers"
 
+import HandlePlayer from "./components/PlayersCRUD/PlayersCRUD"
+
 import ScheduleEvent from "./components/ScheduleEvent/ScheduleEvent"
 
 
@@ -55,6 +57,7 @@ function App() {
           
           
           <Route path="/crear-jugador" element={<PrivateRoute allowedRoles={['admin','tecnico']}><AddJugador /></PrivateRoute>}/>
+          <Route path="/gestionar-jugador" element={<PrivateRoute allowedRoles={['admin','tecnico','administrativo']}><HandlePlayer /></PrivateRoute>}/>
           <Route path="/crear-item" element={<PrivateRoute><AddItem /></PrivateRoute>} />
           <Route path="/crear-registro" element={<PrivateRoute><AddRecord /></PrivateRoute>} />          
           <Route path="/confirmar-asistencia" element={<PrivateRoute><MatchAttendance /></PrivateRoute>} />  
