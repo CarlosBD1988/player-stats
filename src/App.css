@@ -32,15 +32,12 @@
 
 /* Navbar container */
 .navbar {
-  background-color: #333; /* Fondo oscuro profesional */
-  color: #fff; /* Texto blanco para contraste */
-  padding: 15px 20px;
   display: flex;
-  margin-left: 10px;
-  justify-content: space-between; /* Espacio entre elementos */
+  justify-content: space-between;
   align-items: center;
-  font-family: 'Arial', sans-serif;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  background-color: #333;
+  padding: 15px;
+  color: white;
 }
 
 /* Logo or title */
@@ -51,9 +48,15 @@
   text-decoration: none;
 }
 
+.logo img {
+  width: 50px; /* Ajusta el tamaño según lo que necesites */
+  height: 50px; /* Mantiene la proporción */
+  border-radius: 24px ;
+  opacity: 0.7;
+}
+
 /* Navbar menu */
-.navbar-menu {
-  position: relative; /* Posición relativa para desplegable */
+.navbar-menu {  
   display: flex;
   list-style-type: none;
   margin: 0;
@@ -63,7 +66,7 @@
 /* Navbar items */
 .navbar-menu > li {
   position: relative; /* Necesario para submenús */
-  padding: 10px 20px;
+  padding: 4px 12px;
   cursor: pointer;
   color: #fff;
   transition: background-color 0.3s ease-in-out;
@@ -116,6 +119,15 @@
   color: #00bcd4; /* Azul profesional */
 }
 
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
 
 @keyframes App-logo-spin {
   from {
@@ -125,3 +137,23 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+@media (max-width: 800px) {
+  .navbar-menu {
+      display: none;  /* Oculta el menú por defecto */
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      text-align: center;
+  }
+  .menu-toggle {
+      display: block;  /* Muestra el botón de hamburguesa */
+  }
+}
+

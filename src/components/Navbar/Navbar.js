@@ -1,16 +1,22 @@
 // src/components/Navbar/Navbar.js
-import React from "react";
+import React,{useState} from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; // Importar el contexto de autenticación
 
 function Navbar() {
   const { user ,logout } = useAuth(); // Acceder al estado del usuario autenticado
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
 
    // Función para manejar el cierre de sesión
    const handleLogout = () => {
     logout(); // Borra el usuario del estado
     navigate("/SignIn"); // Redirige al login (o a "/" si prefieres la landing page)
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // Cambia el estado para mostrar u ocultar el menú
   };
   
   if (!user) {
@@ -19,7 +25,17 @@ function Navbar() {
 
   return (
     <nav className="navbar">
+
+      <div className="logo">
+        <img src="/logoApp.ico" alt="Logo" />
+      </div>
+
+
+      <div className="menu-toggle" onClick={toggleMenu}>☰</div>
+
+
       <ul className="navbar-menu">
+
         <li><Link to="/home">Inicio</Link></li>
         
         {['admin', 'tecnico'].includes(user?.role) && (
@@ -66,7 +82,7 @@ function Navbar() {
         {['admin','administrativo'].includes(user?.role) && ( 
         <>         
           <li className="dropdown">
-          Panel administrativo
+          Admin panel
           <ul className="dropdown-menu">
               
               <li><Link to="/crear-categoria">Crear Categoria</Link></li>
@@ -83,7 +99,7 @@ function Navbar() {
         {user?.role === 'admin' && ( // Menu Auditoria solo visible para usuarios admin
         <>         
           <li className="dropdown">
-          Admin del sistema
+          Admin system
           <ul className="dropdown-menu">          
               <li><Link to="/crear-escuela">Crear nueva escuela</Link></li>
               <li><Link to="/crear-usuario">Crear nuevo usuario del sistema</Link></li>
@@ -97,12 +113,11 @@ function Navbar() {
         <li className="dropdown">
         {user ? (
           <>
-            <li className="navbar-item">
-              Bienvenido, {user.name} {user.lastname} - <strong>Rol: {user.role}</strong> {user.school && ` - Escuela: ${user.school}`}
-            </li>
-            <li className="navbar-item">
-              <label onClick={handleLogout}> Cerrar sesión </label>
-            </li>
+            <span style={{ color: "#FFD700", fontWeight: "bold", fontSize: "16px" }}>Bienvenido, {user.name} {user.lastname}</span><br />                      
+            <span style={{ color: "#FFD700" ,  fontSize: "12px" }}> {user.school && `Escuela: ${user.school}`}</span>        
+            <span style={{ color: "#FFD700",  fontSize: "12px" }}> - Rol: {user.role}</span>        <br /> <br />
+            <button onClick={handleLogout}> Cerrar sesión </button>
+            
           </>
         ) : (
           <li className="navbar-item">
@@ -111,6 +126,9 @@ function Navbar() {
         )}
         </li>
       </ul>
+
+      
+
     </nav>
   );
 }
