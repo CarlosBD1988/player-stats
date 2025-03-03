@@ -18,7 +18,7 @@
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgb(255, 255, 255);
-  width: 250px;
+  width: 550px;
   text-align: center;
 }
 
@@ -28,7 +28,8 @@
 }
 
 .input-container {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+  width: 100%;
 }
 
 .input-container label {
@@ -44,6 +45,7 @@
   font-size: 14px;
   border: 1px solid #000000;
   border-radius: 4px;
+  height: 32px;
 }
 
 .input-container input:focus {
