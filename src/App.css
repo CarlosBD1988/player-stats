@@ -181,7 +181,7 @@
     left: auto;
     width: 100%; /* Hace que el submenú ocupe el ancho completo */
     display: none; /* Ocultamos por defecto */
-    background-color: #444; /* Mantiene el color */
+    background-color: #6c745f; /* Mantiene el color */
     text-align: center; /* Centra el texto */
     padding: 0;
     box-shadow: none;
@@ -196,7 +196,7 @@
   .navbar-menu > li > ul > li {
     padding: 10px 0;
     border-bottom: 1px solid #555;
-    color: yellow;
+   
   }
 
   .navbar-menu button {
