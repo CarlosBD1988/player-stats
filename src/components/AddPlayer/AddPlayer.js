@@ -136,7 +136,7 @@ const AddPlayer = () => {
   return (
     
     <div className="formu-addplayer">
-      <img src="logo.png" alt="Decorativo" className="log-players" />   
+     
       <h2>Nuevo Jugador</h2>        
       <label htmlFor="playerIdType">Tipo de identificacion:</label>
       <select id="playerIdType" value={idType} onChange={(e) => setIdType(e.target.value)} required> 
