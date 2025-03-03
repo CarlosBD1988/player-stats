@@ -127,9 +127,9 @@ function Navbar() {
                   <li className="dropdown">
                   {user ? (
                     <>
-                      <span style={{ color: "#FFD700", fontWeight: "bold", fontSize: "16px" }}>Bienvenido, {user.name} {user.lastname}</span><br />                      
+                      <span style={{ color: "#FFD700", fontWeight: "bold", fontSize: "14px" }}>Bienvenido! {user.name}</span><br/>
                       <span style={{ color: "#FFD700" ,  fontSize: "12px" }}> {user.school && `Escuela: ${user.school}`}</span>        
-                      <span style={{ color: "#FFD700",  fontSize: "12px" }}> - Rol: {user.role}</span>        <br /> <br />
+                      <span style={{ color: "#FFD700",  fontSize: "12px" }}> - Rol: {user.role}</span>
                       <button onClick={handleLogout}> Cerrar sesión </button>
                       
                     </>

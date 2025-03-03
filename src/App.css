@@ -57,7 +57,8 @@
 
 /* Navbar menu */
 .navbar-menu {  
-  display: flex;
+  display: flex;  
+  align-items: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -82,7 +83,7 @@
   position: absolute; /* Posición absoluta para desplegable */
   top: 100%; /* Alinear debajo del elemento padre */
   left: 0;
-  background-color: #444;
+  background-color: #53615c;
   padding: 10px 0;
   list-style-type: none;
   margin: 0;
@@ -99,7 +100,7 @@
 /* Dropdown items */
 .navbar-menu > li > ul > li {
   padding: 8px 20px;
-  white-space: nowrap; /* Evitar que se rompa el texto */
+  white-space: nowrap; 
   color: #fff;
   transition: background-color 0.3s ease-in-out;
 }
@@ -127,8 +128,6 @@
 }
 
 
-
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -137,6 +136,8 @@
     transform: rotate(360deg);
   }
 }
+
+
 
 .navbar-menu.active {
   display: flex; /* Mostrar en móviles */
@@ -151,8 +152,6 @@
 
 
 @media (max-width: 800px) {
-
-
   .content img {
     display: none;  /* Oculta el menú por defecto */
   }
