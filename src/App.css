@@ -145,10 +145,24 @@
 .dropdown-menu {
   display: none;
   flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 100%; /* Asegura que aparezca justo debajo del padre */
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-width: 200px;
+  z-index: 1000;
 }
 .dropdown-menu.show {
   display: flex; /* Mostrar cuando se haga clic */
 }
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: block; /* Mantiene el menú visible mientras el cursor esté sobre él */
+}
+
 
 
 @media (max-width: 800px) {

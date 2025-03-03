@@ -50,7 +50,7 @@ function Home() {
   return (
     <div className="home">
       <div className="content">
-        <h1>WELCOME TO STATISTICS FOOTBALL!</h1>
+        
         <img src="logo.png" alt="Decorativo" className="home-logo" />
       </div>
 
