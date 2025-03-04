@@ -60,8 +60,11 @@ const PlayersCRUD = () => {
   return (
     <div>
       <h2>Gestión de Jugadores</h2>
-      <button onClick={() => navigate("/players/create")}>
-        Agregar Jugador
+      <button onClick={() => navigate("/crear-jugador")}>
+        Crear nuevo Jugador.
+      </button>
+      <button onClick={() => navigate("/cargar-csv-players")}>
+        Importar jugadores desde CSV.
       </button>
       <table>
         <thead>
