@@ -15,12 +15,21 @@ const PlayersCRUD = () => {
   const fetchPlayers = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/players/list-players/${user.schoolId}`);
-      console.log(response)
-      const data = await response.json();
-      console.log(data)
+      
+      if (!response.ok) {      
+        const errorData = await response.json();
+        console.warn("Error en la respuesta:", errorData.message);
+        setPlayers([]); 
+        return;
+      }
 
+      const data = await response.json();   
 
-      setPlayers(data);
+      if (Array.isArray(data)) {
+        setPlayers(data);
+      } else {
+        setPlayers([]); // Si no es un array, aseguramos que sea vacío
+      }     
     } catch (error) {
       console.error("Error fetching players:", error);
     }
