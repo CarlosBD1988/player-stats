@@ -110,6 +110,7 @@ function Navbar() {
                         <li onClick={closeMenu}><Link to="/crear-escuela">Crear nueva escuela</Link></li>
                         <li onClick={closeMenu}><Link to="/crear-usuario">Crear nuevo usuario del sistema</Link></li>
                         <li onClick={closeMenu}><Link to="/auditoria">Auditoria</Link></li>            
+                        <li onClick={closeMenu}><Link to="/select-school">Cambiar de escuela</Link></li>     
                     </ul>
                   </li>
                   

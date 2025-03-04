@@ -25,6 +25,7 @@ import AddCategories from "./components/AddCategories/AddCategories"
 import AddHeadquarters from "./components/AddHeadquarters/AddHeadquarters"
 import WatchTv from "./components/WatchTv/WatchTv";
 import Fichajes from "./components/Fichajes/Fichajes";
+import SelectSchool from "./components/SelectSchool/SelectSchool"
 
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -78,6 +79,8 @@ function App() {
           <Route path="/crear-agenda" element={<PrivateRoute><ScheduleEvent /></PrivateRoute>} />
 
           <Route path="/cargar-csv-players" element={<PrivateRoute><BulkAddPlayers /></PrivateRoute>} />
+          
+          <Route path="/select-school" element={<PrivateRoute><SelectSchool /></PrivateRoute>} />
           
 
 
