@@ -100,7 +100,7 @@ const ViewConsolidateStatics = () => {
         <tbody>
           {filteredPlayers.map((player) => (
             <tr key={player.id}>
-              <td>{player.name}</td>
+              <td>{player.name} {player.lastname}</td>
               {finalItems.map((item) => {
                 const total = calculateTotal(player.id, item.id);
                 return <td key={item.id}>{total}</td>;
