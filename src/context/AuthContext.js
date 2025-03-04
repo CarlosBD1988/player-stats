@@ -6,19 +6,34 @@ const AuthContext = createContext();
 
 // Componente que envuelve la app y provee el estado de autenticación
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // Estado del usuario autenticado
+    
+    const [user, setUser] = useState(() => {
+      const storedUser = localStorage.getItem("user");
+      return storedUser ? JSON.parse(storedUser) : null;
+  });
 
-  // Funciones de autenticación (puedes reemplazar estas funciones con las reales)
+
   const login = (userData) => {
-    setUser(userData); // Establecer el usuario autenticado
+    setUser(userData); 
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
-    setUser(null); // Eliminar la sesión del usuario
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
+  const updateSchoolId = (schoolId) => {
+    if (user) {
+      const updatedUser = { ...user, schoolId }; // Solo actualizamos schoolId
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser)); // Guardar cambio en localStorage
+    }
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout,updateSchoolId }}>
       {children} {/* Esto renderiza los componentes hijos de AuthProvider */}
     </AuthContext.Provider>
   );

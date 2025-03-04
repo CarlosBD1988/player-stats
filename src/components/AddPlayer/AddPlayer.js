@@ -32,7 +32,7 @@ const AddPlayer = () => {
     try
     {
       setLoading(true); 
-      if (!name.trim() ||  !lastname.trim() || !documentNumber.trim() || !email.trim()) {
+      if ( !idType.trim() || !documentNumber.trim() || !name.trim() || !lastname.trim() || !birthDate.trim() || !weight.trim() || !height.trim() || !country.trim() || !fanTeam.trim() || !position.trim() || !email.trim()   ) {
         Swal.fire({
           title: 'Error',
           text: 'Todos los datos son obligatorios.',
@@ -173,7 +173,7 @@ const AddPlayer = () => {
       </select>
 
       <label htmlFor="playerPosition">Posicion:</label>
-      <select id="playerPosition" value={position} onChange={(e) => setPosition(e.target.value)}>
+      <select id="playerPosition" value={position} onChange={(e) => setPosition(e.target.value)} required>
         <option value="">Selecciona una posición</option>
         {playerPositions.map((pos, index) => (
           <option key={index} value={pos}>{pos}</option>

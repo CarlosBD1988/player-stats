@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 //import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
-//import { useAuth } from "../../context/AuthContext"; // Importar el contexto de autenticación
+import { useAuth } from "../../context/AuthContext"; // Importar el contexto de autenticación
 
-//import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 
 const SelectSchool = () => {
-
-const [shools, setSchools] = useState([]);
+    const { updateSchoolId } = useAuth(); 
+    const [shools, setSchools] = useState([]);
 
 const fetchSchools = useCallback(async () => {
     try {
@@ -27,6 +27,19 @@ const fetchSchools = useCallback(async () => {
   useEffect(() => {
     fetchSchools();
   }, [fetchSchools]);
+
+
+  const handleSelectSchool = (schoolId) => {
+    const selectedSchool = shools.find(school => school.id === schoolId); 
+    updateSchoolId(schoolId); // Actualiza el schoolId en el contexto
+    Swal.fire(
+      "Bienvenido",
+      `Acabas de acceder a la escuela: ${selectedSchool?.nameSchool || "Desconocida"}`, 
+      "success"
+    );
+
+  };
+
 
     return(
     <div>
@@ -48,7 +61,7 @@ const fetchSchools = useCallback(async () => {
               <td>{school.nit}</td>
               <td>{school.nameRepresentative} {school.lastname} </td>
               <td>
-                <button>
+                <button onClick={() => handleSelectSchool(school.id)}>
                   Seleccionar
                 </button>                
               </td>
