@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/AuthContext"; // Importar AuthProvider
 
 import Home from "./components/Home/Home";
 import AddJugador from "./components/AddPlayer/AddPlayer";
+import EditPlayer from "./components/EditPlayer/EditPlayer";
 import AddItem from "./components/AddItem/AddItem";
 import AddRecord from "./components/AddRecord/AddRecord";
 import AddMetrics from "./components/AddMetrics/AddMetrics";
@@ -79,7 +80,8 @@ function App() {
           <Route path="/crear-agenda" element={<PrivateRoute><ScheduleEvent /></PrivateRoute>} />
 
           <Route path="/cargar-csv-players" element={<PrivateRoute><BulkAddPlayers /></PrivateRoute>} />
-          
+          <Route path="/players/edit/:id" element={<PrivateRoute><EditPlayer /></PrivateRoute>} />
+                   
           <Route path="/select-school" element={<PrivateRoute><SelectSchool /></PrivateRoute>} />
           
 
