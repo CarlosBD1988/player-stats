@@ -89,7 +89,13 @@ const PlayersCRUD = () => {
               <td>{player.name}</td>
               <td>{player.lastname}</td>
               <td>
-                <button onClick={() => navigate(`/players/edit/${player.id}`)}>
+                <button onClick={() => {
+                    console.log("Navigating to:", `/players/edit/${player.id}`);  
+                    navigate(`/players/edit/${player.id}`)
+                }
+                
+                  
+                  }>
                   Editar
                 </button>
                 <button onClick={() => handleDelete(player.id)}>Eliminar</button>
