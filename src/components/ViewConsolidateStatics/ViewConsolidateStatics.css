@@ -3,6 +3,12 @@ div {
     padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
+
+  .container-filters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
   
   /* Título */
   h2 {
