@@ -62,10 +62,9 @@ const ViewConsolidateStatics = () => {
 
   // Filtrar jugadores según la selección del filtro
   const filteredPlayers = players.filter(player => 
-    filter === "portero" ? player.position === "portero" : player.position !== "portero" &&     
-    (filterCategoria === "" || player.categoria === filterCategoria) &&
-    (filterSede === "" || player.sede === filterSede)
-
+    filter === "portero" 
+    ? player.position === "portero" && (filterCategoria === "" || player.categoria === filterCategoria) && (filterSede === "" || player.sede === filterSede)    
+    : player.position !== "portero" &&  (filterCategoria === "" || player.categoria === filterCategoria) && (filterSede === "" || player.sede === filterSede)
   );
 
 
