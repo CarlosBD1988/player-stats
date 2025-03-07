@@ -54,4 +54,13 @@
   width: min(100px, 90%);
   
 }
+
+.datacard{
+
+  display: flex;
+  flex-direction: row;
+
+}
+
+
   

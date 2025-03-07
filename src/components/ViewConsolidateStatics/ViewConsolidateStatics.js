@@ -101,7 +101,7 @@ const ViewConsolidateStatics = () => {
       <h2>Reportes Consolidados</h2>
 
         <div className="container-filters">
-            <label>Filtrar por tipo de jugador: </label>
+                  <label>Filtrar por tipo de jugador: </label>
                   <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                     <option value="campo">Jugadores de campo</option>
                     <option value="portero">Porteros</option>
