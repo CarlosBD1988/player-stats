@@ -27,6 +27,8 @@ import AddHeadquarters from "./components/AddHeadquarters/AddHeadquarters"
 import WatchTv from "./components/WatchTv/WatchTv";
 import Fichajes from "./components/Fichajes/Fichajes";
 import SelectSchool from "./components/SelectSchool/SelectSchool"
+import AttendanceRegister from "./components/AttendanceRegister/AttendanceRegister"
+
 
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -84,7 +86,10 @@ function App() {
                    
           <Route path="/select-school" element={<PrivateRoute><SelectSchool /></PrivateRoute>} />
           
+          <Route path="/assistance-events" element={<PrivateRoute><AttendanceRegister /></PrivateRoute>} />
+          
 
+      
 
           <Route path="/auditoria" element={<PrivateRoute><Audit /></PrivateRoute>} />
           <Route path="/crear-usuario" element={<PrivateRoute><AddUser /></PrivateRoute>} />

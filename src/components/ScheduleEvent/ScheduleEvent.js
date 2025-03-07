@@ -72,6 +72,7 @@ const ScheduleEvent = () => {
             
               const eventData = { 
                 schoolId: user.schoolId, 
+                name:event.name,
                 date: event.date, 
                 time: event.time, 
                 category: event.category, 
@@ -109,6 +110,10 @@ const ScheduleEvent = () => {
             <option value="training">Entrenamiento</option>
             <option value="match">Partido</option>
           </select>
+
+          <label htmlFor="name" className="LblInput">Nombre evento:</label>
+          <input id="name" type="text" onChange={(e) => handleEventChange(index, "name", e.target.value)} placeholder="Nombre evento" />
+
 
           <label htmlFor="date" className="LblInput">Fecha:</label>
           <input id="date" type="date" onChange={(e) => handleEventChange(index, "date", e.target.value)} placeholder="Fecha" />

@@ -8,9 +8,13 @@ const ViewConsolidateStatics = () => {
   const { user } = useAuth();
   const [records, setRecords] = useState([]);
   const [players, setPlayers] = useState([]);
+  const [sedes, setSedes] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("campo"); // 'campo' o 'portero'
+  const [filterSede, setFilterSede] = useState(""); 
+  const [filterCategoria, setFilterCategoria] = useState(""); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,21 +23,33 @@ const ViewConsolidateStatics = () => {
 
         const playerQuery = query(collection(db, "players"), where("schoolId", "==", user.schoolId));
         const playerSnapshot = await getDocs(playerQuery);
-        
+        const playersData = playerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
         const itemsQuery = query(collection(db, "items"), where("schoolId", "==", user.schoolId));
         const itemSnapshot = await getDocs(itemsQuery);
-        
+        const itemsData = itemSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
         const recordsQuery = query(collection(db, "records"), where("schoolId", "==", user.schoolId));
         const recordSnapshot = await getDocs(recordsQuery);
-
-        const playersData = playerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        const itemsData = itemSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
         const recordsData = recordSnapshot.docs.map(doc => ({ ...doc.data() }));
+
+
+        const sedesQuery = query(collection(db, "sedes"), where("schoolId", "==", user.schoolId));
+        const sedesSnapshot = await getDocs(sedesQuery);
+        const sedesData = sedesSnapshot.docs.map(doc => ({ ...doc.data() }));
+
+        const categoriesQuery = query(collection(db, "categories"), where("schoolId", "==", user.schoolId));
+        const categoriesSnapshot = await getDocs(categoriesQuery);
+        const categoriesData = categoriesSnapshot.docs.map(doc => ({ ...doc.data() }));
+    
 
         setPlayers(playersData);
         setItems(itemsData);
         setRecords(recordsData);
+        setSedes(sedesData)
+        setCategories(categoriesData)
+
+
         setLoading(false);
       } catch (error) {
         console.error("Error al cargar los datos", error);
@@ -46,15 +62,16 @@ const ViewConsolidateStatics = () => {
 
   // Filtrar jugadores según la selección del filtro
   const filteredPlayers = players.filter(player => 
-    filter === "portero" ? player.position === "portero" : player.position !== "portero"
+    filter === "portero" 
+    ? player.position === "portero" && (filterCategoria === "" || player.categoria === filterCategoria) && (filterSede === "" || player.sede === filterSede)    
+    : player.position !== "portero" &&  (filterCategoria === "" || player.categoria === filterCategoria) && (filterSede === "" || player.sede === filterSede)
   );
 
-  // Filtrar métricas según la selección
+
   const filteredItems = items.filter(item => 
-    filter === "portero" ? item.type === "portero" || item.type === "general" : item.type === "general"
+    filter === "portero" ? item.type === "portero" || item.type === "general" : item.type === "general" 
   );
 
-  // Determinar qué métricas generales tienen al menos un dato en porteros
   const generalItemsWithData = new Set();
   if (filter === "portero") {
     records.forEach(record => {
@@ -65,7 +82,6 @@ const ViewConsolidateStatics = () => {
     });
   }
 
-  // Aplicar el filtro de métricas generales con datos en porteros
   const finalItems = filter === "portero" 
     ? filteredItems.filter(item => item.type === "portero" || generalItemsWithData.has(item.id))
     : filteredItems;
@@ -83,11 +99,37 @@ const ViewConsolidateStatics = () => {
   return (
     <div>
       <h2>Reportes Consolidados</h2>
-      <label>Filtrar por tipo de jugador: </label>
-      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-        <option value="campo">Jugadores de campo</option>
-        <option value="portero">Porteros</option>
-      </select>
+
+        <div className="container-filters">
+                  <label>Filtrar por tipo de jugador: </label>
+                  <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+                    <option value="campo">Jugadores de campo</option>
+                    <option value="portero">Porteros</option>
+                  </select>
+
+                  <label>Filtrar por categoria: </label>
+                  <select value={filterCategoria} onChange={(e) => setFilterCategoria(e.target.value)}>
+                  <option value="">--- Todas ---- </option>
+                  {categories.map(category => (
+                            <option key={category.id} value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                  </select>
+
+                  <label>Filtrar por sede: </label>
+                  <select value={filterSede} onChange={(e) => setFilterSede(e.target.value)}>
+                  <option value="">--- Todas ---- </option>
+                  {sedes.map(sede =>(
+                    <option key={sede.id} value={sede.id}>
+                              {sede.name}
+                            </option>
+                  ) )}
+                  </select>
+
+            </div>  
+
+
       <table>
         <thead>
           <tr>
@@ -100,11 +142,14 @@ const ViewConsolidateStatics = () => {
         <tbody>
           {filteredPlayers.map((player) => (
             <tr key={player.id}>
+
               <td>{player.name} {player.lastname}</td>
+
               {finalItems.map((item) => {
                 const total = calculateTotal(player.id, item.id);
                 return <td key={item.id}>{total}</td>;
               })}
+
             </tr>
           ))}
         </tbody>

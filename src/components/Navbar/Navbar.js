@@ -62,7 +62,8 @@ function Navbar() {
                         <li onClick={closeMenu}><Link to="/crear-registros-masivo">Registrar multiples estadisticas</Link></li>
                         <li onClick={closeMenu}><Link to="/confirmar-asistencia">Registrar Asistencia a partidos</Link></li>
                         <li onClick={closeMenu}><Link to="/ver-consolidado">Ver Consolidado</Link></li>
-                        
+                        <li onClick={closeMenu}><Link to="/assistance-events">Registrar asistencia a eventos</Link></li>                    
+
                       </ul>
                     </li>
                   </>
